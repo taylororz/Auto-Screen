@@ -12,12 +12,15 @@ import json
 import shutil
 import argparse
 import importlib.util
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
 import cv2
 from appium import webdriver
 from appium.options.ios import XCUITestOptions
+
+ROOT_DIR = Path(__file__).resolve().parent
 
 
 def resolve_config_path(config_path=None):

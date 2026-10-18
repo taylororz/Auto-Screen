@@ -4,7 +4,7 @@
     "platform_version": "18.0",
     "device_name": "iPhone 16 Pro",
     "app_path": "/Users/taylorzhuang/Masterarbeit/katapp-app/katapp-app/build/ios/iphonesimulator/Runner.app",
-    "bundle_id": "de.kfru.katapp.dev",
+    "bundle_id": "de.kfru.katapp.prod",
     "appium_url": "http://localhost:4723"
   },
   "initial_setup_steps": [

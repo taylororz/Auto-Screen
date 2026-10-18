@@ -191,6 +191,22 @@ class GenericGUITestEngine:
             if ci_fallback.exists():
                 app_target = str(ci_fallback)
         options.app = app_target
+
+        # Auto-detect CFBundleIdentifier from app bundle Info.plist if present
+        if app_target and Path(app_target).exists():
+            plist_file = Path(app_target) / "Info.plist"
+            if plist_file.exists():
+                try:
+                    import plistlib
+                    with open(plist_file, "rb") as fp:
+                        pl = plistlib.load(fp)
+                        real_bundle_id = pl.get("CFBundleIdentifier")
+                        if real_bundle_id:
+                            print(f"📦 Auto-detected Bundle ID from Info.plist: {real_bundle_id}")
+                            self.app_cfg["bundle_id"] = real_bundle_id
+                except Exception as ex:
+                    pass
+
         options.automation_name = "XCUITest"
         options.auto_accept_alerts = True
         options.show_keychain_automatically = False

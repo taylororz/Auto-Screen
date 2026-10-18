@@ -1,0 +1,66 @@
+name: Mobile Visual Regression CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  workflow_dispatch:
+  # Triggered by workflow dispatch or repository dispatch when katapp-app finishes building
+  repository_dispatch:
+    types: [ katapp_build_completed ]
+
+jobs:
+  visual-regression-test:
+    runs-on: macos-14
+    timeout-minutes: 60
+
+    steps:
+      - name: 1. Checkout test suite repository
+        uses: actions/checkout@v4
+
+      # If triggered via cross-repo event, download the latest Runner.app artifact from katapp-app
+      - name: 2. Download upstream katapp build artifact
+        if: github.event_name == 'repository_dispatch'
+        uses: actions/download-artifact@v4
+        with:
+          name: katapp-runner-app
+          github-token: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
+          repository: kat-app/katapp-app
+          run-id: ${{ github.event.client_payload.run_id }}
+          path: ./app_bundle
+
+      - name: 3. Extract and update target application bundle
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          mkdir -p build/ios/iphonesimulator
+          unzip -q ./app_bundle/katapp-runner.zip -d build/ios/iphonesimulator/
+          echo "✅ Latest build extracted to build/ios/iphonesimulator/Runner.app"
+
+      - name: 4. Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 5. Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 6. Install Node.js and Appium
+        run: |
+          npm install -g appium
+          appium driver install xcuitest
+
+      - name: 7. Execute visual regression testing pipeline
+        run: |
+          chmod +x run_pipeline_local.sh
+          ./run_pipeline_local.sh
+
+      - name: 8. Upload visual quality reports and diff artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-report
+          path: |
+            diff_results/
+            screenshots/

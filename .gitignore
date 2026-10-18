@@ -1,0 +1,70 @@
+# ==========================================
+# Python & Environment
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Sensitive environment variables
+.env
+.env.*
+!.env.example
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# ==========================================
+# Screenshots & Visual Testing Results (30k+ images)
+# ==========================================
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+screenshots/
+**/screenshots/
+diff_results/
+**/diff_results/
+
+# ==========================================
+# Large Datasets & Finetune Data
+# ==========================================
+datasets/
+**/datasets/
+*.jsonl
+
+# ==========================================
+# Model Weights & Checkpoints (Safetensors / PyTorch)
+# ==========================================
+*.safetensors
+*.safetensors.index.json
+*.bin
+*.pt
+*.pth
+*.onnx
+Qwen_trained/Qwen3-VL-4B-V2/
+Qwen_trained/Katapp-Qwen3-VL-Agent/
+checkpoints/
+
+# ==========================================
+# Logs & Temporary files
+# ==========================================
+log/
+logs/
+*.log
+*.tmp
+*copy*.md
+
+# Compiled binaries
+tools/swift_ocr
+

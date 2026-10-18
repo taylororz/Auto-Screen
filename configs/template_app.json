@@ -1,0 +1,50 @@
+{
+  "app_config": {
+    "platform_name": "iOS",
+    "platform_version": "27.0",
+    "device_name": "iPhone 18 Pro",
+    "app_path": "/path/to/your/build/Build/Products/Debug-iphonesimulator/YourApp.app",
+    "bundle_id": "com.example.yourapp",
+    "appium_url": "http://localhost:4723"
+  },
+  "initial_setup_steps": [
+    {
+      "step_name": "dismiss_welcome_banner",
+      "instruction": "Click the button labeled 'Get Started' or 'Continue'",
+      "action": "click",
+      "wait_before": 2
+    },
+    {
+      "step_name": "input_username",
+      "instruction": "Enter test account username in the text input field",
+      "action": "type_text",
+      "text": "test_user"
+    }
+  ],
+  "test_flows": [
+    {
+      "folder": "baseline_EN",
+      "language_name": "English",
+      "steps": [
+        {
+          "step_name": "navigate_to_settings",
+          "instruction": "Click the settings gear icon in the top right corner",
+          "action": "click",
+          "wait_before": 2
+        },
+        {
+          "step_name": "toggle_dark_mode",
+          "instruction": "Click the toggle switch labeled 'Dark Mode'",
+          "action": "click",
+          "wait_before": 1
+        },
+        {
+          "step_name": "back_to_main",
+          "instruction": "Click the back button in the top left corner",
+          "action": "click",
+          "wait_before": 2
+        }
+      ]
+    }
+  ]
+}

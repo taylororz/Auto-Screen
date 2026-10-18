@@ -1,0 +1,389 @@
+{
+  "app_config": {
+    "platform_name": "iOS",
+    "platform_version": "27.0",
+    "device_name": "iPhone 18 Pro",
+    "app_path": "/Users/taylorzhuang/Masterarbeit/katapp-app/katapp-app/build/ios/iphonesimulator/Runner.app",
+    "bundle_id": "de.kfru.katapp.dev",
+    "appium_url": "http://localhost:4723"
+  },
+  "initial_setup_steps": [
+    {
+      "step_name": "login_field",
+      "instruction": "Enter activation token in the text input field in the center",
+      "action": "type_text",
+      "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+    },
+    {
+      "step_name": "initial_login_save_button",
+      "instruction": "Click the Save button below the input field",
+      "action": "click the save button below the input field"
+    }
+  ],
+  "test_flows": [
+    {
+      "folder": "baseline_DE_DE",
+      "language_name": "German",
+      "triage_default_location": "Schadensort",
+      "nav_home": "Home",
+      "login_field": "Aktivierungstoken eingeben",
+      "login_save_button": "Speichern",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
+      "steps": [
+        {
+          "step_name": "home_tab",
+          "page_name": "home_page",
+          "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
+          "skip_layout_check": true
+        },
+        {
+          "step_name": "triage_dropdown",
+          "page_name": "triage_location_menu",
+          "instruction": "Click the triage location dropdown menu in the upper-middle area",
+          "action": "click the triage location dropdown in the upper-middle area"
+        },
+        {
+          "step_name": "triage_option",
+          "page_name": "home_page",
+          "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+          "action": "click the triage location option Schadensort in the dropdown list"
+        },
+        {
+          "step_name": "scan_tab",
+          "page_name": "scan_page",
+          "instruction": "Click the Scan icon (2nd tab from left) in the bottom navigation bar",
+          "action": "click the scan icon (2nd tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "overview_tab",
+          "page_name": "overview_page",
+          "instruction": "Click the Triages overview icon (3rd tab in the center) in the bottom navigation bar",
+          "action": "click the triages overview icon (3rd tab in the center) in the bottom navigation bar"
+        },
+        {
+          "step_name": "vehicle_tab",
+          "page_name": "vehicle_page",
+          "instruction": "Click the Vehicle truck icon (5th tab on the far right) in the bottom navigation bar",
+          "action": "click the vehicle icon (5th tab on the far right) in the bottom navigation bar"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "activation_token_button",
+          "page_name": "activation_token_page",
+          "instruction": "Click the Activation Token button in the settings menu list",
+          "action": "click the activation token button in the settings list"
+        },
+        {
+          "step_name": "login_field",
+          "page_name": "login_page",
+          "instruction": "Enter activation token in the text input field in the center",
+          "action": "type_text",
+          "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+        },
+        {
+          "step_name": "login_save_button",
+          "page_name": "login_page",
+          "instruction": "Click the Save button below the input field",
+          "action": "click the save button below the input field"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "language_button",
+          "page_name": "language_dialog",
+          "instruction": "Click the Language button in the settings menu list",
+          "action": "click the language button in the settings list"
+        },
+        {
+          "step_name": "language_choice",
+          "page_name": "home_page",
+          "instruction": "Select the English language option in the popup dialog",
+          "action": "click the English option in the language dialog"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_EN_US",
+      "language_name": "English",
+      "triage_default_location": "Incident",
+      "nav_home": "Home",
+      "login_field": "Enter Activationtoken",
+      "login_save_button": "Save",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
+      "steps": [
+        {
+          "step_name": "home_tab",
+          "page_name": "home_page",
+          "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
+          "skip_layout_check": true
+        },
+        {
+          "step_name": "triage_dropdown",
+          "page_name": "triage_location_menu",
+          "instruction": "Click the triage location dropdown menu in the upper-middle area",
+          "action": "click the triage location dropdown in the upper-middle area"
+        },
+        {
+          "step_name": "triage_option",
+          "page_name": "home_page",
+          "instruction": "Select the Incident option labeled 'Incident' (1st option in the dropdown list)",
+          "action": "click the triage location option Incident in the dropdown list"
+        },
+        {
+          "step_name": "scan_tab",
+          "page_name": "scan_page",
+          "instruction": "Click the Scan icon (2nd tab from left) in the bottom navigation bar",
+          "action": "click the scan icon (2nd tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "overview_tab",
+          "page_name": "overview_page",
+          "instruction": "Click the Triages overview icon (3rd tab in the center) in the bottom navigation bar",
+          "action": "click the triages overview icon (3rd tab in the center) in the bottom navigation bar"
+        },
+        {
+          "step_name": "vehicle_tab",
+          "page_name": "vehicle_page",
+          "instruction": "Click the Vehicle truck icon (5th tab on the far right) in the bottom navigation bar",
+          "action": "click the vehicle icon (5th tab on the far right) in the bottom navigation bar"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "activation_token_button",
+          "page_name": "activation_token_page",
+          "instruction": "Click the Activation Token button in the settings menu list",
+          "action": "click the activation token button in the settings list"
+        },
+        {
+          "step_name": "login_field",
+          "page_name": "login_page",
+          "instruction": "Enter activation token in the text input field in the center",
+          "action": "type_text",
+          "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+        },
+        {
+          "step_name": "login_save_button",
+          "page_name": "login_page",
+          "instruction": "Click the Save button below the input field",
+          "action": "click the save button below the input field"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "language_button",
+          "page_name": "language_dialog",
+          "instruction": "Click the Language button in the settings menu list",
+          "action": "click the language button in the settings list"
+        },
+        {
+          "step_name": "language_choice",
+          "page_name": "home_page",
+          "instruction": "Select the Chinese (Simplified) language option in the popup dialog",
+          "action": "click the Chinese (Simplified) option in the language dialog"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_ZH_CN",
+      "language_name": "中文（简体）",
+      "triage_default_location": "事件",
+      "nav_home": "首页",
+      "login_field": "输入激活令牌",
+      "login_save_button": "保存",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
+      "steps": [
+        {
+          "step_name": "home_tab",
+          "page_name": "home_page",
+          "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
+          "skip_layout_check": true
+        },
+        {
+          "step_name": "triage_dropdown",
+          "page_name": "triage_location_menu",
+          "instruction": "Click the triage location dropdown menu in the upper-middle area",
+          "action": "click the triage location dropdown in the upper-middle area"
+        },
+        {
+          "step_name": "triage_option",
+          "page_name": "home_page",
+          "instruction": "Select the Incident option labeled '事件' (1st option in the dropdown list)",
+          "action": "click the triage location option 事件 in the dropdown list"
+        },
+        {
+          "step_name": "scan_tab",
+          "page_name": "scan_page",
+          "instruction": "Click the Scan icon (2nd tab from left) in the bottom navigation bar",
+          "action": "click the scan icon (2nd tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "overview_tab",
+          "page_name": "overview_page",
+          "instruction": "Click the Triages overview icon (3rd tab in the center) in the bottom navigation bar",
+          "action": "click the triages overview icon (3rd tab in the center) in the bottom navigation bar"
+        },
+        {
+          "step_name": "vehicle_tab",
+          "page_name": "vehicle_page",
+          "instruction": "Click the Vehicle truck icon (5th tab on the far right) in the bottom navigation bar",
+          "action": "click the vehicle icon (5th tab on the far right) in the bottom navigation bar"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "activation_token_button",
+          "page_name": "activation_token_page",
+          "instruction": "Click the Activation Token button in the settings menu list",
+          "action": "click the activation token button in the settings list"
+        },
+        {
+          "step_name": "login_field",
+          "page_name": "login_page",
+          "instruction": "Enter activation token in the text input field in the center",
+          "action": "type_text",
+          "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+        },
+        {
+          "step_name": "login_save_button",
+          "page_name": "login_page",
+          "instruction": "Click the Save button below the input field",
+          "action": "click the save button below the input field"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "language_button",
+          "page_name": "language_dialog",
+          "instruction": "Click the Language button in the settings menu list",
+          "action": "click the language button in the settings list"
+        },
+        {
+          "step_name": "language_choice",
+          "page_name": "home_page",
+          "instruction": "Select the Chinese (Traditional) language option in the popup dialog",
+          "action": "click the Chinese (Traditional) option in the language dialog"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_ZH_TW",
+      "language_name": "中文（繁體）",
+      "triage_default_location": "事件",
+      "nav_home": "首頁",
+      "login_field": "輸入啟用令牌",
+      "login_save_button": "儲存",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
+      "steps": [
+        {
+          "step_name": "home_tab",
+          "page_name": "home_page",
+          "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
+          "skip_layout_check": true
+        },
+        {
+          "step_name": "triage_dropdown",
+          "page_name": "triage_location_menu",
+          "instruction": "Click the triage location dropdown menu in the upper-middle area",
+          "action": "click the triage location dropdown in the upper-middle area"
+        },
+        {
+          "step_name": "triage_option",
+          "page_name": "home_page",
+          "instruction": "Select the Incident option labeled '事件' (1st option in the dropdown list)",
+          "action": "click the triage location option 事件 in the dropdown list"
+        },
+        {
+          "step_name": "scan_tab",
+          "page_name": "scan_page",
+          "instruction": "Click the Scan icon (2nd tab from left) in the bottom navigation bar",
+          "action": "click the scan icon (2nd tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "overview_tab",
+          "page_name": "overview_page",
+          "instruction": "Click the Triages overview icon (3rd tab in the center) in the bottom navigation bar",
+          "action": "click the triages overview icon (3rd tab in the center) in the bottom navigation bar"
+        },
+        {
+          "step_name": "vehicle_tab",
+          "page_name": "vehicle_page",
+          "instruction": "Click the Vehicle truck icon (5th tab on the far right) in the bottom navigation bar",
+          "action": "click the vehicle icon (5th tab on the far right) in the bottom navigation bar"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "activation_token_button",
+          "page_name": "activation_token_page",
+          "instruction": "Click the Activation Token button in the settings menu list",
+          "action": "click the activation token button in the settings list"
+        },
+        {
+          "step_name": "login_field",
+          "page_name": "login_page",
+          "instruction": "Enter activation token in the text input field in the center",
+          "action": "type_text",
+          "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+        },
+        {
+          "step_name": "login_save_button",
+          "page_name": "login_page",
+          "instruction": "Click the Save button below the input field",
+          "action": "click the save button below the input field"
+        },
+        {
+          "step_name": "settings_tab",
+          "page_name": "settings_page",
+          "instruction": "Click the Settings gear icon (4th tab from left) in the bottom navigation bar",
+          "action": "click the settings icon (4th tab from left) in the bottom navigation bar"
+        },
+        {
+          "step_name": "language_button",
+          "page_name": "language_dialog",
+          "instruction": "Click the Language button in the settings menu list",
+          "action": "click the language button in the settings list"
+        },
+        {
+          "step_name": "language_choice",
+          "page_name": "home_page",
+          "instruction": "Select the German language option in the popup dialog",
+          "action": "click the German option in the language dialog"
+        }
+      ]
+    }
+  ]
+}

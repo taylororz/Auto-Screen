@@ -1,0 +1,425 @@
+{
+  "app_config": {
+    "platform_name": "iOS",
+    "platform_version": "27.0",
+    "device_name": "iPhone 18 Pro",
+    "app_path": "/Users/taylorzhuang/Masterarbeit/social-app/build/ios/iphonesimulator/Bluesky.app",
+    "bundle_id": "xyz.blueskyweb.app",
+    "appium_url": "http://localhost:4723"
+  },
+  "initial_setup_steps": [
+    {
+      "step_name": "Select server",
+      "instruction": "Select the server labeled 'http://localhost:8082' in the server selection page",
+      "action": "click",
+      "wait_before": 2
+    },
+    {
+      "step_name": "login",
+      "instruction": "Click the button labeled 'Sign in'",
+      "action": "click",
+      "wait_before": 2
+    },
+    {
+      "step_name": "enter_email_address",
+      "instruction": "Enter email address in the input field.",
+      "action": "type_text",
+      "text": "[EMAIL_ADDRESS]"
+    },
+    {
+      "step_name": "click_login_field_password",
+      "instruction": "Click the input field under header 'Password'",
+      "action": "click"
+    },
+    {
+      "step_name": "enter_password",
+      "instruction": "Enter password in the input field.",
+      "action": "type_text",
+      "text": "[PASSWORD]",
+      "is_password": true
+    },
+    {
+      "step_name": "login_signin",
+      "instruction": "Click the button labeled 'Sign in'",
+      "action": "click"
+    }
+  ],
+  "test_flows": [
+    {
+      "folder": "baseline_EN",
+      "language_name": "English",
+      "steps": [
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the home icon in the bottom bar.",
+          "action": "click the home icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_discover_page",
+          "instruction": "check discover page.",
+          "action": "click the tab 'Discover'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_following_page",
+          "instruction": "check following page.",
+          "action": "click the tab 'Following'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_video_page",
+          "instruction": "check video page.",
+          "action": "click the tab 'Video'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_Feeds_page",
+          "instruction": "go to # page in the top right corner.",
+          "action": "click the '#' icon",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_search_page",
+          "instruction": "click the 'Search' icon in the bottom bar",
+          "action": "click the 'Search' icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_message_page",
+          "instruction": "click the chat bubble icon in the bottom bar",
+          "action": "click the chat bubble icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_notification_page",
+          "instruction": "click the 'Notification' icon in the bottom bar",
+          "action": "click the 'Notification' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_@_page",
+          "instruction": "click the '@' icon in the bottom bar",
+          "action": "click the '@' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "click the home icon in the bottom bar",
+          "action": "click the home icon in the bottom bar"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_Lists_page",
+          "instruction": "go to Lists page.",
+          "action": "click the 'Lists' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner",
+          "wait_before": 1
+        },
+        {
+          "step_name": "go_to_Saved_page",
+          "instruction": "go to Saved page.",
+          "action": "click the 'Saved' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "open_settings",
+          "instruction": "open settings.",
+          "action": "click the 'Settings' text"
+        },
+        {
+          "step_name": "open_language_settings",
+          "instruction": "open language settings.",
+          "action": "click the 'Language' text"
+        },
+        {
+          "step_name": "open_app_language_dropdown",
+          "instruction": "open App language dropdown.",
+          "action": "click the 'App language' dropdown"
+        },
+        {
+          "step_name": "select_german_language",
+          "instruction": "select Deutsch in the language list.",
+          "action": "click 'Deutsch – German' in the list"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_DE",
+      "language_name": "German",
+      "steps": [
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the home icon in the bottom bar.",
+          "action": "click the home icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_discover_page",
+          "instruction": "check discover page.",
+          "action": "click the tab 'Discover'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_following_page",
+          "instruction": "check following page.",
+          "action": "click the tab 'Following'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_video_page",
+          "instruction": "check video page.",
+          "action": "click the tab 'Video'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_Feeds_page",
+          "instruction": "go to # page in the top right corner.",
+          "action": "click the '#' icon",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_search_page",
+          "instruction": "click the 'Search' icon in the bottom bar",
+          "action": "click the 'Search' icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_message_page",
+          "instruction": "click the chat bubble icon in the bottom bar",
+          "action": "click the chat bubble icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_notification_page",
+          "instruction": "click the 'Notification' icon in the bottom bar",
+          "action": "click the 'Notification' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_@_page",
+          "instruction": "click the '@' icon in the bottom bar",
+          "action": "click the '@' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "click the home icon in the bottom bar",
+          "action": "click the home icon in the bottom bar"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_Lists_page",
+          "instruction": "go to Lists page.",
+          "action": "click the 'Lists' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_Saved_page",
+          "instruction": "go to Saved page.",
+          "action": "click the 'Saved' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "open_settings",
+          "instruction": "open settings.",
+          "action": "click the 'Settings' text"
+        },
+        {
+          "step_name": "open_language_settings",
+          "instruction": "open language settings.",
+          "action": "click the 'Language' text"
+        },
+        {
+          "step_name": "open_app_language_dropdown",
+          "instruction": "open App language dropdown.",
+          "action": "click the 'App language' dropdown"
+        },
+        {
+          "step_name": "scroll_language_list_to_bottom",
+          "instruction": "scroll the language list to the end.",
+          "action": "scroll_down",
+          "repeat": 3,
+          "wait_before": 1
+        },
+        {
+          "step_name": "select_chinese_language",
+          "instruction": "select Simplified Chinese in the language list.",
+          "action": "click '简体中文 - Simplified Chinese' in the list",
+          "wait_before": 1
+        }
+      ]
+    },
+    {
+      "folder": "baseline_ZH_CN",
+      "language_name": "Chinese",
+      "steps": [
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the home icon in the bottom bar.",
+          "action": "click the home icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_discover_page",
+          "instruction": "check discover page.",
+          "action": "click the tab 'Discover'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_following_page",
+          "instruction": "check following page.",
+          "action": "click the tab 'Following'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "check_video_page",
+          "instruction": "check video page.",
+          "action": "click the tab 'Video'",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_Feeds_page",
+          "instruction": "go to # page in the top right corner.",
+          "action": "click the '#' icon",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_search_page",
+          "instruction": "click the 'Search' icon in the bottom bar",
+          "action": "click the 'Search' icon in the bottom bar",
+          "wait_before": 2
+        },
+        {
+          "step_name": "go_to_message_page",
+          "instruction": "click the chat bubble icon in the bottom bar",
+          "action": "click the chat bubble icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_notification_page",
+          "instruction": "click the 'Notification' icon in the bottom bar",
+          "action": "click the 'Notification' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_to_@_page",
+          "instruction": "click the '@' icon in the bottom bar",
+          "action": "click the '@' icon in the bottom bar"
+        },
+        {
+          "step_name": "go_back_to_home_page",
+          "instruction": "click the home icon in the bottom bar",
+          "action": "click the home icon in the bottom bar"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_Lists_page",
+          "instruction": "go to Lists page.",
+          "action": "click the 'Lists' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "go_to_Saved_page",
+          "instruction": "go to Saved page.",
+          "action": "click the 'Saved' text"
+        },
+        {
+          "step_name": "go_back",
+          "instruction": "go to the back icon in the top left corner.",
+          "action": "click the back icon in the top left corner"
+        },
+        {
+          "step_name": "open_app_menu",
+          "instruction": "click the menu icon in the top left corner",
+          "action": "click the menu icon in the top left corner"
+        },
+        {
+          "step_name": "open_settings",
+          "instruction": "open settings.",
+          "action": "click the 'Settings' text"
+        },
+        {
+          "step_name": "open_language_settings",
+          "instruction": "open language settings.",
+          "action": "click the 'Language' text"
+        },
+        {
+          "step_name": "open_app_language_dropdown",
+          "instruction": "open App language dropdown.",
+          "action": "click the 'App language' dropdown"
+        },
+        {
+          "step_name": "select_english_language",
+          "instruction": "select English in the language list.",
+          "action": "click 'English' in the list",
+          "wait_before": 1
+        }
+      ]
+    }
+  ]
+}

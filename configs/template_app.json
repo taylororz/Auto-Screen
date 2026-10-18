@@ -1,8 +1,8 @@
 {
   "app_config": {
     "platform_name": "iOS",
-    "platform_version": "27.0",
-    "device_name": "iPhone 18 Pro",
+    "platform_version": "18.0",
+    "device_name": "iPhone 16 Pro",
     "app_path": "/path/to/your/build/Build/Products/Debug-iphonesimulator/YourApp.app",
     "bundle_id": "com.example.yourapp",
     "appium_url": "http://localhost:4723"

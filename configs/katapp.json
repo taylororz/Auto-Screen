@@ -1,8 +1,8 @@
 {
   "app_config": {
     "platform_name": "iOS",
-    "platform_version": "27.0",
-    "device_name": "iPhone 18 Pro",
+    "platform_version": "18.0",
+    "device_name": "iPhone 16 Pro",
     "app_path": "/Users/taylorzhuang/Masterarbeit/katapp-app/katapp-app/build/ios/iphonesimulator/Runner.app",
     "bundle_id": "de.kfru.katapp.dev",
     "appium_url": "http://localhost:4723"

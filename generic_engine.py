@@ -156,9 +156,38 @@ class GenericGUITestEngine:
         """Initializes Appium XCUITest options from config."""
         options = XCUITestOptions()
         options.platform_name = self.app_cfg.get("platform_name", "iOS")
-        options.platform_version = self.app_cfg.get("platform_version", "17.0")
-        options.device_name = self.app_cfg.get("device_name", "iPhone 15")
-        options.app = self.app_cfg.get("app_path", "")
+        # Auto-detect already booted simulator (from CI or local session)
+        booted_udid = os.environ.get("AUTOSCREEN_UDID")
+        booted_device_name = None
+        if not booted_udid:
+            try:
+                res = subprocess.run(
+                    ["xcrun", "simctl", "list", "devices"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                )
+                for line in res.stdout.splitlines():
+                    if "(Booted)" in line and "(" in line and ")" in line:
+                        booted_device_name = line.split("(")[0].strip()
+                        booted_udid = line.split("(")[1].split(")")[0].strip()
+                        break
+            except Exception:
+                pass
+
+        if booted_udid:
+            print(f"📱 Connected to booted simulator: {booted_device_name or 'Simulator'} ({booted_udid})")
+            options.udid = booted_udid
+            options.device_name = booted_device_name or "iPhone 16 Pro"
+        else:
+            options.device_name = self.app_cfg.get("device_name", "iPhone 16 Pro")
+
+        app_target = os.environ.get("AUTOSCREEN_APP_PATH") or self.app_cfg.get("app_path", "")
+        if app_target and not Path(app_target).exists():
+            ci_fallback = ROOT_DIR / "build" / "ios" / "iphonesimulator" / "Runner.app"
+            if ci_fallback.exists():
+                app_target = str(ci_fallback)
+        options.app = app_target
         options.automation_name = "XCUITest"
         options.auto_accept_alerts = True
         options.show_keychain_automatically = False

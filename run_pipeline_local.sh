@@ -25,7 +25,10 @@ fi
 # 3. Boot iOS Simulator (macOS only)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "📱 [Step 2/5] Checking and booting iOS Simulator..."
-    UDID=$(xcrun simctl list devices available 2>/dev/null | grep "iPhone 15" | head -1 | awk -F '[()]' '{print $2}')
+    UDID=$(xcrun simctl list devices available 2>/dev/null | grep -E "iPhone 16 Pro|iPhone 16" | head -1 | awk -F '[()]' '{print $2}')
+    if [ -z "$UDID" ]; then
+        UDID=$(xcrun simctl list devices available 2>/dev/null | grep "iPhone 15" | head -1 | awk -F '[()]' '{print $2}')
+    fi
     if [ -z "$UDID" ]; then
         UDID=$(xcrun simctl list devices available 2>/dev/null | grep "iPhone" | head -1 | awk -F '[()]' '{print $2}')
     fi
@@ -34,6 +37,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Booting simulator: $UDID"
         xcrun simctl boot "$UDID" 2>/dev/null || true
         open -a Simulator 2>/dev/null || true
+        export AUTOSCREEN_UDID="$UDID"
     else
         echo "⚠️ No available iPhone simulator found, skipping auto-boot"
     fi

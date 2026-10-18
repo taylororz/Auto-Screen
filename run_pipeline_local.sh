@@ -52,6 +52,11 @@ export LOCAL_MODEL_PATH="${LOCAL_MODEL_PATH:-$PROJECT_ROOT/Qwen_trained/Katapp-Q
 APP_NAME="${APP_NAME:-katapp}"
 MODEL_NAME="${MODEL_NAME:-Qwen_trained}"
 
+if [ -d "$PROJECT_ROOT/build/ios/iphonesimulator/Runner.app" ]; then
+    export AUTOSCREEN_APP_PATH="$PROJECT_ROOT/build/ios/iphonesimulator/Runner.app"
+    echo "📦 Using target application bundle: $AUTOSCREEN_APP_PATH"
+fi
+
 if [ -f "screenshot.py" ]; then
     python3 screenshot.py --mode "$AGENT_MODE" --loops 1
 else

@@ -17,23 +17,30 @@ jobs:
       - name: 1. Checkout test suite repository
         uses: actions/checkout@v4
 
-      # If triggered via cross-repo event, download the latest Runner.app artifact from katapp-app
+      # Download Runner.app artifact from katapp-app (supports repository_dispatch, workflow_dispatch, and push)
       - name: 2. Download upstream katapp build artifact
-        if: github.event_name == 'repository_dispatch'
-        uses: actions/download-artifact@v4
-        with:
-          name: katapp-runner-app
-          github-token: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
-          repository: kat-app/katapp-app
-          run-id: ${{ github.event.client_payload.run_id }}
-          path: ./app_bundle
-
-      - name: 3. Extract and update target application bundle
-        if: github.event_name == 'repository_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
+          DISPATCH_RUN_ID: ${{ github.event.client_payload.run_id }}
         run: |
-          mkdir -p build/ios/iphonesimulator
-          unzip -q ./app_bundle/katapp-runner.zip -d build/ios/iphonesimulator/
-          echo "✅ Latest build extracted to build/ios/iphonesimulator/Runner.app"
+          mkdir -p ./app_bundle
+          if [ -n "$DISPATCH_RUN_ID" ]; then
+            echo "📥 Fetching artifact from dispatched upstream run: $DISPATCH_RUN_ID"
+            gh run download "$DISPATCH_RUN_ID" --repo kat-app/katapp-app --name katapp-runner-app --dir ./app_bundle
+          else
+            echo "📥 Fetching latest successful build artifact from kat-app/katapp-app"
+            gh run download --repo kat-app/katapp-app --name katapp-runner-app --dir ./app_bundle || true
+          fi
+
+      - name: 3. Extract target application bundle
+        run: |
+          if [ -f "./app_bundle/katapp-runner.zip" ]; then
+            mkdir -p build/ios/iphonesimulator
+            unzip -q -o ./app_bundle/katapp-runner.zip -d build/ios/iphonesimulator/
+            echo "✅ Latest build extracted to build/ios/iphonesimulator/Runner.app"
+          else
+            echo "⚠️ No katapp-runner.zip found in ./app_bundle"
+          fi
 
       - name: 4. Set up Python environment
         uses: actions/setup-python@v5

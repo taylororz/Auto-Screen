@@ -37,6 +37,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Booting simulator: $UDID"
         xcrun simctl boot "$UDID" 2>/dev/null || true
         open -a Simulator 2>/dev/null || true
+        echo "⏳ Waiting for simulator to finish booting..."
+        xcrun simctl bootstatus "$UDID" -b
+        echo "✅ Simulator is fully booted and ready."
         export AUTOSCREEN_UDID="$UDID"
     else
         echo "⚠️ No available iPhone simulator found, skipping auto-boot"

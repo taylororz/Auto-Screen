@@ -197,6 +197,9 @@ class GenericGUITestEngine:
         # Set long command timeout (1 hour) to prevent Appium killing session during long VLM calls
         options.new_command_timeout = 3600
         options.set_capability("newCommandTimeout", 3600)
+        options.set_capability("showXcodeLog", True)
+        options.set_capability("wdaLaunchTimeout", 180000)
+        options.set_capability("wdaConnectionTimeout", 180000)
         # Disable Expo DevLauncher onboarding popup from source via processArguments
         options.process_arguments = {
             "args": ["-EXPO_DEV_LAUNCHER_IS_ONBOARDED", "1", "-EXPO_DEV_MENU_IS_DISABLED", "1"],

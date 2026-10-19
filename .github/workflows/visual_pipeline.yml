@@ -46,16 +46,15 @@ jobs:
             echo "⚠️ No katapp-runner.zip found and no local fallback build"
           fi
 
-      - name: 4. Set up Python environment
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          cache: 'pip'
+      - name: 4. Verify Python environment
+        run: |
+          python3 --version
+          python3 -m pip --version
 
       - name: 5. Install Python dependencies
         run: |
           python3 -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then python3 -m pip install -r requirements.txt; fi
 
       # Use local fine-tuned Qwen weights if available, otherwise download from Hugging Face
       - name: 6. Prepare fine-tuned Qwen model

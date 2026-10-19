@@ -64,6 +64,9 @@ logs/
 *.log
 *.tmp
 *copy*.md
+upload_*.sh
+upload_*.py
+
 
 # Compiled binaries
 tools/swift_ocr

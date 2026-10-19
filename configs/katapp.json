@@ -12,12 +12,15 @@
       "step_name": "login_field",
       "instruction": "Enter activation token in the text input field in the center",
       "action": "type_text",
-      "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck"
+      "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
+      "hide_keyboard": true,
+      "wait_after": 1.0
     },
     {
       "step_name": "initial_login_save_button",
       "instruction": "Click the Save button below the input field",
-      "action": "click the save button below the input field"
+      "action": "click the save button below the input field",
+      "wait_after": 5.0
     }
   ],
   "test_flows": [

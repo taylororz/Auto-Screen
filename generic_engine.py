@@ -847,7 +847,43 @@ class GenericGUITestEngine:
             except Exception as elem_err:
                 print(f"⚠️ Active element typing attempt failed: {elem_err}")
 
-            # Approach B: ActionChains fallback for webviews or non-standard inputs
+            # Approach B: Native XCUIElement search for Flutter / iOS text fields
+            if not typed_success:
+                try:
+                    from appium.webdriver.common.appiumby import AppiumBy
+                    native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeTextField")
+                    if not native_inputs:
+                        native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeSecureTextField")
+                    if not native_inputs:
+                        native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeTextView")
+                    if native_inputs:
+                        target_input = native_inputs[0]
+                        if should_clear:
+                            try:
+                                target_input.clear()
+                            except Exception:
+                                pass
+                        if hasattr(target_input, "set_value"):
+                            target_input.set_value(text_to_type)
+                        else:
+                            target_input.send_keys(text_to_type)
+                        typed_success = True
+                        display_txt = (text_to_type[:15] + "..." + text_to_type[-10:]) if len(text_to_type) > 30 else text_to_type
+                        print(f"[{lang_name}] 📱 Typed text directly via native XCUIElement: {display_txt}")
+                except Exception as native_err:
+                    print(f"⚠️ Native XCUIElement typing fallback failed: {native_err}")
+
+            # Approach C: XCUITest native mobile: keys command
+            if not typed_success:
+                try:
+                    self.driver.execute_script("mobile: keys", {"keys": [text_to_type]})
+                    typed_success = True
+                    display_txt = (text_to_type[:15] + "..." + text_to_type[-10:]) if len(text_to_type) > 30 else text_to_type
+                    print(f"[{lang_name}] 📱 Typed text via XCUITest mobile:keys: {display_txt}")
+                except Exception as keys_err:
+                    print(f"⚠️ mobile:keys typing failed: {keys_err}")
+
+            # Approach D: ActionChains fallback for webviews or non-standard inputs
             if not typed_success:
                 try:
                     from selenium.webdriver.common.action_chains import ActionChains
@@ -857,14 +893,17 @@ class GenericGUITestEngine:
                 except Exception as type_err:
                     print(f"⚠️ Type text warning: {type_err}")
 
-            time.sleep(0.3)
+            time.sleep(0.5)
 
-            # Optional hide keyboard if specified in step_info
-            if step_info.get("hide_keyboard", False):
+            # Auto-dismiss iOS on-screen keyboard if requested or active
+            if step_info.get("hide_keyboard", True):
                 try:
-                    self.driver.hide_keyboard()
+                    if self.driver.is_keyboard_shown():
+                        self.driver.hide_keyboard()
+                        time.sleep(0.5)
                 except Exception:
                     pass
+
 
             # Update post screenshot after typing so it captures the actual typed input
             try:

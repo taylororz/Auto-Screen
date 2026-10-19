@@ -12,15 +12,12 @@ import json
 import shutil
 import argparse
 import importlib.util
-import subprocess
 from pathlib import Path
 from datetime import datetime
 
 import cv2
 from appium import webdriver
 from appium.options.ios import XCUITestOptions
-
-ROOT_DIR = Path(__file__).resolve().parent
 
 
 def resolve_config_path(config_path=None):
@@ -159,63 +156,20 @@ class GenericGUITestEngine:
         """Initializes Appium XCUITest options from config."""
         options = XCUITestOptions()
         options.platform_name = self.app_cfg.get("platform_name", "iOS")
-        # Auto-detect already booted simulator (from CI or local session)
-        booted_udid = os.environ.get("AUTOSCREEN_UDID")
-        booted_device_name = None
-        if not booted_udid:
-            try:
-                res = subprocess.run(
-                    ["xcrun", "simctl", "list", "devices"],
-                    capture_output=True,
-                    text=True,
-                    timeout=5,
-                )
-                for line in res.stdout.splitlines():
-                    if "(Booted)" in line and "(" in line and ")" in line:
-                        booted_device_name = line.split("(")[0].strip()
-                        booted_udid = line.split("(")[1].split(")")[0].strip()
-                        break
-            except Exception:
-                pass
-
-        if booted_udid:
-            print(f"📱 Connected to booted simulator: {booted_device_name or 'Simulator'} ({booted_udid})")
-            options.udid = booted_udid
-            options.device_name = booted_device_name or "iPhone 16 Pro"
-        else:
-            options.device_name = self.app_cfg.get("device_name", "iPhone 16 Pro")
-
+        options.platform_version = self.app_cfg.get("platform_version", "17.0")
+        options.device_name = self.app_cfg.get("device_name", "iPhone 15")
         app_target = os.environ.get("AUTOSCREEN_APP_PATH") or self.app_cfg.get("app_path", "")
         if app_target and not Path(app_target).exists():
             ci_fallback = ROOT_DIR / "build" / "ios" / "iphonesimulator" / "Runner.app"
             if ci_fallback.exists():
                 app_target = str(ci_fallback)
         options.app = app_target
-
-        # Auto-detect CFBundleIdentifier from app bundle Info.plist if present
-        if app_target and Path(app_target).exists():
-            plist_file = Path(app_target) / "Info.plist"
-            if plist_file.exists():
-                try:
-                    import plistlib
-                    with open(plist_file, "rb") as fp:
-                        pl = plistlib.load(fp)
-                        real_bundle_id = pl.get("CFBundleIdentifier")
-                        if real_bundle_id:
-                            print(f"📦 Auto-detected Bundle ID from Info.plist: {real_bundle_id}")
-                            self.app_cfg["bundle_id"] = real_bundle_id
-                except Exception as ex:
-                    pass
-
         options.automation_name = "XCUITest"
         options.auto_accept_alerts = True
         options.show_keychain_automatically = False
         # Set long command timeout (1 hour) to prevent Appium killing session during long VLM calls
         options.new_command_timeout = 3600
         options.set_capability("newCommandTimeout", 3600)
-        options.set_capability("showXcodeLog", True)
-        options.set_capability("wdaLaunchTimeout", 180000)
-        options.set_capability("wdaConnectionTimeout", 180000)
         # Disable Expo DevLauncher onboarding popup from source via processArguments
         options.process_arguments = {
             "args": ["-EXPO_DEV_LAUNCHER_IS_ONBOARDED", "1", "-EXPO_DEV_MENU_IS_DISABLED", "1"],
@@ -847,43 +801,7 @@ class GenericGUITestEngine:
             except Exception as elem_err:
                 print(f"⚠️ Active element typing attempt failed: {elem_err}")
 
-            # Approach B: Native XCUIElement search for Flutter / iOS text fields
-            if not typed_success:
-                try:
-                    from appium.webdriver.common.appiumby import AppiumBy
-                    native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeTextField")
-                    if not native_inputs:
-                        native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeSecureTextField")
-                    if not native_inputs:
-                        native_inputs = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value="XCUIElementTypeTextView")
-                    if native_inputs:
-                        target_input = native_inputs[0]
-                        if should_clear:
-                            try:
-                                target_input.clear()
-                            except Exception:
-                                pass
-                        if hasattr(target_input, "set_value"):
-                            target_input.set_value(text_to_type)
-                        else:
-                            target_input.send_keys(text_to_type)
-                        typed_success = True
-                        display_txt = (text_to_type[:15] + "..." + text_to_type[-10:]) if len(text_to_type) > 30 else text_to_type
-                        print(f"[{lang_name}] 📱 Typed text directly via native XCUIElement: {display_txt}")
-                except Exception as native_err:
-                    print(f"⚠️ Native XCUIElement typing fallback failed: {native_err}")
-
-            # Approach C: XCUITest native mobile: keys command
-            if not typed_success:
-                try:
-                    self.driver.execute_script("mobile: keys", {"keys": [text_to_type]})
-                    typed_success = True
-                    display_txt = (text_to_type[:15] + "..." + text_to_type[-10:]) if len(text_to_type) > 30 else text_to_type
-                    print(f"[{lang_name}] 📱 Typed text via XCUITest mobile:keys: {display_txt}")
-                except Exception as keys_err:
-                    print(f"⚠️ mobile:keys typing failed: {keys_err}")
-
-            # Approach D: ActionChains fallback for webviews or non-standard inputs
+            # Approach B: ActionChains fallback for webviews or non-standard inputs
             if not typed_success:
                 try:
                     from selenium.webdriver.common.action_chains import ActionChains
@@ -893,17 +811,14 @@ class GenericGUITestEngine:
                 except Exception as type_err:
                     print(f"⚠️ Type text warning: {type_err}")
 
-            time.sleep(0.5)
+            time.sleep(0.3)
 
-            # Auto-dismiss iOS on-screen keyboard if requested or active
-            if step_info.get("hide_keyboard", True):
+            # Optional hide keyboard if specified in step_info
+            if step_info.get("hide_keyboard", False):
                 try:
-                    if self.driver.is_keyboard_shown():
-                        self.driver.hide_keyboard()
-                        time.sleep(0.5)
+                    self.driver.hide_keyboard()
                 except Exception:
                     pass
-
 
             # Update post screenshot after typing so it captures the actual typed input
             try:

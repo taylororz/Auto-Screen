@@ -13,7 +13,6 @@
       "instruction": "Enter activation token in the text input field in the center",
       "action": "type_text",
       "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWJlZGRlZENsYWltcyI6eyJ1c2VySWQiOiJmYTMxOWNiOC1iOTY1LTQwMzktYmQ3Mi1iNTIzOGFiOWIyMGMifX0.YUyg5_0M2m8spepSEzESTcZC2o2sQFy-GLwPPROJCck",
-      "hide_keyboard": true,
       "wait_after": 1.0
     },
     {
@@ -48,7 +47,7 @@
         },
         {
           "step_name": "triage_option",
-          "page_name": "home_page",
+          "page_name": "triage_option_page",
           "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
           "action": "click the triage location option Schadensort in the dropdown list"
         },
@@ -109,7 +108,7 @@
         },
         {
           "step_name": "language_choice",
-          "page_name": "home_page",
+          "page_name": "language_choice_page",
           "instruction": "Select the English language option in the popup dialog",
           "action": "click the English option in the language dialog"
         }
@@ -139,7 +138,7 @@
         },
         {
           "step_name": "triage_option",
-          "page_name": "home_page",
+          "page_name": "triage_option_page",
           "instruction": "Select the Incident option labeled 'Incident' (1st option in the dropdown list)",
           "action": "click the triage location option Incident in the dropdown list"
         },
@@ -200,7 +199,7 @@
         },
         {
           "step_name": "language_choice",
-          "page_name": "home_page",
+          "page_name": "language_choice_page",
           "instruction": "Select the Chinese (Simplified) language option in the popup dialog",
           "action": "click the Chinese (Simplified) option in the language dialog"
         }
@@ -230,7 +229,7 @@
         },
         {
           "step_name": "triage_option",
-          "page_name": "home_page",
+          "page_name": "triage_option_page",
           "instruction": "Select the Incident option labeled '事件' (1st option in the dropdown list)",
           "action": "click the triage location option 事件 in the dropdown list"
         },
@@ -291,7 +290,7 @@
         },
         {
           "step_name": "language_choice",
-          "page_name": "home_page",
+          "page_name": "language_choice_page",
           "instruction": "Select the Chinese (Traditional) language option in the popup dialog",
           "action": "click the Chinese (Traditional) option in the language dialog"
         }
@@ -321,7 +320,7 @@
         },
         {
           "step_name": "triage_option",
-          "page_name": "home_page",
+          "page_name": "triage_option_page",
           "instruction": "Select the Incident option labeled '事件' (1st option in the dropdown list)",
           "action": "click the triage location option 事件 in the dropdown list"
         },
@@ -382,7 +381,7 @@
         },
         {
           "step_name": "language_choice",
-          "page_name": "home_page",
+          "page_name": "language_choice_page",
           "instruction": "Select the German language option in the popup dialog",
           "action": "click the German option in the language dialog"
         }

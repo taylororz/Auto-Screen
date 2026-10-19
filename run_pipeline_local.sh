@@ -25,7 +25,11 @@ fi
 # 3. Boot iOS Simulator (macOS only)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "📱 [Step 2/5] Checking and booting iOS Simulator..."
-    UDID=$(xcrun simctl list devices available 2>/dev/null | grep -E "iPhone 16 Pro|iPhone 16" | head -1 | awk -F '[()]' '{print $2}')
+    # Prefer already booted simulator
+    UDID=$(xcrun simctl list devices 2>/dev/null | grep "(Booted)" | head -1 | awk -F '[()]' '{print $2}')
+    if [ -z "$UDID" ]; then
+        UDID=$(xcrun simctl list devices available 2>/dev/null | grep -E "iPhone 18 Pro|iPhone 16 Pro|iPhone 16" | head -1 | awk -F '[()]' '{print $2}')
+    fi
     if [ -z "$UDID" ]; then
         UDID=$(xcrun simctl list devices available 2>/dev/null | grep "iPhone 15" | head -1 | awk -F '[()]' '{print $2}')
     fi

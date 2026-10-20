@@ -880,7 +880,13 @@ class GenericGUITestEngine:
                         print(f"🔄 [Lightweight Reset] Restarting app ({bundle_id}) for clean state before Loop {loop + 1}/{self.loops}...")
                         self.reset_app(wait_after=3)
 
-                    for flow in test_flows:
+                    for flow_idx, flow in enumerate(test_flows):
+                        # Ensure every language flow starts cleanly on the Home screen in its active language
+                        if flow_idx > 0 or (loop > 0 and not flow_broken):
+                            bundle_id = self.app_cfg.get("bundle_id", "")
+                            print(f"\n🔄 [Language Flow Reset] Restarting app ({bundle_id}) to return to Home screen for clean baseline...")
+                            self.reset_app(wait_after=3)
+
                         lang_info = {
                             "folder": flow.get("folder", "default"),
                             "language_name": flow.get("language_name", "English")

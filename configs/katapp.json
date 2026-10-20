@@ -36,8 +36,7 @@
           "step_name": "home_tab",
           "page_name": "home_page",
           "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
-          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
-          "skip_layout_check": true
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar"
         },
         {
           "step_name": "triage_dropdown",
@@ -127,8 +126,7 @@
           "step_name": "home_tab",
           "page_name": "home_page",
           "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
-          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
-          "skip_layout_check": true
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar"
         },
         {
           "step_name": "triage_dropdown",
@@ -218,8 +216,7 @@
           "step_name": "home_tab",
           "page_name": "home_page",
           "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
-          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
-          "skip_layout_check": true
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar"
         },
         {
           "step_name": "triage_dropdown",
@@ -309,8 +306,7 @@
           "step_name": "home_tab",
           "page_name": "home_page",
           "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
-          "action": "click the home icon (1st tab from left) in the bottom navigation bar",
-          "skip_layout_check": true
+          "action": "click the home icon (1st tab from left) in the bottom navigation bar"
         },
         {
           "step_name": "triage_dropdown",

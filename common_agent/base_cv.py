@@ -270,7 +270,7 @@ def annotate_ui_elements_som(
     image_path = Path(image_path)
     image = cv2.imread(str(image_path))
     if image is None:
-        raise ValueError(f"Bild konnte nicht gelesen werden: {image_path}")
+        raise ValueError(f"Unable to read image: {image_path}")
 
     height, width = image.shape[:2]
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -292,7 +292,7 @@ def annotate_ui_elements_som(
     modal = _detect_modal_dialog(image)
     boxes = []
     if modal:
-        # Modaler Dialog aktiv: NUR Elemente innerhalb des Dialogs markieren, Hintergrund ignorieren
+        # Modal dialog active: ONLY mark elements within the dialog, ignore background
         mx, my, mw, mh = modal
         close_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 7))
         t_mask = cv2.morphologyEx(threshold_mask.copy(), cv2.MORPH_CLOSE, close_kernel, iterations=1)
@@ -302,11 +302,11 @@ def annotate_ui_elements_som(
         raw_boxes = []
         for c in contours:
             x, y, w, h = cv2.boundingRect(c)
-            # Nur Boxen innerhalb der Dialoggrenzen zulassen
+            # Only allow bounding boxes within dialog boundaries
             if x >= mx - 10 and y >= my - 10 and x + w <= mx + mw + 10 and y + h <= my + mh + 10:
                 area = w * h
                 if area > mw * mh * 0.8:
-                    continue  # Dialoghintergrund selbst ignorieren
+                    continue  # Ignore dialog background card itself
                 if w < 22 or h < 18 or area < 350:
                     continue
                 raw_boxes.append((x, y, w, h))
@@ -392,7 +392,7 @@ def annotate_ui_elements_som(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(output_path), marked)
 
-    # Metadaten als JSON neben dem Bild speichern
+    # Save metadata JSON alongside annotated image
     json_path = output_path.with_suffix(".json")
     with json_path.open("w", encoding="utf-8") as f:
         json.dump(elements, f, indent=2, ensure_ascii=False)

@@ -1136,7 +1136,7 @@ def resolve_app_config(app_name=None):
             with open(config_path, "r", encoding="utf-8") as f:
                 config_data = json.load(f)
         except Exception as e:
-            print(f"⚠️ Warnung: Konnte Konfigurationsdatei '{config_path}' nicht laden: {e}")
+            print(f"⚠️ Warning: Could not load configuration file '{config_path}': {e}")
 
     return selected_app, config_data, config_path
 
@@ -1831,7 +1831,7 @@ def main():
             candidate_base = Path(candidate) / "screenshots"
             if candidate_base.exists():
                 base_dir = candidate_base
-                print(f"ℹ️ Standardpfad './screenshots' nicht gefunden. Verwende Screenshots aus Modellordner '{candidate}'.")
+                print(f"ℹ️ Default path './screenshots' not found. Using screenshots from model directory '{candidate}'.")
                 break
         if not base_dir:
             base_dir = default_base_dir

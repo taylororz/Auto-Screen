@@ -26,7 +26,7 @@ def _get_ssl_context():
 # ==============================================================================
 class ClaudeClient:
     def __init__(self, model_name=None):
-        self.model_name = model_name or os.environ.get("CLAUDE_AGENT_MODEL", "claude-sonnet-5")
+        self.model_name = model_name or os.environ.get("CLAUDE_AGENT_MODEL", "claude-sonnet-5-5")
         self.api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("CLAUDE_API_KEY")
         base_url = os.environ.get("ANTHROPIC_BASE_URL") or os.environ.get("CLAUDE_BASE_URL") or "https://api.anthropic.com"
         self.endpoint = f"{base_url.rstrip('/')}/v1/messages" if not base_url.endswith("/messages") else base_url
@@ -340,48 +340,73 @@ class QwenUntrainClient:
 
     def query_som(self, annotated_img_path, instruction, elements, language=None, timeout=60):
         import torch
+        from PIL import Image
         from qwen_vl_utils import process_vision_info
 
         model, processor = self._get_model_and_processor()
+        # Same prompt, preprocessing and decoding settings as the fine-tuned agent (Qwen_trained/visual_agent.py),
+        # so the baseline and the LoRA model are compared under identical inference conditions
+        valid_ids = {element["id"] for element in elements}
+        id_list_str = ", ".join(str(i) for i in sorted(valid_ids))
         prompt_text = (
-            f"<image>This is a UI testing task. "
-            f"Find the element that matches this instruction: '{instruction}'. "
-            f"Output the target ID in JSON format: {{\"target_id\": <number>}}."
+            f"<image>This is a UI testing task with numbered Set-of-Mark bounding boxes. "
+            f"Find the UI element that matches this instruction: '{instruction}'. "
+            f"You MUST select one integer ID from the labeled elements on screen (valid IDs: {id_list_str}). "
+            f"Output ONLY a valid integer ID in JSON format: {{\"target_id\": <selected_id>}}"
         )
+
+        pil_img = Image.open(str(annotated_img_path))
+        max_dim = max(pil_img.size)
+        if max_dim > 1600:
+            scale = 1600.0 / max_dim
+            new_size = (int(pil_img.width * scale), int(pil_img.height * scale))
+            pil_img = pil_img.resize(new_size, Image.Resampling.LANCZOS)
 
         messages = [{
             "role": "user",
             "content": [
-                {"type": "image", "image": str(annotated_img_path)},
+                {"type": "image", "image": pil_img},
                 {"type": "text", "text": prompt_text},
             ],
         }]
 
-        text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        image_inputs, video_inputs = process_vision_info(messages)
-        device = next(model.parameters()).device
+        output_text = ""
+        inputs = None
+        generated_ids = None
+        try:
+            text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            image_inputs, video_inputs = process_vision_info(messages)
+            device = next(model.parameters()).device
 
-        inputs = processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt"
-        ).to(device)
+            inputs = processor(
+                text=[text],
+                images=image_inputs,
+                videos=video_inputs,
+                padding=True,
+                return_tensors="pt"
+            ).to(device)
 
-        with torch.no_grad():
-            generated_ids = model.generate(**inputs, max_new_tokens=160, do_sample=False)
+            with torch.no_grad():
+                generated_ids = model.generate(**inputs, max_new_tokens=45, do_sample=False)
 
-        generated_ids_trimmed = [
-            out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
-        ]
-        output_text = processor.batch_decode(
-            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
-        )[0]
+            generated_ids_trimmed = [
+                out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+            ]
+            output_text = processor.batch_decode(
+                generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+            )[0]
+        finally:
+            del inputs, generated_ids
+            if torch.backends.mps.is_available():
+                torch.mps.empty_cache()
+            elif torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
         return output_text, None
 
     def query_dg(self, image_path, instruction, image_width=1206, image_height=2622, language=None, timeout=60):
         import torch
+        from PIL import Image
         from qwen_vl_utils import process_vision_info
 
         model, processor = self._get_model_and_processor()
@@ -391,10 +416,19 @@ class QwenUntrainClient:
             f'{{"point": [x, y], "confidence": 1.0, "rationale": "..."}}'
         )
 
+        # Same preprocessing and decoding settings as the fine-tuned agent (Qwen_trained/visual_agent_DG.py),
+        # so the baseline and the LoRA model are compared under identical inference conditions
+        pil_img = Image.open(str(image_path))
+        max_dim = max(pil_img.size)
+        if max_dim > 1280:
+            scale = 1280.0 / max_dim
+            new_size = (int(pil_img.width * scale), int(pil_img.height * scale))
+            pil_img = pil_img.resize(new_size, Image.Resampling.LANCZOS)
+
         messages = [{
             "role": "user",
             "content": [
-                {"type": "image", "image": str(image_path)},
+                {"type": "image", "image": pil_img},
                 {"type": "text", "text": prompt_text},
             ],
         }]
@@ -411,13 +445,23 @@ class QwenUntrainClient:
             return_tensors="pt"
         ).to(device)
 
-        with torch.no_grad():
-            generated_ids = model.generate(**inputs, max_new_tokens=160, do_sample=False)
+        output_text = ""
+        generated_ids = None
+        try:
+            with torch.inference_mode():
+                generated_ids = model.generate(**inputs, max_new_tokens=60, do_sample=False)
 
-        generated_ids_trimmed = [
-            out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
-        ]
-        output_text = processor.batch_decode(
-            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
-        )[0]
+            generated_ids_trimmed = [
+                out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+            ]
+            output_text = processor.batch_decode(
+                generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+            )[0]
+        finally:
+            del inputs, generated_ids
+            if torch.backends.mps.is_available():
+                torch.mps.empty_cache()
+            elif torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
         return output_text, None

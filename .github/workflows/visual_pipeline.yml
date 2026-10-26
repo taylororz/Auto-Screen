@@ -12,32 +12,71 @@ jobs:
   visual-regression-test:
     runs-on: self-hosted
     timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read  # needed to download the screenshots of the previous run
 
     steps:
       - name: 1. Checkout test suite repository
         uses: actions/checkout@v4
 
-      # Download Runner.app artifact from katapp-app (supports repository_dispatch, workflow_dispatch, and push)
-      - name: 2. Download upstream katapp build artifact
+      # Identify the upstream KatApp build: from the dispatch payload, otherwise the latest successful build run
+      - name: 2a. Resolve upstream katapp build
+        id: upstream
         env:
           GH_TOKEN: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
+          KATAPP_REPO: kat-app/katapp-app
           DISPATCH_RUN_ID: ${{ github.event.client_payload.run_id }}
+          DISPATCH_SHA: ${{ github.event.client_payload.commit_sha }}
+          DISPATCH_BRANCH: ${{ github.event.client_payload.branch }}
         run: |
-          mkdir -p ./app_bundle
           if [ -n "$DISPATCH_RUN_ID" ]; then
-            echo "📥 Fetching artifact from dispatched upstream run: $DISPATCH_RUN_ID"
-            gh run download "$DISPATCH_RUN_ID" --repo kat-app/katapp-app --name katapp-runner-app --dir ./app_bundle || true
+            printf 'run_id=%s\nsha=%s\nbranch=%s\n' "$DISPATCH_RUN_ID" "$DISPATCH_SHA" "$DISPATCH_BRANCH" >> "$GITHUB_OUTPUT"
+            echo "📥 Upstream build from dispatch: run $DISPATCH_RUN_ID, commit $DISPATCH_SHA"
           else
-            echo "📥 Fetching latest successful build artifact from kat-app/katapp-app"
-            gh run download --repo kat-app/katapp-app --name katapp-runner-app --dir ./app_bundle || true
+            curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$KATAPP_REPO/actions/workflows/build_and_trigger_test.yml/runs?status=success&per_page=1" \
+              -o upstream_runs.json || true
+            python3 - <<'EOF'
+          import json, os
+          try:
+              runs = json.load(open("upstream_runs.json")).get("workflow_runs") or []
+          except Exception:
+              runs = []
+          run = runs[0] if runs else {}
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"run_id={run.get('id', '')}\nsha={run.get('head_sha', '')}\nbranch={run.get('head_branch', '')}\n")
+          print(f"📥 Latest upstream build: run {run.get('id', '-')}, commit {run.get('head_sha', '-')}")
+          EOF
           fi
 
-      - name: 3. Extract target application bundle
+      # Replaces 'gh run download' (gh is not installed on the runner)
+      - name: 2b. Download upstream katapp build artifact
+        if: steps.upstream.outputs.run_id != ''
+        continue-on-error: true  # e.g. expired artifact (retention 1 day); step 3 then uses the local build
+        uses: actions/download-artifact@v4
+        with:
+          name: katapp-runner-app
+          path: app_bundle
+          repository: kat-app/katapp-app
+          run-id: ${{ steps.upstream.outputs.run_id }}
+          github-token: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
+
+      # The identity of the app build decides which screenshots serve as baseline for the version comparison:
+      # the upstream commit SHA, or for a local build the hash of the app binary.
+      - name: 3. Extract target application bundle and record its identity
+        id: app
+        env:
+          UPSTREAM_RUN_ID: ${{ steps.upstream.outputs.run_id }}
+          UPSTREAM_SHA: ${{ steps.upstream.outputs.sha }}
+          UPSTREAM_BRANCH: ${{ steps.upstream.outputs.branch }}
         run: |
+          SOURCE=local
           if [ -f "./app_bundle/katapp-runner.zip" ]; then
             mkdir -p build/ios/iphonesimulator
             unzip -q -o ./app_bundle/katapp-runner.zip -d build/ios/iphonesimulator/
-            echo "✅ Latest build extracted to build/ios/iphonesimulator/Runner.app"
+            SOURCE=upstream
+            echo "✅ Upstream build extracted to build/ios/iphonesimulator/Runner.app"
           elif [ -d "/Users/taylorzhuang/Masterarbeit/katapp-app/katapp-app/build/ios/iphonesimulator/Runner.app" ]; then
             mkdir -p build/ios/iphonesimulator
             rsync -a /Users/taylorzhuang/Masterarbeit/katapp-app/katapp-app/build/ios/iphonesimulator/Runner.app build/ios/iphonesimulator/
@@ -45,6 +84,40 @@ jobs:
           else
             echo "⚠️ No katapp-runner.zip found and no local fallback build"
           fi
+          APP_SOURCE="$SOURCE" python3 - <<'EOF'
+          import hashlib, json, os, plistlib, subprocess
+          app = "build/ios/iphonesimulator/Runner.app"
+          info = {"source": os.environ["APP_SOURCE"]}
+          # Test environment: screenshots are only comparable if it is the same for baseline and current run
+          try:
+              xcode = " ".join(subprocess.run(["xcodebuild", "-version"], capture_output=True, text=True).stdout.split())
+          except Exception:
+              xcode = ""
+          cfg = json.load(open(f"configs/{os.environ.get('APP_NAME', 'katapp')}.json")).get("app_config", {})
+          info["environment"] = {
+              "xcode": xcode,
+              "device_name": cfg.get("device_name", ""),
+              "platform_version": cfg.get("platform_version", ""),
+          }
+          binary = os.path.join(app, "Runner")
+          if os.path.exists(binary):
+              info["binary_sha256"] = hashlib.sha256(open(binary, "rb").read()).hexdigest()
+          plist = os.path.join(app, "Info.plist")
+          if os.path.exists(plist):
+              p = plistlib.load(open(plist, "rb"))
+              info["version"] = p.get("CFBundleShortVersionString")
+              info["build"] = p.get("CFBundleVersion")
+          if info["source"] == "upstream":
+              info["commit_sha"] = os.environ.get("UPSTREAM_SHA", "")
+              info["branch"] = os.environ.get("UPSTREAM_BRANCH", "")
+              info["run_id"] = os.environ.get("UPSTREAM_RUN_ID", "")
+          sha = info.get("commit_sha") or ""
+          info["identity"] = sha[:12] if sha else "local-" + info.get("binary_sha256", "unknown")[:12]
+          json.dump(info, open("app_build.json", "w"), indent=2)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"identity={info['identity']}\n")
+          print(json.dumps(info, indent=2))
+          EOF
 
       - name: 4. Verify Python environment
         run: |
@@ -56,25 +129,20 @@ jobs:
           python3 -m pip install --upgrade pip
           if [ -f requirements.txt ]; then python3 -m pip install -r requirements.txt; fi
 
-      # Use local fine-tuned Qwen weights if available, otherwise download from Hugging Face
+      # Use the local Qwen3-VL-4B-V2 weights (same model as the experiments).
+      # The Hugging Face repo Auto-Screen-Qwen3-VL-Agent holds an older model and is not used here.
       - name: 6. Prepare fine-tuned Qwen model
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           mkdir -p Qwen_trained
-          if [ -d "/Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent" ] && [ ! -d "Qwen_trained/Katapp-Qwen3-VL-Agent" ]; then
-            echo "⚡ Linking local model from /Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent..."
-            ln -s /Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent Qwen_trained/Katapp-Qwen3-VL-Agent
-          elif [ ! -d "Qwen_trained/Katapp-Qwen3-VL-Agent" ]; then
-            git lfs install
-            if [ -n "$HF_TOKEN" ]; then
-              git config --global credential.helper store
-              echo "https://user:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
-            fi
-            echo "📥 Cloning fine-tuned Qwen model from Hugging Face..."
-            git clone https://huggingface.co/Taylororz/Auto-Screen-Qwen3-VL-Agent Qwen_trained/Katapp-Qwen3-VL-Agent
+          if [ -d "/Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2" ] && [ ! -d "Qwen_trained/Qwen3-VL-4B-V2" ]; then
+            echo "⚡ Linking local model from /Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2..."
+            ln -s /Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2 Qwen_trained/Qwen3-VL-4B-V2
           fi
-          echo "✅ Qwen model weights ready in Qwen_trained/Katapp-Qwen3-VL-Agent!"
+          if [ ! -d "Qwen_trained/Qwen3-VL-4B-V2" ]; then
+            echo "::error::Qwen_trained/Qwen3-VL-4B-V2 not found. No fallback model is used."
+            exit 1
+          fi
+          echo "✅ Qwen model weights ready in Qwen_trained/Qwen3-VL-4B-V2"
 
       - name: 7. Verify Appium and XCUITest setup
         run: |
@@ -84,9 +152,79 @@ jobs:
           fi
           echo "✅ Appium environment is ready"
 
+      # Version comparison: the baseline is the newest screenshots artifact of a different app build on this branch.
+      # Artifacts are named screenshots-<identity>, so a rerun of the same build is compared with the previous build.
+      - name: 8a. Find the baseline screenshots of the previous app build
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CURRENT_ID: ${{ steps.app.outputs.identity }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?per_page=100" \
+            -o artifacts.json || true
+          python3 - <<'EOF'
+          import json, os
+          try:
+              artifacts = json.load(open("artifacts.json")).get("artifacts") or []
+          except Exception:
+              artifacts = []
+          current, branch = os.environ["CURRENT_ID"], os.environ["BRANCH"]
+          candidates = [
+              a for a in artifacts
+              if a["name"].startswith("screenshots-") and not a.get("expired")
+              and (a.get("workflow_run") or {}).get("head_branch") == branch
+              and a["name"] != f"screenshots-{current}"
+          ]
+          candidates.sort(key=lambda a: a["created_at"], reverse=True)
+          best = candidates[0] if candidates else None
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"run_id={best['workflow_run']['id'] if best else ''}\n")
+              out.write(f"name={best['name'] if best else ''}\n")
+              out.write(f"identity={best['name'][len('screenshots-'):] if best else ''}\n")
+          if best:
+              print(f"📥 Baseline: {best['name']} from run {best['workflow_run']['id']} (current build: {current})")
+          else:
+              print(f"ℹ️ No screenshots of a different app build found (current build: {current}), the version comparison is skipped")
+          EOF
+
+      - name: 8b. Download the baseline screenshots
+        if: steps.previous.outputs.run_id != ''
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.previous.outputs.name }}
+          path: previous_screenshots
+          run-id: ${{ steps.previous.outputs.run_id }}
+          github-token: ${{ github.token }}
+
       - name: 8. Execute visual regression testing pipeline
+        env:
+          CURRENT_APP_ID: ${{ steps.app.outputs.identity }}
+          PREVIOUS_APP_ID: ${{ steps.previous.outputs.identity }}
         run: |
           chmod +x run_pipeline_local.sh
+          if [ -d previous_screenshots ] && [ -n "$(ls -A previous_screenshots)" ]; then
+            # Compare only if baseline and current run used the same test environment
+            if python3 - <<'EOF'
+          import json, sys
+          try:
+              base = json.load(open("previous_screenshots/app_build.json")).get("environment")
+          except Exception:
+              base = None
+          cur = json.load(open("app_build.json")).get("environment")
+          if base == cur:
+              sys.exit(0)
+          print(f"::warning::Test environment differs, version comparison skipped. Baseline: {base}. Current: {cur}. "
+                "A new baseline is created by this run.")
+          sys.exit(1)
+          EOF
+            then
+              export PREVIOUS_SCREENSHOTS="$PWD/previous_screenshots"
+              echo "🔁 Version comparison enabled: $PREVIOUS_APP_ID -> $CURRENT_APP_ID"
+            fi
+          fi
           ./run_pipeline_local.sh
 
       - name: 9. Upload visual quality reports and diff artifacts
@@ -96,4 +234,17 @@ jobs:
           name: visual-regression-report
           path: |
             diff_results/
-            screenshots/
+            Qwen_trained/screenshots/
+            app_build.json
+
+      # Baseline for the version comparison of later runs (only from successful runs), named by app build
+      - name: 10. Upload screenshots as baseline for later runs
+        if: success()
+        run: cp app_build.json Qwen_trained/screenshots/app_build.json
+
+      - name: 11. Upload screenshots artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ steps.app.outputs.identity }}
+          path: Qwen_trained/screenshots/

@@ -8,7 +8,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 DATASET_OPTIONS = {
     "Qwen_trained (Fine-tuned Model)": str(SCRIPT_DIR / "Qwen_trained/diff_results/interaction_log.jsonl"),
     "Qwen_untrain (Base Model)": str(SCRIPT_DIR / "Qwen_untrain/diff_results/interaction_log.jsonl"),
-    "claude (Claude 3.5 Sonnet Model)": str(SCRIPT_DIR / "claude/diff_results/interaction_log.jsonl"),
+    "claude (Claude Sonnet 5.5 Model)": str(SCRIPT_DIR / "claude/diff_results/interaction_log.jsonl"),
     "openAI_6.0_Luna (GPT-6 Luna Model)": str(SCRIPT_DIR / "openAI_6.0_Luna/diff_results/interaction_log.jsonl"),
     "openAI_6.0_Sol (GPT-6 Sol Model)": str(SCRIPT_DIR / "openAI_6.0_Sol/diff_results/interaction_log.jsonl"),
     "openAI_5.6_Luna (GPT-4o Luna Model)": str(SCRIPT_DIR / "openAI_5.6_Luna/diff_results/interaction_log.jsonl"),
@@ -117,22 +117,26 @@ def resolve_image_path(record_or_path):
 
 def calculate_statistics():
     """Calculates comprehensive error rate statistics from finetune_dataset.jsonl and interaction_log.jsonl."""
-    reviewed_records = []
+    # Keep only the latest entry per timestamp, so duplicate lines are not counted twice
+    reviewed_by_ts = {}
     if os.path.exists(CLEAN_FILE):
         with open(CLEAN_FILE, 'r', encoding='utf-8') as f:
             for line in f:
                 if line.strip():
                     try:
-                        reviewed_records.append(json.loads(line))
+                        data = json.loads(line)
                     except Exception:
-                        pass
+                        continue
+                    reviewed_by_ts[data.get("timestamp") or object()] = data
+    reviewed_records = list(reviewed_by_ts.values())
 
+
+    # Same denominator as the review queue (DG-mode logs excluded), so percentages match the progress bar
+    log_records, total_raw_logs = get_logs(show_all=True)
+    # CLEAN_FILE can hold reviews from other logs in the same folder; only count the ones for this log
+    log_ts = {r.get("timestamp") for r in log_records}
+    reviewed_records = [r for r in reviewed_records if r.get("timestamp") in log_ts]
     total_reviewed = len(reviewed_records)
-    
-    total_raw_logs = 0
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, 'r', encoding='utf-8') as f:
-            total_raw_logs = sum(1 for line in f if line.strip())
 
     if total_reviewed == 0:
         return f"""### 📊 Error Rate Statistics Dashboard (Dataset: `{LOG_FILE}`)
@@ -146,6 +150,7 @@ def calculate_statistics():
     
     lang_stats = {}
     step_stats = {}
+    task_stats = {}
 
     for r in reviewed_records:
         lang = r.get("language", "Unknown")
@@ -168,6 +173,8 @@ def calculate_statistics():
 
         lang_stats[lang]["total"] += 1
         step_stats[step]["total"] += 1
+        # Repeated rounds of the same task are not independent samples, so track outcomes per task
+        task_stats.setdefault((lang, step, r.get("instruction", "")), []).append(ai_id == gt_id and ai_id != -1)
 
         if ai_id == gt_id and ai_id != -1:
             correct_count += 1
@@ -181,6 +188,12 @@ def calculate_statistics():
     valid_reviewed = total_reviewed - discarded_count
     acc_rate = (correct_count / valid_reviewed * 100) if valid_reviewed > 0 else 0.0
     err_rate = (error_count / valid_reviewed * 100) if valid_reviewed > 0 else 0.0
+    distinct_tasks = len(task_stats)
+    repeats_per_task = (valid_reviewed / distinct_tasks) if distinct_tasks else 0.0
+    inconsistent_tasks = sum(1 for outcomes in task_stats.values() if len(set(outcomes)) > 1)
+    # Each task counts once: mean of the per-task accuracies instead of one vote per repeated sample
+    task_level_rate = (sum(sum(o) / len(o) for o in task_stats.values()) / distinct_tasks * 100) if distinct_tasks else 0.0
+    run_count = len({r.get("run_id") for r in reviewed_records if r.get("run_id")})
 
     report_md = f"""### 📊 Experiment Metrics & Error Rate Dashboard
 > **Current Log File**: `{LOG_FILE}`  
@@ -194,6 +207,10 @@ def calculate_statistics():
 | **✅ AI Prediction Correct** | {correct_count} entries | **{acc_rate:.2f}%** |
 | **❌ AI Prediction Error** | {error_count} entries | **{err_rate:.2f}%** |
 | **⚠️ AI No Target / Fallback** | {no_target_count} entries | - |
+| **🧩 Distinct Tasks (language + step + instruction)** | {distinct_tasks} tasks | {repeats_per_task:.1f} samples per task |
+| **⚖️ Task-level Accuracy (each task counted once)** | - | **{task_level_rate:.2f}%** |
+| **🔀 Inconsistent Tasks (outcome differs between repeats)** | {inconsistent_tasks} tasks | - |
+| **🏷️ Runs (records with run_id)** | {run_count} runs | - |
 | **🗑️ Discarded Samples** | {discarded_count} entries | - |
 
 #### 🌐 Error Rate Breakdown by Language
@@ -278,6 +295,31 @@ def load_record(idx, show_all=False):
     return img_path, instruction, ai_choice, default_id
 
 
+def save_record_to_clean_file(record):
+    """Saves a record idempotently to CLEAN_FILE (replaces the matching timestamp, otherwise appends)."""
+    os.makedirs(os.path.dirname(CLEAN_FILE), exist_ok=True)
+    existing_lines = []
+    replaced = False
+    target_ts = record.get("timestamp")
+    if os.path.exists(CLEAN_FILE):
+        with open(CLEAN_FILE, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    try:
+                        d = json.loads(line)
+                        if target_ts and d.get("timestamp") == target_ts:
+                            existing_lines.append(json.dumps(record, ensure_ascii=False) + '\n')
+                            replaced = True
+                        else:
+                            existing_lines.append(line.rstrip('\n') + '\n')
+                    except Exception:
+                        existing_lines.append(line)
+    if not replaced:
+        existing_lines.append(json.dumps(record, ensure_ascii=False) + '\n')
+    with open(CLEAN_FILE, 'w', encoding='utf-8') as f:
+        f.writelines(existing_lines)
+
+
 def save_and_next(human_corrected_id, show_all_choice):
     global current_idx, logs
     show_all = (show_all_choice == "Show all entries (including reviewed)")
@@ -288,29 +330,8 @@ def save_and_next(human_corrected_id, show_all_choice):
             record["ground_truth_id"] = int(val)
         except ValueError:
             record["ground_truth_id"] = record.get("target_id", -1)
-            
-        os.makedirs(os.path.dirname(CLEAN_FILE), exist_ok=True)
-        # Update or append in CLEAN_FILE
-        existing_lines = []
-        replaced = False
-        target_ts = record.get("timestamp")
-        if os.path.exists(CLEAN_FILE):
-            with open(CLEAN_FILE, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if line.strip():
-                        try:
-                            d = json.loads(line)
-                            if target_ts and d.get("timestamp") == target_ts:
-                                existing_lines.append(json.dumps(record, ensure_ascii=False) + '\n')
-                                replaced = True
-                            else:
-                                existing_lines.append(line.rstrip('\n') + '\n')
-                        except Exception:
-                            existing_lines.append(line)
-        if not replaced:
-            existing_lines.append(json.dumps(record, ensure_ascii=False) + '\n')
-        with open(CLEAN_FILE, 'w', encoding='utf-8') as f:
-            f.writelines(existing_lines)
+
+        save_record_to_clean_file(record)
             
         if show_all:
             current_idx = min(current_idx + 1, len(logs) - 1)
@@ -330,9 +351,7 @@ def discard_and_next(show_all_choice):
         record = logs[current_idx]
         record["ground_truth_id"] = -1
         record["discarded"] = True
-        os.makedirs(os.path.dirname(CLEAN_FILE), exist_ok=True)
-        with open(CLEAN_FILE, 'a', encoding='utf-8') as f:
-            f.write(json.dumps(record, ensure_ascii=False) + '\n')
+        save_record_to_clean_file(record)
             
         if show_all:
             current_idx = min(current_idx + 1, len(logs) - 1)

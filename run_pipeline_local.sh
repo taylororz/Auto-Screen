@@ -55,7 +55,7 @@ fi
 # 4. Execute visual agent test flows and capture screenshots
 echo "🤖 [Step 3/5] Running visual agent navigation flows..."
 export AGENT_MODE="${AGENT_MODE:-dg}"
-export LOCAL_MODEL_PATH="${LOCAL_MODEL_PATH:-$PROJECT_ROOT/Qwen_trained/Katapp-Qwen3-VL-Agent}"
+export LOCAL_MODEL_PATH="${LOCAL_MODEL_PATH:-$PROJECT_ROOT/Qwen_trained/Qwen3-VL-4B-V2}"
 APP_NAME="${APP_NAME:-katapp}"
 MODEL_NAME="${MODEL_NAME:-Qwen_trained}"
 
@@ -73,7 +73,29 @@ fi
 
 # 5. Cross-language visual comparison and report generation
 echo "🔍 [Step 4/5] Running pixel & OpenCV visual regression diff..."
-python3 compare_images.py --batch --app "$APP_NAME"
+# Report 1: language comparison (reference language against the other languages, same build).
+# The CI quality gate reads this report.
+# --model points explicitly to <model>/screenshots instead of relying on the fallback from ./screenshots.
+python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME"
+
+# Report 2 (optional): version comparison against the screenshots of the previous release,
+# each language folder against the folder of the same name, e.g.:
+#   PREVIOUS_SCREENSHOTS=<prev_release>/screenshots ./run_pipeline_local.sh
+if [ -n "${PREVIOUS_SCREENSHOTS:-}" ]; then
+    echo "🔍 [Step 4b/5] Running version comparison against $PREVIOUS_SCREENSHOTS..."
+    # Optional identities of the two app builds (set by CI), shown in the report
+    LABEL_ARGS=()
+    if [ -n "${PREVIOUS_APP_ID:-}" ]; then
+        LABEL_ARGS+=(--baseline-label "$PREVIOUS_APP_ID")
+    fi
+    if [ -n "${CURRENT_APP_ID:-}" ]; then
+        LABEL_ARGS+=(--actual-label "$CURRENT_APP_ID")
+    fi
+    python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME" \
+        --version-baseline-root "$PREVIOUS_SCREENSHOTS" \
+        --output-root diff_results/version_comparison \
+        ${LABEL_ARGS[@]+"${LABEL_ARGS[@]}"}
+fi
 
 # 6. CI Quality Gate assertion
 echo "⚖️ [Step 5/5] Checking pipeline quality gate..."

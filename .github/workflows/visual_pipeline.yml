@@ -85,9 +85,20 @@ jobs:
             echo "⚠️ No katapp-runner.zip found and no local fallback build"
           fi
           APP_SOURCE="$SOURCE" python3 - <<'EOF'
-          import hashlib, json, os, plistlib
+          import hashlib, json, os, plistlib, subprocess
           app = "build/ios/iphonesimulator/Runner.app"
           info = {"source": os.environ["APP_SOURCE"]}
+          # Test environment: screenshots are only comparable if it is the same for baseline and current run
+          try:
+              xcode = " ".join(subprocess.run(["xcodebuild", "-version"], capture_output=True, text=True).stdout.split())
+          except Exception:
+              xcode = ""
+          cfg = json.load(open(f"configs/{os.environ.get('APP_NAME', 'katapp')}.json")).get("app_config", {})
+          info["environment"] = {
+              "xcode": xcode,
+              "device_name": cfg.get("device_name", ""),
+              "platform_version": cfg.get("platform_version", ""),
+          }
           binary = os.path.join(app, "Runner")
           if os.path.exists(binary):
               info["binary_sha256"] = hashlib.sha256(open(binary, "rb").read()).hexdigest()
@@ -195,8 +206,24 @@ jobs:
         run: |
           chmod +x run_pipeline_local.sh
           if [ -d previous_screenshots ] && [ -n "$(ls -A previous_screenshots)" ]; then
-            export PREVIOUS_SCREENSHOTS="$PWD/previous_screenshots"
-            echo "🔁 Version comparison enabled: $PREVIOUS_APP_ID -> $CURRENT_APP_ID"
+            # Compare only if baseline and current run used the same test environment
+            if python3 - <<'EOF'
+          import json, sys
+          try:
+              base = json.load(open("previous_screenshots/app_build.json")).get("environment")
+          except Exception:
+              base = None
+          cur = json.load(open("app_build.json")).get("environment")
+          if base == cur:
+              sys.exit(0)
+          print(f"::warning::Test environment differs, version comparison skipped. Baseline: {base}. Current: {cur}. "
+                "A new baseline is created by this run.")
+          sys.exit(1)
+          EOF
+            then
+              export PREVIOUS_SCREENSHOTS="$PWD/previous_screenshots"
+              echo "🔁 Version comparison enabled: $PREVIOUS_APP_ID -> $CURRENT_APP_ID"
+            fi
           fi
           ./run_pipeline_local.sh
 

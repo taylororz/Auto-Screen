@@ -1263,7 +1263,7 @@ def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, th
     )
 
 
-def run_version_comparison(folder_pairs, pages, output_root, baseline_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None):
+def run_version_comparison(folder_pairs, pages, output_root, baseline_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None, baseline_label=None, actual_label=None):
     """Compares each language folder of the previous release with the same folder of the current release."""
     batch_start_time = time.time()
     all_results = []
@@ -1298,6 +1298,8 @@ def run_version_comparison(folder_pairs, pages, output_root, baseline_root, thre
         total_runtime_ms=(time.time() - batch_start_time) * 1000,
         app=app,
         comparison_mode="version",
+        baseline_label=baseline_label,
+        actual_label=actual_label,
     )
 
 
@@ -1371,7 +1373,7 @@ def _build_page_rankings(batch_results):
     return rankings
 
 
-def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None, comparison_mode=None):
+def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None, comparison_mode=None, baseline_label=None, actual_label=None):
     output_root = Path(output_root)
     output_root.mkdir(parents=True, exist_ok=True)
 
@@ -1381,6 +1383,8 @@ def write_batch_report(baseline_folder, actual_folders, pages, output_root, batc
     summary = {
         "app": app,
         "comparison_mode": comparison_mode,
+        "baseline_label": baseline_label,
+        "actual_label": actual_label,
         "output_root": str(output_root),
         "baseline_folder": str(Path(baseline_folder)),
         "actual_folders": [str(Path(folder)) for folder in actual_folders],
@@ -1442,6 +1446,13 @@ def build_html_report(summary):
         report_subtitle = ("This report compares the screenshots of the current build against a previous build "
                            "in the same language, then highlights the pages with the most layout drift.")
         folders_meta = "Language folders compared with the previous build"
+        build_labels = []
+        if summary.get("baseline_label"):
+            build_labels.append(f"Baseline build: <strong>{html.escape(str(summary['baseline_label']))}</strong>.")
+        if summary.get("actual_label"):
+            build_labels.append(f"Current build: <strong>{html.escape(str(summary['actual_label']))}</strong>.")
+        if build_labels:
+            report_subtitle += " " + " ".join(build_labels)
     else:
         report_title = "Language screenshot comparison"
         report_subtitle = ("This report compares reference screenshots against secondary language sets, "
@@ -1847,6 +1858,8 @@ def main():
     parser.add_argument("--actual-folders", nargs="*", default=None, help="Actual screenshot folders for batch mode")
     parser.add_argument("--version-baseline-root", default=None, help="Screenshot root of the previous release. With --batch, each language folder is compared with the folder of the same name in the current release (version comparison)")
     parser.add_argument("--version-actual-root", default=None, help="Screenshot root of the current release for the version comparison. Defaults to the resolved screenshots directory")
+    parser.add_argument("--baseline-label", default=None, help="Identity of the baseline app build shown in the version comparison report (e.g. commit SHA)")
+    parser.add_argument("--actual-label", default=None, help="Identity of the current app build shown in the version comparison report (e.g. commit SHA)")
     parser.add_argument("--pages", nargs="*", default=None, help="Page names to compare in batch mode. Defaults to all matching standard pages. Use '--flow' or '--pages flow' for full step flow.")
     parser.add_argument("--flow", action="store_true", help="Compare all numbered sequential flow step screenshots (01_*, 02_*, etc.)")
     parser.add_argument("--output-root", default="./diff_results", help="Root directory for batch diff images")
@@ -2055,6 +2068,8 @@ def main():
                 ai_model=args.ai_model,
                 only_diffs=args.only_diffs,
                 app=app_name,
+                baseline_label=args.baseline_label,
+                actual_label=args.actual_label,
             )
             return
 

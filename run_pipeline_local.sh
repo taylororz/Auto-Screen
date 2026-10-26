@@ -83,9 +83,18 @@ python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME"
 #   PREVIOUS_SCREENSHOTS=<prev_release>/screenshots ./run_pipeline_local.sh
 if [ -n "${PREVIOUS_SCREENSHOTS:-}" ]; then
     echo "🔍 [Step 4b/5] Running version comparison against $PREVIOUS_SCREENSHOTS..."
+    # Optional identities of the two app builds (set by CI), shown in the report
+    LABEL_ARGS=()
+    if [ -n "${PREVIOUS_APP_ID:-}" ]; then
+        LABEL_ARGS+=(--baseline-label "$PREVIOUS_APP_ID")
+    fi
+    if [ -n "${CURRENT_APP_ID:-}" ]; then
+        LABEL_ARGS+=(--actual-label "$CURRENT_APP_ID")
+    fi
     python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME" \
         --version-baseline-root "$PREVIOUS_SCREENSHOTS" \
-        --output-root diff_results/version_comparison
+        --output-root diff_results/version_comparison \
+        ${LABEL_ARGS[@]+"${LABEL_ARGS[@]}"}
 fi
 
 # 6. CI Quality Gate assertion

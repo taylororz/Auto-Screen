@@ -13,12 +13,8 @@ import numpy as np
 # ==============================================================================
 _BASE_DIR = Path(__file__).resolve().parent
 _QWEN_V2_DIR = _BASE_DIR / "Qwen3-VL-4B-V2"
-_KATAPP_DIR = _BASE_DIR / "Katapp-Qwen3-VL-Agent"
 
-DEFAULT_MODEL_DIR = str(_QWEN_V2_DIR if _QWEN_V2_DIR.exists() else _KATAPP_DIR)
-MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH") or (
-    DEFAULT_MODEL_DIR if os.path.exists(DEFAULT_MODEL_DIR) else str(_KATAPP_DIR)
-)
+MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH") or str(_QWEN_V2_DIR)
 
 _model = None
 _processor = None
@@ -416,7 +412,7 @@ class VisualNavigationError(Exception):
     pass
 
 
-def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None):
+def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None, run_id=None, loop_index=None, step_index=None):
     """
     Appends execution log record to diff_results/interaction_log_DG.jsonl.
     """
@@ -438,6 +434,9 @@ def log_interaction(language, step_name, instruction, action, target_id, center_
         "decision": decision,
         "tap_x": tap_x,
         "tap_y": tap_y,
+        "run_id": run_id,
+        "loop_index": loop_index,
+        "step_index": step_index,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 

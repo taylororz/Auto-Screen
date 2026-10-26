@@ -40,8 +40,6 @@ def cmd_list(args):
         sub_models = []
         if (p / "Qwen3-VL-4B-V2").exists():
             sub_models.append("Qwen3-VL-4B-V2")
-        if (p / "Katapp-Qwen3-VL-Agent").exists():
-            sub_models.append("Katapp-Qwen3-VL-Agent")
         extra = f" ({', '.join(sub_models)})" if sub_models else ""
         print(f"  • {md:<20} [{exists_str}]{extra}")
 

@@ -1263,6 +1263,44 @@ def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, th
     )
 
 
+def run_version_comparison(folder_pairs, pages, output_root, baseline_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None):
+    """Compares each language folder of the previous release with the same folder of the current release."""
+    batch_start_time = time.time()
+    all_results = []
+    for baseline_folder, actual_folder in folder_pairs:
+        folder_results = compare_folder_pair(
+            baseline_folder=baseline_folder,
+            actual_folder=actual_folder,
+            output_root=output_root,
+            pages=pages,
+            threshold=threshold,
+            min_box_size=min_box_size,
+            use_ai=use_ai,
+            ai_model=ai_model,
+            only_diffs=only_diffs,
+            app=app,
+        )
+        all_results.append({
+            "actual_folder": str(actual_folder),
+            "results": folder_results,
+        })
+
+    write_batch_report(
+        baseline_folder=baseline_root,
+        actual_folders=[actual for _, actual in folder_pairs],
+        pages=pages,
+        output_root=output_root,
+        batch_results=all_results,
+        threshold=threshold,
+        min_box_size=min_box_size,
+        use_ai=use_ai,
+        ai_model=ai_model,
+        total_runtime_ms=(time.time() - batch_start_time) * 1000,
+        app=app,
+        comparison_mode="version",
+    )
+
+
 def _build_folder_summaries(batch_results):
     folder_summaries = []
     for folder_entry in batch_results:
@@ -1333,7 +1371,7 @@ def _build_page_rankings(batch_results):
     return rankings
 
 
-def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None):
+def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None, comparison_mode=None):
     output_root = Path(output_root)
     output_root.mkdir(parents=True, exist_ok=True)
 
@@ -1342,6 +1380,7 @@ def write_batch_report(baseline_folder, actual_folders, pages, output_root, batc
 
     summary = {
         "app": app,
+        "comparison_mode": comparison_mode,
         "output_root": str(output_root),
         "baseline_folder": str(Path(baseline_folder)),
         "actual_folders": [str(Path(folder)) for folder in actual_folders],
@@ -1391,6 +1430,23 @@ def build_html_report(summary):
     app_name = summary.get("app")
     app_eyebrow = f" · {app_name.upper()}" if app_name else ""
     app_heading = f"{app_name.capitalize()} " if app_name else ""
+    # Explicit mode from --version-baseline-root, otherwise: same folder name on both sides
+    # (e.g. baseline_DE_DE of two releases via --baseline-folder/--actual-folders) means a version comparison.
+    baseline_name = Path(summary["baseline_folder"]).name
+    actual_paths = summary.get("actual_folders") or []
+    is_version_comparison = summary.get("comparison_mode") == "version" or (
+        bool(actual_paths) and all(Path(p).name == baseline_name for p in actual_paths)
+    )
+    if is_version_comparison:
+        report_title = "Version comparison"
+        report_subtitle = ("This report compares the screenshots of the current build against a previous build "
+                           "in the same language, then highlights the pages with the most layout drift.")
+        folders_meta = "Language folders compared with the previous build"
+    else:
+        report_title = "Language screenshot comparison"
+        report_subtitle = ("This report compares reference screenshots against secondary language sets, "
+                           "then highlights the pages with the most layout drift.")
+        folders_meta = "Language sets compared"
 
     def rel_path(path_value):
         return os.path.relpath(Path(path_value).resolve(), report_root).replace(os.sep, "/")
@@ -1654,10 +1710,10 @@ def build_html_report(summary):
     <div class='shell'>
         <header class='hero'>
             <div class='eyebrow'>Visual Regression Report${app_eyebrow}</div>
-            <h1>${app_heading}Language screenshot comparison</h1>
-            <p class='subtitle'>Baseline: <strong>$baseline_folder</strong>. This report compares reference screenshots against secondary language sets, then highlights the pages with the most layout drift.</p>
+            <h1>${app_heading}${report_title}</h1>
+            <p class='subtitle'>Baseline: <strong>$baseline_folder</strong>. $report_subtitle</p>
             <div class='stats'>
-                <div class='stat'><div class='label'>Compared folders</div><div class='value'>$compared_folders</div><div class='meta'>Language sets compared</div></div>
+                <div class='stat'><div class='label'>Compared folders</div><div class='value'>$compared_folders</div><div class='meta'>$folders_meta</div></div>
                 <div class='stat'><div class='label'>Compared pages</div><div class='value'>$total_compared</div><div class='meta'>Total page comparisons</div></div>
                 <div class='stat'><div class='label'>CV Grayscale diffs</div><div class='value'>$cv_total_differences</div><div class='meta'>Detected by grayscale method</div></div>
                 <div class='stat'><div class='label'>Pixel Matching diffs</div><div class='value'>$pixel_total_differences</div><div class='meta'>Detected by strict pixel comparison</div></div>
@@ -1763,6 +1819,9 @@ def build_html_report(summary):
         ),
         app_eyebrow=app_eyebrow,
         app_heading=app_heading,
+        report_title=report_title,
+        report_subtitle=report_subtitle,
+        folders_meta=folders_meta,
         overview_sections=''.join(overview_sections),
         ranking_cards=''.join(ranking_cards),
         ranking_rows=''.join(ranking_rows),
@@ -1786,6 +1845,8 @@ def main():
     parser.add_argument("--model", "-m", default=None, help="Model directory containing screenshots (e.g. Qwen_trained, openAI_6.0_Luna, claude)")
     parser.add_argument("--baseline-folder", default=None, help="Baseline screenshot folder for batch mode")
     parser.add_argument("--actual-folders", nargs="*", default=None, help="Actual screenshot folders for batch mode")
+    parser.add_argument("--version-baseline-root", default=None, help="Screenshot root of the previous release. With --batch, each language folder is compared with the folder of the same name in the current release (version comparison)")
+    parser.add_argument("--version-actual-root", default=None, help="Screenshot root of the current release for the version comparison. Defaults to the resolved screenshots directory")
     parser.add_argument("--pages", nargs="*", default=None, help="Page names to compare in batch mode. Defaults to all matching standard pages. Use '--flow' or '--pages flow' for full step flow.")
     parser.add_argument("--flow", action="store_true", help="Compare all numbered sequential flow step screenshots (01_*, 02_*, etc.)")
     parser.add_argument("--output-root", default="./diff_results", help="Root directory for batch diff images")
@@ -1970,6 +2031,32 @@ def main():
                 if not matched:
                     matched = sorted([f.stem for f in baseline_folder.glob("*.png") if not f.name.startswith(".")])
             pages_to_compare = matched
+
+        if args.version_baseline_root:
+            previous_root = Path(args.version_baseline_root)
+            current_root = Path(args.version_actual_root) if args.version_actual_root else base_dir
+            folder_names = [baseline_folder.name] + [Path(f).name for f in actual_folders]
+            folder_pairs = []
+            for name in folder_names:
+                if (previous_root / name).is_dir() and (current_root / name).is_dir():
+                    folder_pairs.append((previous_root / name, current_root / name))
+                else:
+                    print(f"Skipping {name}: folder missing in {previous_root} or {current_root}")
+            if not folder_pairs:
+                parser.error(f"No matching language folders in {previous_root} and {current_root}")
+            run_version_comparison(
+                folder_pairs=folder_pairs,
+                pages=pages_to_compare,
+                output_root=output_root,
+                baseline_root=previous_root,
+                threshold=args.threshold,
+                min_box_size=args.min_box_size,
+                use_ai=args.ai,
+                ai_model=args.ai_model,
+                only_diffs=args.only_diffs,
+                app=app_name,
+            )
+            return
 
         run_batch_comparison(
             baseline_folder=baseline_folder,

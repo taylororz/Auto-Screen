@@ -12,6 +12,9 @@ jobs:
   visual-regression-test:
     runs-on: self-hosted
     timeout-minutes: 60
+    permissions:
+      contents: read
+      actions: read  # needed to download the screenshots of the previous run
 
     steps:
       - name: 1. Checkout test suite repository
@@ -56,25 +59,20 @@ jobs:
           python3 -m pip install --upgrade pip
           if [ -f requirements.txt ]; then python3 -m pip install -r requirements.txt; fi
 
-      # Use local fine-tuned Qwen weights if available, otherwise download from Hugging Face
+      # Use the local Qwen3-VL-4B-V2 weights (same model as the experiments).
+      # The Hugging Face repo Auto-Screen-Qwen3-VL-Agent holds an older model and is not used here.
       - name: 6. Prepare fine-tuned Qwen model
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           mkdir -p Qwen_trained
-          if [ -d "/Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent" ] && [ ! -d "Qwen_trained/Katapp-Qwen3-VL-Agent" ]; then
-            echo "⚡ Linking local model from /Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent..."
-            ln -s /Users/taylorzhuang/Auto-Screen/Qwen_trained/Katapp-Qwen3-VL-Agent Qwen_trained/Katapp-Qwen3-VL-Agent
-          elif [ ! -d "Qwen_trained/Katapp-Qwen3-VL-Agent" ]; then
-            git lfs install
-            if [ -n "$HF_TOKEN" ]; then
-              git config --global credential.helper store
-              echo "https://user:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
-            fi
-            echo "📥 Cloning fine-tuned Qwen model from Hugging Face..."
-            git clone https://huggingface.co/Taylororz/Auto-Screen-Qwen3-VL-Agent Qwen_trained/Katapp-Qwen3-VL-Agent
+          if [ -d "/Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2" ] && [ ! -d "Qwen_trained/Qwen3-VL-4B-V2" ]; then
+            echo "⚡ Linking local model from /Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2..."
+            ln -s /Users/taylorzhuang/Auto-Screen/Qwen_trained/Qwen3-VL-4B-V2 Qwen_trained/Qwen3-VL-4B-V2
           fi
-          echo "✅ Qwen model weights ready in Qwen_trained/Katapp-Qwen3-VL-Agent!"
+          if [ ! -d "Qwen_trained/Qwen3-VL-4B-V2" ]; then
+            echo "::error::Qwen_trained/Qwen3-VL-4B-V2 not found. No fallback model is used."
+            exit 1
+          fi
+          echo "✅ Qwen model weights ready in Qwen_trained/Qwen3-VL-4B-V2"
 
       - name: 7. Verify Appium and XCUITest setup
         run: |
@@ -84,9 +82,39 @@ jobs:
           fi
           echo "✅ Appium environment is ready"
 
+      # Version comparison: the screenshots of the last successful run on this branch are the baseline.
+      - name: 8a. Find the previous successful run
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID=$(curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/visual_pipeline.yml/runs?branch=${{ github.ref_name }}&status=success&per_page=1" \
+            | python3 -c "import sys, json; runs = json.load(sys.stdin).get('workflow_runs') or []; print(runs[0]['id'] if runs else '')")
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          if [ -n "$RUN_ID" ]; then
+            echo "📥 Previous successful run: $RUN_ID"
+          else
+            echo "ℹ️ No previous successful run found, the version comparison is skipped"
+          fi
+
+      - name: 8b. Download screenshots of the previous run
+        if: steps.previous.outputs.run_id != ''
+        continue-on-error: true  # the first run after this change has no screenshots artifact yet
+        uses: actions/download-artifact@v4
+        with:
+          name: screenshots
+          path: previous_screenshots
+          run-id: ${{ steps.previous.outputs.run_id }}
+          github-token: ${{ github.token }}
+
       - name: 8. Execute visual regression testing pipeline
         run: |
           chmod +x run_pipeline_local.sh
+          if [ -d previous_screenshots ] && [ -n "$(ls -A previous_screenshots)" ]; then
+            export PREVIOUS_SCREENSHOTS="$PWD/previous_screenshots"
+            echo "🔁 Version comparison enabled against $PREVIOUS_SCREENSHOTS"
+          fi
           ./run_pipeline_local.sh
 
       - name: 9. Upload visual quality reports and diff artifacts
@@ -96,4 +124,12 @@ jobs:
           name: visual-regression-report
           path: |
             diff_results/
-            screenshots/
+            Qwen_trained/screenshots/
+
+      # Baseline for the version comparison of the next run (only from successful runs)
+      - name: 10. Upload screenshots as baseline for the next run
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: Qwen_trained/screenshots/

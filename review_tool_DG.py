@@ -60,13 +60,13 @@ def get_reviewed_timestamps():
     return reviewed
 
 
-def get_unreviewed_logs():
-    """Returns pure Direct Grounding interaction logs."""
+def get_dg_log_records(include_unlocated=False):
+    """Returns all pure Direct Grounding interaction logs in LOG_FILE, reviewed or not.
+
+    Logs without a predicted coordinate (failed steps) are skipped unless include_unlocated=True."""
     if not os.path.exists(LOG_FILE):
-        return [], 0
-    reviewed_ts = get_reviewed_timestamps()
-    total_count = 0
-    unreviewed = []
+        return []
+    records = []
     with open(LOG_FILE, 'r', encoding='utf-8') as f:
         for line in f:
             if line.strip():
@@ -75,15 +75,20 @@ def get_unreviewed_logs():
                     # Strict filter: exclude old SoM box logs
                     if data.get("mode") != "direct_grounding" and "_som.png" in str(data.get("annotated_image_path", "")):
                         continue
-                    if data.get("center_x") is None or data.get("center_y") is None:
+                    if not include_unlocated and (data.get("center_x") is None or data.get("center_y") is None):
                         continue
-                    
-                    total_count += 1
-                    if data.get("timestamp") not in reviewed_ts:
-                        unreviewed.append(data)
+                    records.append(data)
                 except Exception:
                     pass
-    return unreviewed, total_count
+    return records
+
+
+def get_unreviewed_logs():
+    """Returns pure Direct Grounding interaction logs that are not reviewed yet, and the total count."""
+    records = get_dg_log_records()
+    reviewed_ts = get_reviewed_timestamps()
+    unreviewed = [d for d in records if d.get("timestamp") not in reviewed_ts]
+    return unreviewed, len(records)
 
 
 def resolve_image_path(img_path):
@@ -176,6 +181,20 @@ def render_direct_grounding_overlay(image_path, ai_point=None, gt_point=None):
     return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
 
 
+def _is_manual_gt(record):
+    """Manually added ground-truth points carry no AI prediction."""
+    return str(record.get("timestamp", "")).startswith("dg_manual_add_")
+
+
+def _has_independent_gt(record):
+    """True when the GT point was set by a human click instead of being copied from the AI prediction."""
+    source = record.get("gt_source")
+    if source is not None:
+        return source == "manual_click"
+    # Records saved before gt_source existed: a GT identical to the prediction was an accepted prediction
+    return (record.get("gt_x"), record.get("gt_y")) != (record.get("center_x"), record.get("center_y"))
+
+
 def calculate_statistics():
     """Calculates metrics & distance error for Direct Grounding including is_action_successful."""
     reviewed_records = []
@@ -188,11 +207,19 @@ def calculate_statistics():
                     except Exception:
                         pass
 
+    # Manually added GT points have no AI prediction, so they are not AI evaluation samples
+    manual_gt_count = sum(1 for r in reviewed_records if _is_manual_gt(r))
+    reviewed_records = [r for r in reviewed_records if not _is_manual_gt(r)]
+
+    # Same denominator as the review queue (filtered DG logs), so percentages match the progress bar
+    log_records = get_dg_log_records()
+    total_raw_logs = len(log_records)
+    # Failed steps never produce a coordinate, so they are not in the review queue; count them separately
+    unlocated_count = len(get_dg_log_records(include_unlocated=True)) - total_raw_logs
+    # CLEAN_FILE is shared by the eval/train logs in one folder; only count the reviews for this log
+    log_ts = {r.get("timestamp") for r in log_records}
+    reviewed_records = [r for r in reviewed_records if r.get("timestamp") in log_ts]
     total_reviewed = len(reviewed_records)
-    total_raw_logs = 0
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, 'r', encoding='utf-8') as f:
-            total_raw_logs = sum(1 for line in f if line.strip())
 
     if total_reviewed == 0:
         return f"""### 📊 Direct Grounding Error Rates & Metrics (Dataset: `{LOG_FILE}`)
@@ -206,6 +233,7 @@ def calculate_statistics():
     distances = []
     lang_stats = {}
     step_stats = {}
+    task_stats = {}
 
     for r in reviewed_records:
         lang = r.get("language", "Unknown")
@@ -227,8 +255,8 @@ def calculate_statistics():
         is_correct = r.get("is_correct", False)
         is_action_succ = r.get("is_action_successful", is_correct)
 
-        dist = None
-        if ai_x is not None and ai_y is not None and gt_x is not None and gt_y is not None:
+        # Accepting a prediction copies it into GT (distance 0 by construction), so only human-set GT points count
+        if ai_x is not None and ai_y is not None and gt_x is not None and gt_y is not None and _has_independent_gt(r):
             dist = math.sqrt((ai_x - gt_x)**2 + (ai_y - gt_y)**2)
             distances.append(dist)
             lang_stats[lang]["dists"].append(dist)
@@ -236,6 +264,8 @@ def calculate_statistics():
 
         lang_stats[lang]["total"] += 1
         step_stats[step]["total"] += 1
+        # Repeated rounds of the same task are not independent samples, so track outcomes per task
+        task_stats.setdefault((lang, step, r.get("instruction", "")), []).append(bool(is_action_succ))
 
         if is_correct:
             correct_count += 1
@@ -255,7 +285,17 @@ def calculate_statistics():
     acc_rate = (correct_count / valid_reviewed * 100) if valid_reviewed > 0 else 0.0
     err_rate = (error_count / valid_reviewed * 100) if valid_reviewed > 0 else 0.0
     action_succ_rate = (action_success_count / valid_reviewed * 100) if valid_reviewed > 0 else 0.0
-    avg_dist = (sum(distances) / len(distances)) if distances else 0.0
+    avg_dist_text = f"{sum(distances) / len(distances):.2f} px" if distances else "n/a (no corrected samples)"
+    distinct_tasks = len(task_stats)
+    repeats_per_task = (valid_reviewed / distinct_tasks) if distinct_tasks else 0.0
+    inconsistent_tasks = sum(1 for outcomes in task_stats.values() if len(set(outcomes)) > 1)
+    # Each task counts once: mean of the per-task success rates instead of one vote per repeated sample
+    task_level_rate = (sum(sum(o) / len(o) for o in task_stats.values()) / distinct_tasks * 100) if distinct_tasks else 0.0
+    run_count = len({r.get("run_id") for r in reviewed_records if r.get("run_id")})
+    attempts = total_raw_logs + unlocated_count
+    failure_rate = (unlocated_count / attempts * 100) if attempts else 0.0
+    # Estimate: action success rate on reviewed samples, scaled by the share of attempts that produced a coordinate
+    e2e_rate = action_succ_rate * total_raw_logs / attempts if attempts else 0.0
 
     report_md = f"""### 🎯 Direct Grounding (DG) Evaluation Metrics & Distance Analysis
 > **Current Log File**: `{LOG_FILE}`  
@@ -269,8 +309,15 @@ def calculate_statistics():
 | **⚡ Interaction Action Successful** | {action_success_count} entries | **{action_succ_rate:.2f}%** |
 | **✅ Localization Accurate** | {correct_count} entries | **{acc_rate:.2f}%** |
 | **❌ Localization Inaccurate / Corrected** | {error_count} entries | **{err_rate:.2f}%** |
-| **📏 Mean Pixel Error Distance** | **{avg_dist:.2f} px** | - |
+| **📏 Mean Pixel Error Distance (corrected samples only)** | **{avg_dist_text}** | n={len(distances)} |
+| **🚫 Pipeline Failures (no coordinate produced)** | {unlocated_count} entries | {failure_rate:.2f}% of {attempts} attempts |
+| **🏁 End-to-End Success Rate (est.)** | - | **{e2e_rate:.2f}%** |
+| **🧩 Distinct Tasks (language + step + instruction)** | {distinct_tasks} tasks | {repeats_per_task:.1f} samples per task |
+| **⚖️ Task-level Action Success (each task counted once)** | - | **{task_level_rate:.2f}%** |
+| **🔀 Inconsistent Tasks (outcome differs between repeats)** | {inconsistent_tasks} tasks | - |
+| **🏷️ Runs (records with run_id)** | {run_count} runs | - |
 | **🗑️ Discarded Samples** | {discarded_count} entries | - |
+| **✍️ Manually Added GT (not counted above)** | {manual_gt_count} entries | - |
 
 #### 🌐 Direct Grounding Accuracy by Language
 
@@ -280,8 +327,8 @@ def calculate_statistics():
     for lang, s in lang_stats.items():
         if s["total"] > 0:
             l_act = s["action_success"] / s["total"] * 100
-            l_avg_d = (sum(s["dists"]) / len(s["dists"])) if s["dists"] else 0.0
-            report_md += f"| {lang} | {s['total']} | {s['action_success']} | {s['correct']} | **{l_act:.2f}%** | {l_avg_d:.1f} px |\n"
+            l_dist = f"{sum(s['dists']) / len(s['dists']):.1f} px" if s["dists"] else "n/a"
+            report_md += f"| {lang} | {s['total']} | {s['action_success']} | {s['correct']} | **{l_act:.2f}%** | {l_dist} |\n"
 
     report_md += """
 #### 📋 Direct Grounding Accuracy by Interaction Step
@@ -292,8 +339,8 @@ def calculate_statistics():
     for step, s in step_stats.items():
         if s["total"] > 0:
             st_act = s["action_success"] / s["total"] * 100
-            st_avg_d = (sum(s["dists"]) / len(s["dists"])) if s["dists"] else 0.0
-            report_md += f"| `{step}` | {s['total']} | {s['action_success']} | {s['correct']} | **{st_act:.2f}%** | {st_avg_d:.1f} px |\n"
+            st_dist = f"{sum(s['dists']) / len(s['dists']):.1f} px" if s["dists"] else "n/a"
+            report_md += f"| `{step}` | {s['total']} | {s['action_success']} | {s['correct']} | **{st_act:.2f}%** | {st_dist} |\n"
 
     return report_md
 
@@ -423,6 +470,7 @@ def save_as_correct(rec_json, is_action_successful=True):
     record["is_action_successful"] = bool(is_action_successful)
     record["gt_x"] = record.get("center_x")
     record["gt_y"] = record.get("center_y")
+    record["gt_source"] = "accepted_prediction"
     record["discarded"] = False
 
     _save_record_to_clean_file(record)
@@ -453,11 +501,15 @@ def save_corrected(rec_json, manual_x, manual_y, is_action_successful=True):
     ai_x = record.get("center_x")
     ai_y = record.get("center_y")
 
-    dist = math.sqrt((ai_x - gt_x)**2 + (ai_y - gt_y)**2) if (ai_x and ai_y and gt_x and gt_y) else 0.0
-    record["is_correct"] = (dist <= 40.0)
+    # Coordinates of 0 are valid, so check for None instead of truthiness
+    has_ai = ai_x is not None and ai_y is not None
+    dist = math.sqrt((ai_x - gt_x)**2 + (ai_y - gt_y)**2) if has_ai else 0.0
+    # Without an AI prediction there is nothing to be correct about
+    record["is_correct"] = has_ai and dist <= 40.0
     record["is_action_successful"] = bool(is_action_successful)
     record["gt_x"] = gt_x
     record["gt_y"] = gt_y
+    record["gt_source"] = "manual_click"
     record["pixel_error_distance"] = dist
     record["discarded"] = False
 

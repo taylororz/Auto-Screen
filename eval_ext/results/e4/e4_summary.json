@@ -1,0 +1,62 @@
+{
+  "sequence": [
+    "A1",
+    "B5",
+    "A2",
+    "B5"
+  ],
+  "rolling": [
+    {
+      "run": 2,
+      "baseline": "A1",
+      "actual": "B5",
+      "actual_build": "B",
+      "pixel_boxes": 53,
+      "pixel_boxes_at_defect_areas": 15
+    },
+    {
+      "run": 3,
+      "baseline": "B5",
+      "actual": "A2",
+      "actual_build": "A",
+      "pixel_boxes": 53,
+      "pixel_boxes_at_defect_areas": 15
+    },
+    {
+      "run": 4,
+      "baseline": "A2",
+      "actual": "B5",
+      "actual_build": "B",
+      "pixel_boxes": 53,
+      "pixel_boxes_at_defect_areas": 15
+    }
+  ],
+  "approved_A1": [
+    {
+      "run": 2,
+      "baseline": "A1",
+      "actual": "B5",
+      "actual_build": "B",
+      "pixel_boxes": 53,
+      "pixel_boxes_at_defect_areas": 15
+    },
+    {
+      "run": 3,
+      "baseline": "A1",
+      "actual": "A2",
+      "actual_build": "A",
+      "pixel_boxes": 0,
+      "pixel_boxes_at_defect_areas": 0
+    },
+    {
+      "run": 4,
+      "baseline": "A1",
+      "actual": "B5",
+      "actual_build": "B",
+      "pixel_boxes": 53,
+      "pixel_boxes_at_defect_areas": 15
+    }
+  ],
+  "rolling_boxes_on_defect_free_builds": 53,
+  "approved_A1_boxes_on_defect_free_builds": 0
+}

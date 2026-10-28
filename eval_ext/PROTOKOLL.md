@@ -95,3 +95,5 @@ Screenshots der Abläufe (1206 × 2622 px), deren Auflösung sie stärker erhöh
 - E1: Der Befehl wurde mit der FF3-Seitenliste aus diesem Protokoll ausgeführt. Keine Abweichung.
 - E4: Keine Abweichung.
 - E3: Keine Abweichung. 500 Fälle, keine Rückfallebene. Temporäre Teilbilder nach dem Lauf gelöscht.
+- E2: Keine Abweichung. 296 Boxen (V 58, L 238), alle bewertet. Die Stufe `unclear` kam nicht vor, Kennzahlen „defect oder unclear“ sind daher gleich „defect“.
+  Nachträgliche Beobachtung (keine vorab festgelegte Kennzahl): In drei Fällen nennt die Begründung einen abgeschnittenen Text bei der Einstufung `acceptable`.

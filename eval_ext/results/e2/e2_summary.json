@@ -1,0 +1,267 @@
+{
+  "boxes": {
+    "V_total": 58,
+    "V_defect_boxes": 14,
+    "V_other_boxes": 44,
+    "L_total": 238
+  },
+  "verdicts": {
+    "V": {
+      "defect": 6,
+      "acceptable": 52
+    },
+    "L": {
+      "acceptable": 234,
+      "defect": 4
+    }
+  },
+  "1_defect_boxes_rated_defect": "5/14 (35.7%)",
+  "1_defect_boxes_rated_defect_or_unclear": "5/14 (35.7%)",
+  "2_defects_with_box_defect": "4/10 (40.0%)",
+  "2_defects_with_box_defect_or_unclear": "4/10 (40.0%)",
+  "2_defects_lost_if_only_defect_or_unclear_reviewed": [
+    "D04",
+    "D06",
+    "D10",
+    "D11",
+    "D14",
+    "D15"
+  ],
+  "3_V_other_boxes_acceptable": "43/44 (97.7%)",
+  "3_L_boxes_acceptable": "234/238 (98.3%)",
+  "4_boxes_skippable_acceptable": "286/296 (96.6%)",
+  "4_defects_lost_when_skipping": [
+    "D04",
+    "D06",
+    "D10",
+    "D11",
+    "D14",
+    "D15"
+  ],
+  "defect_boxes_detail": [
+    {
+      "folder": "baseline_DE_DE",
+      "page": "06_vehicle_tab",
+      "box": [
+        305,
+        245,
+        577,
+        62
+      ],
+      "defect_ids": [
+        "D01"
+      ],
+      "verdict": "defect",
+      "category": "text cut off",
+      "reason": "Text on right is truncated with ellipsis indicating overflow"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "07_settings_tab",
+      "box": [
+        66,
+        539,
+        1073,
+        50
+      ],
+      "defect_ids": [
+        "D06"
+      ],
+      "verdict": "acceptable",
+      "category": "text",
+      "reason": "Text wording differs but content and layout remain consistent"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        361,
+        346,
+        641,
+        50
+      ],
+      "defect_ids": [
+        "D16"
+      ],
+      "verdict": "acceptable",
+      "category": "text truncation",
+      "reason": "Text is partially cut off but not clipped or garbled"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        1024,
+        347,
+        86,
+        39
+      ],
+      "defect_ids": [
+        "D16"
+      ],
+      "verdict": "defect",
+      "category": "text cut off or truncated",
+      "reason": "The text 'dein' is partially cut off on the right side."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        1137,
+        357,
+        25,
+        28
+      ],
+      "defect_ids": [
+        "D16"
+      ],
+      "verdict": "defect",
+      "category": "text cut off or truncated",
+      "reason": "The letter 'n' is cut off on the right side."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        488,
+        875,
+        438,
+        79
+      ],
+      "defect_ids": [
+        "D11"
+      ],
+      "verdict": "acceptable",
+      "category": "text change",
+      "reason": "The new build adds 'der' which is a valid extension of the text, not a defect."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        95,
+        876,
+        340,
+        61
+      ],
+      "defect_ids": [
+        "D11"
+      ],
+      "verdict": "acceptable",
+      "category": "text truncation",
+      "reason": "Text appears identical with no truncation or clipping"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "box": [
+        94,
+        1020,
+        1018,
+        96
+      ],
+      "defect_ids": [
+        "D14"
+      ],
+      "verdict": "acceptable",
+      "category": "text",
+      "reason": "Text is truncated but not garbled or missing, and layout remains consistent."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "box": [
+        779,
+        779,
+        88,
+        89
+      ],
+      "defect_ids": [
+        "D15"
+      ],
+      "verdict": "acceptable",
+      "category": "layout",
+      "reason": "Icon is correctly placed with no layout issues."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "box": [
+        274,
+        785,
+        459,
+        89
+      ],
+      "defect_ids": [
+        "D15"
+      ],
+      "verdict": "acceptable",
+      "category": "text change",
+      "reason": "Text added but no layout or visual breakage"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "box": [
+        90,
+        1328,
+        709,
+        67
+      ],
+      "defect_ids": [
+        "D10"
+      ],
+      "verdict": "acceptable",
+      "category": "text",
+      "reason": "Text is fully visible and not truncated or clipped"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "box": [
+        58,
+        1874,
+        1090,
+        119
+      ],
+      "defect_ids": [
+        "D03"
+      ],
+      "verdict": "defect",
+      "category": "text truncation",
+      "reason": "Text on right is truncated with ellipsis indicating overflow"
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "login_field",
+      "box": [
+        362,
+        245,
+        454,
+        62
+      ],
+      "defect_ids": [
+        "D04"
+      ],
+      "verdict": "acceptable",
+      "category": "language change",
+      "reason": "Text is in different language but not truncated or clipped."
+    },
+    {
+      "folder": "baseline_DE_DE",
+      "page": "13_language_choice",
+      "box": [
+        193,
+        1007,
+        663,
+        58
+      ],
+      "defect_ids": [
+        "D08"
+      ],
+      "verdict": "defect",
+      "category": "text cut off or truncated",
+      "reason": "The text on the right is truncated, ending mid-word with a visible ellipsis, indicating cut-off content."
+    }
+  ]
+}

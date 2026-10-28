@@ -255,9 +255,11 @@ python3 auto_screen.py review --mode dg
 
 ---
 
-## Optional features (not evaluated)
+## Optional features (added after the evaluation)
 
-These features were added after the evaluation (branch `feat/improvements`, after tag `eval-final-2`). All of them are off by default. Without the options below, the comparison produces the same reports and diff images as `eval-final-2` (checked on the FF3 runs). None of them was evaluated.
+These features were added after the evaluation (branch `feat/improvements`, after tag `eval-final-2`). All of them are off by default. Without the options below, the comparison produces the same reports and diff images as `eval-final-2` (checked on the FF3 runs).
+
+Four of them were evaluated afterwards with existing data only (threshold calibration, local assessment, sub-image refinement, approved baseline). Protocol, scripts and results are in `eval_ext/`. The protocol was committed before the runs. Stable screenshots, ignore regions, devices, dark mode, text size and right-to-left languages were not evaluated.
 
 ### Local VLM assessment of difference boxes
 
@@ -268,7 +270,7 @@ LOCAL_TRIAGE=1 ./run_pipeline_local.sh      # version comparison of the pipeline
 
 Each box of the grayscale comparison is cut out of both screenshots and rated by a local VLM (default `Qwen/Qwen3-VL-4B-Instruct` from the local Hugging Face cache, override with `--ai-model` or `TRIAGE_MODEL_PATH`) as `defect`, `acceptable` or `unclear`. The largest boxes are rated first, at most `--ai-max-boxes` (default 8) per page. Screenshots do not leave the machine. The report shows the verdict per page and links an image with the rated boxes (red defect, orange unclear, gray acceptable, white not rated).
 
-The verdicts only order the boxes for the reviewer. In a spot check on two FF3 pages, the base model rated one seeded defect correctly and a clipped text (D06) as acceptable. Before relying on it, the model needs fine-tuning and an evaluation on separate data. `GATE_ON_AI_FAIL=1` makes the gate block runs with `fail` verdicts. It should not be used before such an evaluation.
+The verdicts only order the boxes for the reviewer. Evaluation (`eval_ext/`, E2) on all 296 grayscale boxes of the FF3 pages: the base model rated 43 of 44 boxes without a defect in the version comparison and 234 of 238 translation differences as acceptable, but only 5 of 14 boxes at seeded defects as defect (4 of the 10 detected defects). Skipping the boxes rated acceptable would lose 6 of 10 defects. Before relying on it, the model needs fine-tuning and an evaluation on separate data. `GATE_ON_AI_FAIL=1` makes the gate block runs with `fail` verdicts. It should not be used before such an evaluation.
 
 ### Approved baseline
 
@@ -322,6 +324,8 @@ Runs the unchanged comparison for a grid of thresholds and minimum box sizes and
 ### Sub-image refinement for Direct Grounding (Ferret-UI style)
 
 `DG_SUBIMAGE_REFINE=1` (fine-tuned local model only): after the first prediction, the upper or lower half of the screenshot that contains it (10 % overlap) is passed again at almost twice the effective resolution, and the refined point is mapped back. If it lies more than 15 % of the screen height away (`DG_SUBIMAGE_MAX_SHIFT`), the first prediction is kept. Each step needs a second inference. The decision in the log records both points (`subimage_refinement`).
+
+Evaluation (`eval_ext/`, E3): on 500 cases of the cleaned iOS-1K split, the refinement did not change the hit rate (68.2 % without, 67.8 % with, hit = at most 40 px from the element centre, McNemar p = 0.85, icons 51.6 % in both). It doubles the inference time per step.
 
 ---
 

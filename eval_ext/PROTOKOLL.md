@@ -64,6 +64,26 @@ Durchführung: Skripte und Läufe mit Unterstützung von Claude Code (Opus 5.5).
 - Das Ergebnis folgt aus der Logik und ist keine empirische Prüfung.
 - Befehl: `python3 eval_ext/e4_baseline_replay.py --out eval_ext/results/e4`
 
+## E3b: Teilbild-Verfeinerung in den Abläufen (Nachtrag nach E3, nicht vorab geplant)
+
+Nachtrag vom 28.10.2026, geschrieben nach dem Ergebnis von E3 und vor dem Lauf von E3b.
+Anlass: E3 fand keine Verbesserung auf iOS-1K (828 × 1792 px). Offen blieb, ob die Verfeinerung bei den
+Screenshots der Abläufe (1206 × 2622 px), deren Auflösung sie stärker erhöht, schadet oder nützt.
+
+- Daten: alle 598 manuell geprüften DG-Schritte des feinabgestimmten Modells aus FF2 (KatApp 262, Bluesky 336),
+  `Qwen_trained/diff_results/finetune_dataset_DG.jsonl`. Die Screenshots liegen in der Arbeitskopie der Läufe vom 28.09.2026.
+- Einschränkung vorab: Alle 598 Schritte waren richtig, und der Zielpunkt jedes Eintrags ist der bestätigte vorhergesagte Punkt.
+  Eine Verbesserung der Trefferquote ist deshalb nicht messbar. E3b prüft nur, ob die Verfeinerung schadet.
+- Ablauf: Erster Punkt ist der protokollierte und bestätigte Punkt. Darauf wird `_refine_in_subimage()` mit den Parametern
+  aus `2f50706` angewendet (Überlappung 0,1, maximale Verschiebung 0,15). Ein erneuter erster Aufruf des Modells entfällt.
+- Kennzahlen:
+  1. Anteil übernommener Verfeinerungen, Verschiebung gegenüber dem bestätigten Punkt (Median, Anteil bis 40 px), je App.
+  2. Schritte mit übernommener Verfeinerung und Verschiebung über 40 px prüft der Verfasser manuell am Screenshot
+     (Ziel getroffen ja oder nein), wie in FF2. Schrittgenauigkeit mit Verfeinerung = (Schritte bis 40 px + manuell bestätigte) / 598.
+  3. Rechenzeit der Verfeinerung je Schritt.
+- Befehle: `python3 eval_ext/e3b_dg_flows.py run --out eval_ext/results/e3b.jsonl`, danach `... review` (Bilder für die
+  manuelle Prüfung) und `... summary`.
+
 ## Nicht ausgewertet
 
 - Stabilere Screenshots (Tastatur, Warten auf Ruhe): erfordert neue Läufe am Simulator.
@@ -71,4 +91,7 @@ Durchführung: Skripte und Läufe mit Unterstützung von Claude Code (Opus 5.5).
 
 ## Abweichungen
 
-(nach den Läufen ergänzen)
+- Bezeichnung: In der Arbeit heißen E1 bis E4 „EA1 bis EA4“ (Abschnitt „Ergänzende Auswertung der Erweiterungen“), weil E1 bis E6 dort die Entwurfsentscheidungen bezeichnen. Inhalt, Daten und Parameter sind unverändert.
+- E1: Der Befehl wurde mit der FF3-Seitenliste aus diesem Protokoll ausgeführt. Keine Abweichung.
+- E4: Keine Abweichung.
+- E3: Keine Abweichung. 500 Fälle, keine Rückfallebene. Temporäre Teilbilder nach dem Lauf gelöscht.

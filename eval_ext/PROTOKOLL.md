@@ -95,5 +95,10 @@ Screenshots der Abläufe (1206 × 2622 px), deren Auflösung sie stärker erhöh
 - E1: Der Befehl wurde mit der FF3-Seitenliste aus diesem Protokoll ausgeführt. Keine Abweichung.
 - E4: Keine Abweichung.
 - E3: Keine Abweichung. 500 Fälle, keine Rückfallebene. Temporäre Teilbilder nach dem Lauf gelöscht.
+- E3, nachträgliche Auswertung (nicht vorab geplant): Die Annahme „Element-Rechtecke liegen nicht vor“ war falsch. Sie stehen in den
+  Annotationen von MUIAnno (`iOS-1K-Mobile-UI-Dataset/annotations/`). `e3_boxcheck.py` ordnet die Anweisungen über den Mittelpunkt
+  (bis 3 px) eindeutig einem Rechteck zu (432 von 500, 36 ohne, 32 mehrdeutig) und zählt Punkte innerhalb des Rechtecks.
+  Ergebnis: 72,2 % ohne, 73,4 % mit Verfeinerung, 5 gegen 10 abweichende Fälle, McNemar p = 0,30. Die vorab festgelegten
+  Kennzahlen bleiben die primären.
 - E2: Keine Abweichung. 296 Boxen (V 58, L 238), alle bewertet. Die Stufe `unclear` kam nicht vor, Kennzahlen „defect oder unclear“ sind daher gleich „defect“.
   Nachträgliche Beobachtung (keine vorab festgelegte Kennzahl): In drei Fällen nennt die Begründung einen abgeschnittenen Text bei der Einstufung `acceptable`.

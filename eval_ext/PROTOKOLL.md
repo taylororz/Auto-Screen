@@ -100,5 +100,12 @@ Screenshots der Abläufe (1206 × 2622 px), deren Auflösung sie stärker erhöh
   (bis 3 px) eindeutig einem Rechteck zu (432 von 500, 36 ohne, 32 mehrdeutig) und zählt Punkte innerhalb des Rechtecks.
   Ergebnis: 72,2 % ohne, 73,4 % mit Verfeinerung, 5 gegen 10 abweichende Fälle, McNemar p = 0,30. Die vorab festgelegten
   Kennzahlen bleiben die primären.
+- E3b: 598 Schritte, Verfeinerung in 590 übernommen (8 durch die maximale Verschiebung verworfen, alle `open_language_settings`).
+  27 übernommene Verfeinerungen mit Verschiebung über 40 px (Bluesky: `go_to_Lists_page` 13, `go_to_Saved_page` 8,
+  `open_language_settings` 6), alle nach rechts in derselben Menüzeile.
+  Abweichung bei der manuellen Prüfung: Statt jeden Fall nur am Screenshot zu beurteilen, tippte der Verfasser je Schritt
+  die Stelle eines verfeinerten Punkts in Bluesky an. In allen drei Schritten öffnete sich das Ziel. Da alle Punkte eines
+  Schritts in derselben Zeile liegen, wurden alle 27 Fälle in `e3b_review/manual.json` als getroffen eingetragen.
+  Ergebnis: 598/598, Rechenzeit der Verfeinerung im Median 3,7 s je Schritt.
 - E2: Keine Abweichung. 296 Boxen (V 58, L 238), alle bewertet. Die Stufe `unclear` kam nicht vor, Kennzahlen „defect oder unclear“ sind daher gleich „defect“.
   Nachträgliche Beobachtung (keine vorab festgelegte Kennzahl): In drei Fällen nennt die Begründung einen abgeschnittenen Text bei der Einstufung `acceptable`.

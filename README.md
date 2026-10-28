@@ -327,6 +327,8 @@ Runs the unchanged comparison for a grid of thresholds and minimum box sizes and
 
 Evaluation (`eval_ext/`, E3): on 500 cases of the cleaned iOS-1K split, the refinement did not change the hit rate (68.2 % without, 67.8 % with, hit = at most 40 px from the element centre, McNemar p = 0.85, icons 51.6 % in both). It doubles the inference time per step.
 
+Addendum (E3b, not pre-planned): applied to the 598 confirmed DG steps of the fine-tuned model from FF2 (KatApp 262, Bluesky 336), starting from the confirmed point. All steps stayed correct (598/598). In Bluesky, 27 points moved 45–387 px to the right within the same menu row and still opened the target because the whole row is tappable (checked manually in the app). Since all steps were correct before, E3b can only show harm, not a benefit.
+
 ---
 
 ## Known limitations

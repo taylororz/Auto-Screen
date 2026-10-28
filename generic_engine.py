@@ -11,6 +11,7 @@ import time
 import json
 import shutil
 import argparse
+import subprocess
 import importlib.util
 from pathlib import Path
 from datetime import datetime
@@ -136,10 +137,15 @@ class GenericGUITestEngine:
         self.run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         self._log_ctx = {}
 
-        # Prepare log and screenshot output directories under model_dir
+        # Optional screenshot stabilization (config key "stability", not used in the evaluated configs)
+        self.stability = self.config.get("stability", {})
+
+        # Prepare log and screenshot output directories under model_dir.
+        # AUTOSCREEN_VARIANT (e.g. set by tools/run_matrix.py) keeps device/appearance variants apart: screenshots_<variant>/
         self.diff_dir = self.model_dir / "diff_results"
         self.diff_dir.mkdir(parents=True, exist_ok=True)
-        self.screenshot_root = self.model_dir / "screenshots"
+        variant = os.environ.get("AUTOSCREEN_VARIANT")
+        self.screenshot_root = self.model_dir / (f"screenshots_{variant}" if variant else "screenshots")
         self.screenshot_root.mkdir(parents=True, exist_ok=True)
 
     def get_window_size(self):
@@ -159,8 +165,9 @@ class GenericGUITestEngine:
         """Initializes Appium XCUITest options from config."""
         options = XCUITestOptions()
         options.platform_name = self.app_cfg.get("platform_name", "iOS")
-        options.platform_version = self.app_cfg.get("platform_version", "17.0")
-        options.device_name = self.app_cfg.get("device_name", "iPhone 15")
+        # AUTOSCREEN_* overrides select another device without editing the config (e.g. tools/run_matrix.py)
+        options.platform_version = os.environ.get("AUTOSCREEN_PLATFORM_VERSION") or self.app_cfg.get("platform_version", "17.0")
+        options.device_name = os.environ.get("AUTOSCREEN_DEVICE_NAME") or self.app_cfg.get("device_name", "iPhone 15")
         app_target = os.environ.get("AUTOSCREEN_APP_PATH") or self.app_cfg.get("app_path", "")
         if app_target and not Path(app_target).exists():
             ci_fallback = ROOT_DIR / "build" / "ios" / "iphonesimulator" / "Runner.app"
@@ -181,7 +188,12 @@ class GenericGUITestEngine:
                 "EXPO_PUBLIC_DEV_LAUNCHER": "0"
             }
         }
-        
+        # Optional extra capabilities, e.g. for a real device: udid, xcodeOrgId, xcodeSigningId, updatedWDABundleId
+        for cap_name, cap_value in self.app_cfg.get("extra_capabilities", {}).items():
+            options.set_capability(cap_name, cap_value)
+        if os.environ.get("AUTOSCREEN_DEVICE_UDID"):
+            options.set_capability("udid", os.environ["AUTOSCREEN_DEVICE_UDID"])
+
         appium_url = self.app_cfg.get("appium_url", "http://localhost:4723")
         print(f"🔌 Connecting to Appium server: {appium_url}")
         try:
@@ -195,12 +207,89 @@ class GenericGUITestEngine:
                 sys.exit(1)
             raise
         time.sleep(3)
+        self._apply_simulator_ui_settings()
         # Pre-cache window size on startup
         try:
             self._cached_window_size = self.driver.get_window_size()
         except Exception:
             pass
         return self.driver
+
+    def _apply_simulator_ui_settings(self):
+        """Sets dark mode and the Dynamic Type size of the simulator if configured
+        (app_config "appearance" / "content_size" or AUTOSCREEN_APPEARANCE / AUTOSCREEN_CONTENT_SIZE).
+        Only works on simulators (xcrun simctl). The app is restarted afterwards so it renders with the setting."""
+        settings = [
+            ("appearance", os.environ.get("AUTOSCREEN_APPEARANCE") or self.app_cfg.get("appearance")),
+            ("content_size", os.environ.get("AUTOSCREEN_CONTENT_SIZE") or self.app_cfg.get("content_size")),
+        ]
+        settings = [(name, value) for name, value in settings if value]
+        if not settings:
+            return
+        udid = (self.driver.capabilities or {}).get("udid") or "booted"
+        for name, value in settings:
+            result = subprocess.run(["xcrun", "simctl", "ui", udid, name, value], capture_output=True, text=True)
+            if result.returncode == 0:
+                print(f"🎨 Simulator {name} set to '{value}'")
+            else:
+                print(f"⚠️ Could not set simulator {name} to '{value}' (real device?): {result.stderr.strip()}")
+        self.reset_app(wait_after=3)
+
+    def _stabilize_screen(self, action):
+        """Prepares a stable screenshot (config key "stability"): hides the keyboard except for text input steps
+        ("hide_keyboard": true) and waits until two consecutive frames differ by at most "max_change" of the
+        pixels below the status bar ("wait_for_idle": true or {"timeout", "interval", "max_change", "ignore_top"})."""
+        if self.stability.get("hide_keyboard") and action != "type_text":
+            try:
+                if self.driver.is_keyboard_shown():
+                    self.driver.hide_keyboard()
+                    time.sleep(0.5)
+            except Exception as kb_err:
+                print(f"⚠️ Could not hide the keyboard before the screenshot: {kb_err}")
+
+        idle = self.stability.get("wait_for_idle")
+        if not idle:
+            return
+        idle = idle if isinstance(idle, dict) else {}
+        timeout = float(idle.get("timeout", 3.0))
+        interval = float(idle.get("interval", 0.4))
+        max_change = float(idle.get("max_change", 0.001))
+        ignore_top = int(idle.get("ignore_top", 140))
+
+        import cv2
+        import numpy as np
+        deadline = time.time() + timeout
+        previous = None
+        while True:
+            frame = cv2.imdecode(np.frombuffer(self.driver.get_screenshot_as_png(), np.uint8), cv2.IMREAD_GRAYSCALE)
+            if frame is not None:
+                frame = frame[ignore_top:, :]
+                if previous is not None and frame.shape == previous.shape:
+                    changed = np.count_nonzero(cv2.absdiff(frame, previous) > 20) / frame.size
+                    if changed <= max_change:
+                        return
+            if time.time() >= deadline:
+                print(f"⚠️ Screen did not settle within {timeout:.1f}s, taking the screenshot anyway")
+                return
+            previous = frame
+            time.sleep(interval)
+
+    def _relaunch_with_language(self, language, locale=None):
+        """Restarts the app in another system language, e.g. a right-to-left language such as Arabic
+        (flow keys "launch_language" and "launch_locale"). Uses -AppleLanguages/-AppleLocale launch arguments."""
+        bundle_id = self.app_cfg.get("bundle_id", "")
+        arguments = ["-AppleLanguages", f"({language})"]
+        if locale:
+            arguments += ["-AppleLocale", locale]
+        arguments += ["-EXPO_DEV_LAUNCHER_IS_ONBOARDED", "1", "-EXPO_DEV_MENU_IS_DISABLED", "1"]
+        print(f"🌐 Relaunching {bundle_id} with system language '{language}'" + (f" and locale '{locale}'" if locale else ""))
+        try:
+            self.driver.terminate_app(bundle_id)
+            time.sleep(1.0)
+            self.driver.execute_script("mobile: launchApp", {"bundleId": bundle_id, "arguments": arguments})
+            time.sleep(4)
+        except Exception as launch_err:
+            print(f"⚠️ Relaunch with language '{language}' failed: {launch_err}")
 
     def reset_app(self, wait_after=4):
         """Forcefully terminates and reactivates app state (lightweight process restart preserving app data/auth)."""
@@ -453,6 +542,10 @@ class GenericGUITestEngine:
                 time.sleep(1.0)
         except Exception:
             pass
+
+        # Optional: hide the keyboard and wait for a still screen (config key "stability", per step "stabilize": false)
+        if self.stability and step_info.get("stabilize", True):
+            self._stabilize_screen(action)
 
         # 1. Capture current simulator screen (unmarked raw screenshot)
         self.driver.save_screenshot(str(screenshot_path))
@@ -897,6 +990,8 @@ class GenericGUITestEngine:
                             "language_name": flow.get("language_name", "English")
                         }
                         print(f"\n🚀 Running test flow for language: {lang_info['language_name']} (Loop {loop + 1}/{self.loops})")
+                        if flow.get("launch_language"):
+                            self._relaunch_with_language(flow["launch_language"], flow.get("launch_locale"))
                         flow_broken = False
                         for s_i, step in enumerate(flow.get("steps", []), 1):
                             ok = self.execute_step(step, lang_info, is_setup_step=False, step_index=s_i, loop_index=loop)

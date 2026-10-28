@@ -255,13 +255,83 @@ python3 auto_screen.py review --mode dg
 
 ---
 
+## Optional features (not evaluated)
+
+These features were added after the evaluation (branch `feat/improvements`, after tag `eval-final-2`). All of them are off by default. Without the options below, the comparison produces the same reports and diff images as `eval-final-2` (checked on the FF3 runs). None of them was evaluated.
+
+### Local VLM assessment of difference boxes
+
+```bash
+python3 compare_images.py --batch --app katapp --model Qwen_trained --version-baseline-root <previous screenshots> --ai-local
+LOCAL_TRIAGE=1 ./run_pipeline_local.sh      # version comparison of the pipeline
+```
+
+Each box of the grayscale comparison is cut out of both screenshots and rated by a local VLM (default `Qwen/Qwen3-VL-4B-Instruct` from the local Hugging Face cache, override with `--ai-model` or `TRIAGE_MODEL_PATH`) as `defect`, `acceptable` or `unclear`. The largest boxes are rated first, at most `--ai-max-boxes` (default 8) per page. Screenshots do not leave the machine. The report shows the verdict per page and links an image with the rated boxes (red defect, orange unclear, gray acceptable, white not rated).
+
+The verdicts only order the boxes for the reviewer. In a spot check on two FF3 pages, the base model rated one seeded defect correctly and a clipped text (D06) as acceptable. Before relying on it, the model needs fine-tuning and an evaluation on separate data. `GATE_ON_AI_FAIL=1` makes the gate block runs with `fail` verdicts. It should not be used before such an evaluation.
+
+### Approved baseline
+
+```bash
+python3 tools/approve_baseline.py --app katapp --source Qwen_trained/screenshots --label <commit> --note "checked by hand"
+python3 tools/approve_baseline.py --app katapp --show
+BASELINE_MODE=approved ./run_pipeline_local.sh
+```
+
+The version comparison then uses `baselines/<app>/screenshots` instead of the previous build, until the next approval. `baseline.json` records who approved which build and the SHA-256 of every screenshot. In CI, run the workflow **Approve visual baseline** with the ID of a successful CI run and set the repository variable `BASELINE_MODE=approved`. The approved artifact expires after 90 days.
+
+### Stable screenshots and ignore regions
+
+Config keys (top level of `configs/<app>.json`):
+
+```json
+"stability": { "hide_keyboard": true, "wait_for_idle": { "timeout": 3.0, "interval": 0.4, "max_change": 0.001 } },
+"compare": {
+  "mask_top": 140,
+  "mask_bottom": 70,
+  "ignore_regions": [ { "rect": [0, 400, 1206, 900], "pages": ["home_tab"], "folders": ["baseline_DE_DE"], "reason": "feed with changing content" } ]
+}
+```
+
+- `hide_keyboard` hides the keyboard before the screenshot of every step except `type_text`. `wait_for_idle` waits until two consecutive frames differ by at most `max_change` of the pixels below the status bar. A step can turn both off with `"stabilize": false`.
+- `ignore_regions` are excluded from both comparison methods and outlined in gray in the diff images. Without `pages` or `folders`, a region applies to all pages or folders. `--mask-top` and `--mask-bottom` override the masks, e.g. for other devices.
+
+### Devices, dark mode, text size, right-to-left languages
+
+```bash
+python3 tools/run_matrix.py --app katapp --devices "iPhone 18 Pro" "iPhone 17e" \
+    --appearance light dark --content-size large accessibility-large --dry-run
+```
+
+Each combination writes its screenshots to `<model>/screenshots_<variant>/`. Compare a variant only with the same variant of another build (`--version-baseline-root` / `--version-actual-root`) and set the masks for the device. The engine also reads `AUTOSCREEN_DEVICE_NAME`, `AUTOSCREEN_PLATFORM_VERSION`, `AUTOSCREEN_DEVICE_UDID`, `AUTOSCREEN_APPEARANCE`, `AUTOSCREEN_CONTENT_SIZE` and `AUTOSCREEN_VARIANT`, or `appearance` and `content_size` in `app_config`.
+
+- **Real devices**: `app_config.extra_capabilities` is passed to Appium (e.g. `udid`, `xcodeOrgId`, `xcodeSigningId`, `updatedWDABundleId`). Appearance and text size can only be set on simulators. Not tested on a real device.
+- **Right-to-left languages**: a flow with `"launch_language": "ar"` and optionally `"launch_locale": "ar_SA"` restarts the app with `-AppleLanguages`/`-AppleLocale` before the flow. The app must support the language. Mirrored layouts are only comparable with the same language of another build.
+- The SoM box filter (status bar 110 px) and the heuristic fallbacks are tuned to the iPhone 18 Pro.
+
+### Threshold calibration
+
+```bash
+python3 tools/calibrate_thresholds.py \
+    --set <baseline root> <actual root> <annotations.json> --set <baseline root> <control root> none \
+    --pages <page names> --out diff_results/calibration
+```
+
+Runs the unchanged comparison for a grid of thresholds and minimum box sizes and reports per method the found annotated defects (same rule as `ff3/ff3_eval.py`), box precision and boxes on pages without a defect. With τ = 38 and 14 px, it reproduces the FF3 results. Values calibrated on a set must be evaluated on other pairs.
+
+### Sub-image refinement for Direct Grounding (Ferret-UI style)
+
+`DG_SUBIMAGE_REFINE=1` (fine-tuned local model only): after the first prediction, the upper or lower half of the screenshot that contains it (10 % overlap) is passed again at almost twice the effective resolution, and the refined point is mapped back. If it lies more than 15 % of the screen height away (`DG_SUBIMAGE_MAX_SHIFT`), the first prediction is kept. Each step needs a second inference. The decision in the log records both points (`subimage_refinement`).
+
+---
+
 ## Known limitations
 
 - **DG with cloud models at reduced resolution**: the coordinates of the cloud models are not converted back to the original screenshot. With `MAX_IMAGE_EDGE=1600`, Luna and Sol answered partly in the grid of the original and partly in the grid of the reduced image. Use the original resolution (`MAX_IMAGE_EDGE=0`). SoM is not affected.
 - **Training prompt**: the prompt of the training data differs from the prompt at runtime. No validation split was used.
 - **Thresholds**: not calibrated (see above).
-- **Login page**: the keyboard is visible in some runs and not in others, which produces differences in the version comparison.
-- **One device**: evaluated only on one simulator (iPhone 18 Pro, iOS 27.0) with two apps (KatApp, Bluesky).
+- **Login page**: the keyboard is visible in some runs and not in others, which produces differences in the version comparison (optional: `stability.hide_keyboard`, not evaluated).
+- **One device**: evaluated only on one simulator (iPhone 18 Pro, iOS 27.0) with two apps (KatApp, Bluesky). `tools/run_matrix.py` runs other variants but was not evaluated.
 - **`auto_screen.py compare`**: forwards `--baseline` and `--actual`, which `compare_images.py` rejects as ambiguous. Call `compare_images.py` directly (step 4).
 - **`auto_screen.py dataset`**: the arguments are not passed on, because `tools/prepare_dataset.py` uses fixed paths.
 - **`requirements.txt`**: does not contain `gradio`.

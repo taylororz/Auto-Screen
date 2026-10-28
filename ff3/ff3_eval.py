@@ -9,12 +9,12 @@ Boxen ausgewertet, die auch im HTML-Bericht erscheinen.
 
 Beispiele
   # Fehlerbuild B gegen Referenzlauf A1
-  python3 ff3_eval.py --tool-dir ~/Masterarbeit/Auto-Screen \
+  python3 ff3_eval.py --tool-dir ~/Auto-Screen \
       --baseline runs/A1/screenshots --actual runs/B1/screenshots \
       --gt seeded_defects.json --out results/B1_vs_A1
 
   # Kontrolle: zweiter Lauf von A gegen A1 (keine Fehler eingebracht)
-  python3 ff3_eval.py --tool-dir ~/Masterarbeit/Auto-Screen \
+  python3 ff3_eval.py --tool-dir ~/Auto-Screen \
       --baseline runs/A1/screenshots --actual runs/A2/screenshots \
       --out results/A2_vs_A1
 """

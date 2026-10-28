@@ -74,3 +74,6 @@ tools/swift_ocr
 
 # Exports for review chats (FF3)
 ff3/*.zip
+
+# Approved baselines (tools/approve_baseline.py), machine-specific
+baselines/

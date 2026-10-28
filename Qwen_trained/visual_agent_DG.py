@@ -333,6 +333,47 @@ def heuristic_fallback(instruction, elements=None, image_size=(1206, 2622)):
     return int(physical_w * 0.5), int(physical_h * 0.5)
 
 
+def _refine_in_subimage(img, image_path, instruction, coarse_x, coarse_y, model_path=None):
+    """
+    Optional second pass in the style of Ferret-UI (env DG_SUBIMAGE_REFINE=1, not evaluated).
+    The portrait screenshot is split into an upper and a lower sub-image with some overlap. The half
+    that contains the first prediction is passed again. After the 1280 px limit it keeps almost twice
+    the resolution of the full screenshot, so small elements cover more image tokens. The refined point
+    is mapped back to the full screenshot. If it lies far from the first prediction, the first is kept.
+    """
+    img_h, img_w = img.shape[:2]
+    overlap = float(os.environ.get("DG_SUBIMAGE_OVERLAP", "0.1"))
+    max_shift = float(os.environ.get("DG_SUBIMAGE_MAX_SHIFT", "0.15"))
+    half = img_h / 2.0
+    if coarse_y < half:
+        top, bottom = 0, int(min(img_h, half + overlap * img_h))
+    else:
+        top, bottom = int(max(0, half - overlap * img_h)), img_h
+
+    crop_path = Path(image_path).with_name(f"{Path(image_path).stem}_sub_{top}_{bottom}.png")
+    cv2.imwrite(str(crop_path), img[top:bottom, :])
+    raw_output = local_visual_agent_inference(crop_path, instruction, model_path=model_path)
+    print(f"🔎 [Direct Grounding] Sub-image {top}-{bottom}px output: {raw_output}")
+
+    result = {"subimage": [0, top, img_w, bottom - top], "coarse_point": [coarse_x, coarse_y], "raw_output": raw_output, "accepted": False}
+    # The prompt asks for the grid [0, 1000]. Parsing against a 10000 px canvas keeps that value for any crop size,
+    # because the parser only rescales values <= 1000 for large images.
+    norm_x, norm_y, _, _ = _parse_direct_grounding_coordinates(raw_output, image_width=10000, image_height=10000)
+    if norm_x is None or norm_y is None:
+        result["reason"] = "no coordinates in the sub-image answer, kept the first prediction"
+        return result
+
+    refined_x = int(round(norm_x / 10000.0 * img_w))
+    refined_y = int(round(top + norm_y / 10000.0 * (bottom - top)))
+    result["refined_point"] = [refined_x, refined_y]
+    shift = ((refined_x - coarse_x) ** 2 + (refined_y - coarse_y) ** 2) ** 0.5
+    if shift > max_shift * img_h:
+        result["reason"] = f"refined point {shift:.0f}px away from the first prediction, kept the first prediction"
+        return result
+    result.update({"accepted": True, "point": [refined_x, refined_y]})
+    return result
+
+
 def predict_target_coordinates(image_path, instruction, model_path=None):
     """
     Main function for Direct Grounding:
@@ -361,6 +402,12 @@ def predict_target_coordinates(image_path, instruction, model_path=None):
             used_fallback = True
             confidence = 0.5
 
+        refinement = None
+        if not used_fallback and img is not None and os.environ.get("DG_SUBIMAGE_REFINE") == "1":
+            refinement = _refine_in_subimage(img, image_path, instruction, target_x, target_y, model_path=model_path)
+            if refinement["accepted"]:
+                target_x, target_y = refinement["point"]
+
         decision = {
             "status": "analyzed_fallback" if used_fallback else "analyzed_direct_grounding",
             "model": "qwen_vl_direct_grounding",
@@ -372,6 +419,8 @@ def predict_target_coordinates(image_path, instruction, model_path=None):
             "raw_output": raw_output,
             "time_ms": (time.time() - start_time) * 1000,
         }
+        if refinement is not None:
+            decision["subimage_refinement"] = refinement
         return (target_x, target_y), decision
     except Exception as exc:
         print(f"⚠️ [Direct Grounding] Inference exception: {exc}. Heuristic fallback activated.")

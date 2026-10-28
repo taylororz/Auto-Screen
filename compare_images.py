@@ -64,7 +64,39 @@ def _draw_diff_highlight(image, boxes, color=(0, 0, 255)):
     return result
 
 
-def compare_pixel_matching(baseline_path, actual_path, diff_output_path, min_box_size=14, color_threshold=38, ignore_top=140, ignore_bottom=70):
+def _apply_ignore_regions(mask, ignore_regions):
+    """Zeroes the configured ignore regions ([x, y, w, h] in screenshot pixels) in the comparison mask."""
+    for (rx, ry, rw, rh) in ignore_regions or []:
+        mask[max(0, ry):max(0, ry + rh), max(0, rx):max(0, rx + rw)] = 0
+    return mask
+
+
+def _draw_ignored_regions(image, ignore_regions):
+    """Outlines ignored regions in gray so the report shows which areas were not compared."""
+    for (rx, ry, rw, rh) in ignore_regions or []:
+        cv2.rectangle(image, (rx, ry), (rx + rw, ry + rh), (150, 150, 150), 2)
+        cv2.putText(image, "ignored", (rx + 6, ry + 28), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (150, 150, 150), 2)
+    return image
+
+
+def _ignore_rects_for_page(ignore_regions, folder_name, page_name):
+    """Returns the rectangles of the configured ignore regions that apply to a folder and page.
+    A region without "pages" or "folders" applies to all pages or folders."""
+    rects = []
+    for region in ignore_regions or []:
+        pages = region.get("pages")
+        folders = region.get("folders")
+        if pages and page_name not in pages:
+            continue
+        if folders and folder_name not in folders:
+            continue
+        rect = region.get("rect")
+        if rect and len(rect) == 4:
+            rects.append(tuple(int(v) for v in rect))
+    return rects
+
+
+def compare_pixel_matching(baseline_path, actual_path, diff_output_path, min_box_size=14, color_threshold=38, ignore_top=140, ignore_bottom=70, ignore_regions=None, boxes_out=None):
     """
     Color-tolerant pixel matching: calculates channel-wise color difference to eliminate anti-aliasing noise,
     ignores system status bar, connects line-level differences, and merges bounding boxes.
@@ -95,6 +127,7 @@ def compare_pixel_matching(baseline_path, actual_path, diff_output_path, min_box
         mask[:ignore_top, :] = 0
     if ignore_bottom > 0 and h > ignore_bottom:
         mask[h - ignore_bottom:, :] = 0
+    _apply_ignore_regions(mask, ignore_regions)
 
     _, diff_thresh = cv2.threshold(max_diff, color_threshold, 255, cv2.THRESH_BINARY)
     diff_thresh = cv2.bitwise_and(diff_thresh, diff_thresh, mask=mask)
@@ -117,7 +150,11 @@ def compare_pixel_matching(baseline_path, actual_path, diff_output_path, min_box
                 raw_boxes.append((x, y, bw, bh))
 
     boxes = _merge_close_boxes(raw_boxes, padding_x=18, padding_y=10)
+    if boxes_out is not None:
+        boxes_out.extend(boxes)
     result_img = _draw_diff_highlight(actual_img, boxes, color=(0, 200, 0))
+    if ignore_regions:
+        result_img = _draw_ignored_regions(result_img, ignore_regions)
 
     pixel_output_path = Path(diff_output_path).parent / f"{Path(diff_output_path).stem}_pixel_matching.png"
     pixel_output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -129,7 +166,7 @@ def compare_pixel_matching(baseline_path, actual_path, diff_output_path, min_box
     return diff_count, elapsed_time, str(pixel_output_path)
 
 
-def compare_cv_grayscale(baseline_path, actual_path, diff_output_path, threshold=38, min_box_size=14, ignore_top=140, ignore_bottom=70):
+def compare_cv_grayscale(baseline_path, actual_path, diff_output_path, threshold=38, min_box_size=14, ignore_top=140, ignore_bottom=70, ignore_regions=None, boxes_out=None):
     """
     OpenCV grayscale difference method: converts to grayscale, masks system status bar,
     applies horizontal word-grouping, and clusters bounding boxes.
@@ -162,6 +199,7 @@ def compare_cv_grayscale(baseline_path, actual_path, diff_output_path, threshold
         mask[:ignore_top, :] = 0
     if ignore_bottom > 0 and h > ignore_bottom:
         mask[h - ignore_bottom:, :] = 0
+    _apply_ignore_regions(mask, ignore_regions)
     thresh = cv2.bitwise_and(thresh, thresh, mask=mask)
 
     # Horizontal morphological closing to unify text lines
@@ -182,7 +220,11 @@ def compare_cv_grayscale(baseline_path, actual_path, diff_output_path, threshold
                 raw_boxes.append((x, y, bw, bh))
 
     boxes = _merge_close_boxes(raw_boxes, padding_x=18, padding_y=10)
+    if boxes_out is not None:
+        boxes_out.extend(boxes)
     result_img = _draw_diff_highlight(actual_img, boxes, color=(0, 0, 240))
+    if ignore_regions:
+        result_img = _draw_ignored_regions(result_img, ignore_regions)
 
     output_path = Path(diff_output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -194,21 +236,24 @@ def compare_cv_grayscale(baseline_path, actual_path, diff_output_path, threshold
     return diff_count, elapsed_time, str(output_path)
 
 
-def compare_ui_screenshots(baseline_path, actual_path, diff_output_path, threshold=38, min_box_size=14, ignore_top=140, ignore_bottom=70):
+def compare_ui_screenshots(baseline_path, actual_path, diff_output_path, threshold=38, min_box_size=14, ignore_top=140, ignore_bottom=70, ignore_regions=None):
     print(f"🔍 Vergleiche: {baseline_path} vs {actual_path}")
 
+    cv_boxes, pixel_boxes = [], []
     cv_diff_count, cv_time, cv_output = compare_cv_grayscale(
-        baseline_path, actual_path, diff_output_path, threshold=threshold, min_box_size=min_box_size, ignore_top=ignore_top, ignore_bottom=ignore_bottom
+        baseline_path, actual_path, diff_output_path, threshold=threshold, min_box_size=min_box_size, ignore_top=ignore_top, ignore_bottom=ignore_bottom,
+        ignore_regions=ignore_regions, boxes_out=cv_boxes
     )
     pixel_diff_count, pixel_time, pixel_output = compare_pixel_matching(
-        baseline_path, actual_path, diff_output_path, color_threshold=threshold, min_box_size=min_box_size, ignore_top=ignore_top, ignore_bottom=ignore_bottom
+        baseline_path, actual_path, diff_output_path, color_threshold=threshold, min_box_size=min_box_size, ignore_top=ignore_top, ignore_bottom=ignore_bottom,
+        ignore_regions=ignore_regions, boxes_out=pixel_boxes
     )
 
     print(f"   📊 Vergleich: CV={cv_diff_count} Diffs, Pixel={pixel_diff_count} Diffs | CV:{cv_time:.2f}ms vs Pixel:{pixel_time:.2f}ms")
 
     return {
-        "cv": {"count": cv_diff_count, "time_ms": cv_time, "output_path": cv_output},
-        "pixel": {"count": pixel_diff_count, "time_ms": pixel_time, "output_path": pixel_output},
+        "cv": {"count": cv_diff_count, "time_ms": cv_time, "output_path": cv_output, "boxes": cv_boxes},
+        "pixel": {"count": pixel_diff_count, "time_ms": pixel_time, "output_path": pixel_output, "boxes": pixel_boxes},
     }
 
 
@@ -1149,7 +1194,8 @@ def build_default_output_path(baseline_path, actual_path):
     return Path("./diff_results") / f"diff_{baseline_parent}_{baseline_stem}_vs_{actual_parent}_{actual_stem}.png"
 
 
-def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None):
+def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None,
+                        mask_top=140, mask_bottom=70, ignore_regions=None, ai_backend=None, ai_max_boxes=8):
     baseline_folder = Path(baseline_folder)
     actual_folder = Path(actual_folder)
     output_root = Path(output_root)
@@ -1184,12 +1230,16 @@ def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, thre
             continue
 
         output_path = output_root / actual_folder.name / f"diff_{page_name}.png"
+        page_ignore_rects = _ignore_rects_for_page(ignore_regions, actual_folder.name, page_name)
         comparison_result = compare_ui_screenshots(
             baseline_path,
             actual_path,
             output_path,
             threshold=threshold,
             min_box_size=min_box_size,
+            ignore_top=mask_top,
+            ignore_bottom=mask_bottom,
+            ignore_regions=page_ignore_rects,
         )
 
         cv_count = comparison_result["cv"]["count"]
@@ -1200,7 +1250,19 @@ def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, thre
             continue
 
         ai_analysis = None
-        if use_ai:
+        if use_ai and ai_backend == "local":
+            # Local VLM rates each difference box of the grayscale comparison, screenshots stay on this machine
+            from common_agent.diff_triage import triage_page_local
+            ai_analysis = triage_page_local(
+                baseline_path=baseline_path,
+                actual_path=actual_path,
+                boxes=comparison_result["cv"]["boxes"],
+                page_name=page_name,
+                model_path=ai_model,
+                max_boxes=ai_max_boxes,
+                output_path=output_root / actual_folder.name / f"triage_{page_name}.png",
+            )
+        elif use_ai:
             ai_analysis = analyze_diff_with_ai(
                 baseline_path=baseline_path,
                 actual_path=actual_path,
@@ -1210,7 +1272,7 @@ def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, thre
                 model=ai_model,
             )
 
-        folder_results.append({
+        page_result = {
             "page": page_name,
             "baseline_path": str(baseline_path),
             "actual_path": str(actual_path),
@@ -1222,12 +1284,18 @@ def compare_folder_pair(baseline_folder, actual_folder, output_root, pages, thre
             "pixel_time_ms": comparison_result["pixel"]["time_ms"],
             "ai_analysis": ai_analysis,
             "status": "compared",
-        })
+        }
+        # Optional fields, only written when the corresponding option is used
+        if page_ignore_rects:
+            page_result["ignored_regions"] = [list(rect) for rect in page_ignore_rects]
+        if ai_backend == "local":
+            page_result["cv_boxes"] = [list(box) for box in comparison_result["cv"]["boxes"]]
+        folder_results.append(page_result)
 
     return folder_results
 
 
-def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None):
+def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None, compare_options=None):
     batch_start_time = time.time()
     all_results = []
     for actual_folder in actual_folders:
@@ -1242,6 +1310,7 @@ def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, th
             ai_model=ai_model,
             only_diffs=only_diffs,
             app=app,
+            **(compare_options or {}),
         )
         all_results.append({
             "actual_folder": str(actual_folder),
@@ -1260,10 +1329,11 @@ def run_batch_comparison(baseline_folder, actual_folders, pages, output_root, th
         ai_model=ai_model,
         total_runtime_ms=(time.time() - batch_start_time) * 1000,
         app=app,
+        compare_options=compare_options,
     )
 
 
-def run_version_comparison(folder_pairs, pages, output_root, baseline_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None, baseline_label=None, actual_label=None):
+def run_version_comparison(folder_pairs, pages, output_root, baseline_root, threshold=38, min_box_size=14, use_ai=False, ai_model=None, only_diffs=False, app=None, baseline_label=None, actual_label=None, compare_options=None):
     """Compares each language folder of the previous release with the same folder of the current release."""
     batch_start_time = time.time()
     all_results = []
@@ -1279,6 +1349,7 @@ def run_version_comparison(folder_pairs, pages, output_root, baseline_root, thre
             ai_model=ai_model,
             only_diffs=only_diffs,
             app=app,
+            **(compare_options or {}),
         )
         all_results.append({
             "actual_folder": str(actual_folder),
@@ -1300,6 +1371,7 @@ def run_version_comparison(folder_pairs, pages, output_root, baseline_root, thre
         comparison_mode="version",
         baseline_label=baseline_label,
         actual_label=actual_label,
+        compare_options=compare_options,
     )
 
 
@@ -1373,7 +1445,7 @@ def _build_page_rankings(batch_results):
     return rankings
 
 
-def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None, comparison_mode=None, baseline_label=None, actual_label=None):
+def write_batch_report(baseline_folder, actual_folders, pages, output_root, batch_results, threshold, min_box_size, use_ai=False, ai_model=None, total_runtime_ms=None, app=None, comparison_mode=None, baseline_label=None, actual_label=None, compare_options=None):
     output_root = Path(output_root)
     output_root.mkdir(parents=True, exist_ok=True)
 
@@ -1398,6 +1470,9 @@ def write_batch_report(baseline_folder, actual_folders, pages, output_root, batc
         "page_rankings": page_rankings,
         "total_runtime_ms": total_runtime_ms,
     }
+    # Non-default comparison options (masks, ignore regions, local triage), only written when used
+    if compare_options:
+        summary["compare_options"] = compare_options
 
     json_path = output_root / "summary_report.json"
     with json_path.open("w", encoding="utf-8") as json_file:
@@ -1499,7 +1574,11 @@ def build_html_report(summary):
             action_html = "<ul class='compact-list ai-actions'>" + "".join(
                 f"<li>{html.escape(str(action))}</li>" for action in actions[:3]
             ) + "</ul>"
-        return f"<div class='ai-box'><span class='ai-pill ai-{severity}'>{severity}</span><p>{summary_text}</p>{action_html}</div>"
+        # Local triage: link to the screenshot with the rated boxes (red defect, orange unclear, gray acceptable)
+        triage_html = ""
+        if ai_analysis.get("triage_image"):
+            triage_html = f"<p><a href='{html.escape(rel_path(ai_analysis['triage_image']))}' target='_blank'>rated boxes (local VLM)</a></p>"
+        return f"<div class='ai-box'><span class='ai-pill ai-{severity}'>{severity}</span><p>{summary_text}</p>{action_html}{triage_html}</div>"
 
     def page_row(item):
         page = html.escape(item["page"])
@@ -1868,6 +1947,10 @@ def main():
     parser.add_argument("--min-box-size", type=int, default=14, help="Minimum width/height for a difference box")
     parser.add_argument("--only-diffs", action="store_true", help="Only compare and report pages with visual differences, ignore identical pages")
     parser.add_argument("--ai", action="store_true", help="Use AI vision to triage CV differences and add verdicts to the report")
+    parser.add_argument("--ai-local", action="store_true", help="Rate every difference box with a local VLM (default Qwen/Qwen3-VL-4B-Instruct, override with --ai-model or TRIAGE_MODEL_PATH). Screenshots stay on this machine")
+    parser.add_argument("--ai-max-boxes", type=int, default=8, help="Maximum number of difference boxes per page rated by --ai-local (largest first)")
+    parser.add_argument("--mask-top", type=int, default=None, help="Masked rows at the top (status bar). Defaults to compare.mask_top of the app config, otherwise 140")
+    parser.add_argument("--mask-bottom", type=int, default=None, help="Masked rows at the bottom (home indicator). Defaults to compare.mask_bottom of the app config, otherwise 70")
     parser.add_argument("--ai-model", default=None, help="Vision-capable OpenAI model. Defaults to OPENAI_VISION_MODEL or gpt-4.1-mini")
     args = parser.parse_args()
 
@@ -1882,6 +1965,24 @@ def main():
 
     cfg_flows = app_config.get("test_flows", []) if app_config else []
     cfg_folders = [f["folder"] for f in cfg_flows if "folder" in f]
+
+    # Optional comparison options (not part of the evaluated configuration): masks for other devices,
+    # ignore regions for dynamic content (config key "compare") and the local VLM triage
+    cmp_cfg = (app_config or {}).get("compare", {})
+    compare_options = {}
+    for key, cli_value in (("mask_top", args.mask_top), ("mask_bottom", args.mask_bottom)):
+        value = cli_value if cli_value is not None else cmp_cfg.get(key)
+        if value is not None:
+            compare_options[key] = int(value)
+    if cmp_cfg.get("ignore_regions"):
+        compare_options["ignore_regions"] = cmp_cfg["ignore_regions"]
+    use_ai = args.ai or args.ai_local
+    ai_model = args.ai_model
+    if args.ai_local:
+        from common_agent.diff_triage import default_triage_model
+        ai_model = ai_model or default_triage_model()
+        compare_options["ai_backend"] = "local"
+        compare_options["ai_max_boxes"] = args.ai_max_boxes
 
     # Isolate diff output directory per app (KatApp preserves legacy root ./diff_results)
     output_root = Path(args.output_root)
@@ -2064,12 +2165,13 @@ def main():
                 baseline_root=previous_root,
                 threshold=args.threshold,
                 min_box_size=args.min_box_size,
-                use_ai=args.ai,
-                ai_model=args.ai_model,
+                use_ai=use_ai,
+                ai_model=ai_model,
                 only_diffs=args.only_diffs,
                 app=app_name,
                 baseline_label=args.baseline_label,
                 actual_label=args.actual_label,
+                compare_options=compare_options,
             )
             return
 
@@ -2080,10 +2182,11 @@ def main():
             output_root=output_root,
             threshold=args.threshold,
             min_box_size=args.min_box_size,
-            use_ai=args.ai,
-            ai_model=args.ai_model,
+            use_ai=use_ai,
+            ai_model=ai_model,
             only_diffs=args.only_diffs,
             app=app_name,
+            compare_options=compare_options,
         )
         return
 
@@ -2091,8 +2194,25 @@ def main():
         parser.error("Provide both baseline and actual paths, or use --batch")
 
     output_path = args.output or build_default_output_path(args.baseline, args.actual)
-    comparison_result = compare_ui_screenshots(args.baseline, args.actual, output_path, threshold=args.threshold, min_box_size=args.min_box_size)
-    if args.ai:
+    pair_ignore_rects = _ignore_rects_for_page(compare_options.get("ignore_regions"), Path(args.actual).parent.name, Path(args.actual).stem)
+    comparison_result = compare_ui_screenshots(
+        args.baseline, args.actual, output_path, threshold=args.threshold, min_box_size=args.min_box_size,
+        ignore_top=compare_options.get("mask_top", 140), ignore_bottom=compare_options.get("mask_bottom", 70),
+        ignore_regions=pair_ignore_rects,
+    )
+    if args.ai_local:
+        from common_agent.diff_triage import triage_page_local
+        ai_analysis = triage_page_local(
+            baseline_path=args.baseline,
+            actual_path=args.actual,
+            boxes=comparison_result["cv"]["boxes"],
+            page_name=Path(args.actual).stem,
+            model_path=ai_model,
+            max_boxes=args.ai_max_boxes,
+            output_path=Path(output_path).with_name(f"triage_{Path(output_path).stem}.png"),
+        )
+        print(json.dumps({"ai_analysis": ai_analysis}, ensure_ascii=False, indent=2))
+    elif args.ai:
         ai_analysis = analyze_diff_with_ai(
             baseline_path=args.baseline,
             actual_path=args.actual,

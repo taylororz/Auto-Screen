@@ -154,12 +154,15 @@ jobs:
 
       # Version comparison: the baseline is the newest screenshots artifact of a different app build on this branch.
       # Artifacts are named screenshots-<identity>, so a rerun of the same build is compared with the previous build.
+      # Optional (not evaluated): with the repository variable BASELINE_MODE=approved, the baseline is the newest
+      # artifact approved-baseline-<branch> uploaded by the workflow "Approve visual baseline".
       - name: 8a. Find the baseline screenshots of the previous app build
         id: previous
         env:
           GH_TOKEN: ${{ github.token }}
           CURRENT_ID: ${{ steps.app.outputs.identity }}
           BRANCH: ${{ github.ref_name }}
+          BASELINE_MODE: ${{ vars.BASELINE_MODE || 'previous' }}
         run: |
           curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?per_page=100" \
@@ -171,20 +174,27 @@ jobs:
           except Exception:
               artifacts = []
           current, branch = os.environ["CURRENT_ID"], os.environ["BRANCH"]
-          candidates = [
-              a for a in artifacts
-              if a["name"].startswith("screenshots-") and not a.get("expired")
-              and (a.get("workflow_run") or {}).get("head_branch") == branch
-              and a["name"] != f"screenshots-{current}"
-          ]
+          approved = os.environ.get("BASELINE_MODE") == "approved"
+          if approved:
+              candidates = [a for a in artifacts if a["name"] == f"approved-baseline-{branch}" and not a.get("expired")]
+          else:
+              candidates = [
+                  a for a in artifacts
+                  if a["name"].startswith("screenshots-") and not a.get("expired")
+                  and (a.get("workflow_run") or {}).get("head_branch") == branch
+                  and a["name"] != f"screenshots-{current}"
+              ]
           candidates.sort(key=lambda a: a["created_at"], reverse=True)
           best = candidates[0] if candidates else None
+          identity = ("approved" if approved else best["name"][len("screenshots-"):]) if best else ""
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
               out.write(f"run_id={best['workflow_run']['id'] if best else ''}\n")
               out.write(f"name={best['name'] if best else ''}\n")
-              out.write(f"identity={best['name'][len('screenshots-'):] if best else ''}\n")
+              out.write(f"identity={identity}\n")
           if best:
               print(f"📥 Baseline: {best['name']} from run {best['workflow_run']['id']} (current build: {current})")
+          elif approved:
+              print(f"ℹ️ BASELINE_MODE=approved, but no artifact approved-baseline-{branch} found, the version comparison is skipped")
           else:
               print(f"ℹ️ No screenshots of a different app build found (current build: {current}), the version comparison is skipped")
           EOF
@@ -203,8 +213,15 @@ jobs:
         env:
           CURRENT_APP_ID: ${{ steps.app.outputs.identity }}
           PREVIOUS_APP_ID: ${{ steps.previous.outputs.identity }}
+          # Optional (not evaluated), repository variables: local VLM triage and blocking on its "fail" verdicts
+          LOCAL_TRIAGE: ${{ vars.LOCAL_TRIAGE || '0' }}
+          GATE_ON_AI_FAIL: ${{ vars.GATE_ON_AI_FAIL || '0' }}
         run: |
           chmod +x run_pipeline_local.sh
+          # An approved baseline carries the label of the approved build
+          if [ -f previous_screenshots/baseline.json ]; then
+            export PREVIOUS_APP_ID="approved-$(python3 -c "import json; print(json.load(open('previous_screenshots/baseline.json')).get('label', ''))")"
+          fi
           if [ -d previous_screenshots ] && [ -n "$(ls -A previous_screenshots)" ]; then
             # Compare only if baseline and current run used the same test environment
             if python3 - <<'EOF'

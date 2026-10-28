@@ -1,0 +1,187 @@
+{
+  "beschreibung": "Gezielt eingebrachte Darstellungsfehler in Build B (KatApp, af44aec). bbox = [x, y, Breite, Hoehe] in Pixeln des Screenshots aus Lauf B1 (baseline_DE_DE), manuell mit bbox_picker.py. Leere bbox = Defekt im Screenshot nicht manuell identifiziert (GT leer, zählt als nicht gefunden).",
+  "defects": [
+    {
+      "id": "D01",
+      "class": "Gekürzter Text",
+      "folder": "baseline_DE_DE",
+      "page": "06_vehicle_tab",
+      "bbox": [
+        276,
+        198,
+        643,
+        145
+      ],
+      "aenderung": "Überschrift Übersicht gekürzt (ARB triages_overview_screen_title)"
+    },
+    {
+      "id": "D02",
+      "class": "Gekürzter Text",
+      "folder": "baseline_DE_DE",
+      "page": "07_settings_tab",
+      "bbox": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "aenderung": "Zeile 'Letzte Aktualisierung' gekürzt; nur nach erfolgreichem Senden sichtbar; nicht manuell identifiziert"
+    },
+    {
+      "id": "D03",
+      "class": "Gekürzter Text",
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "bbox": [
+        326,
+        1861,
+        579,
+        125
+      ],
+      "aenderung": "Button 'Datenschutz und Einw...' gekürzt"
+    },
+    {
+      "id": "D04",
+      "class": "Gekürzter Text",
+      "folder": "baseline_DE_DE",
+      "page": "login_field",
+      "bbox": [
+        320,
+        198,
+        527,
+        125
+      ],
+      "aenderung": "Titel Login-Seite gekürzt"
+    },
+    {
+      "id": "D05",
+      "class": "Beschnittener Text",
+      "folder": "baseline_DE_DE",
+      "page": "06_vehicle_tab",
+      "bbox": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "aenderung": "Hinweis 'Kein Upload in der Warteschlange' zweite Zeile abgeschnitten; Zustand nicht im Lauf; nicht manuell identifiziert"
+    },
+    {
+      "id": "D06",
+      "class": "Beschnittener Text",
+      "folder": "baseline_DE_DE",
+      "page": "07_settings_tab",
+      "bbox": [
+        61,
+        439,
+        1092,
+        168
+      ],
+      "aenderung": "Beschreibung Fahrzeug-Tracking, dritte Zeile abgeschnitten (ursprünglich als D09 geführt)"
+    },
+    {
+      "id": "D08",
+      "class": "Beschnittener Text",
+      "folder": "baseline_DE_DE",
+      "page": "13_language_choice",
+      "bbox": [
+        171,
+        958,
+        739,
+        166
+      ],
+      "aenderung": "Titel Sprachdialog, zweite Zeile abgeschnitten"
+    },
+    {
+      "id": "D09",
+      "class": "Überlappung",
+      "folder": "baseline_DE_DE",
+      "page": "07_settings_tab",
+      "bbox": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "aenderung": "Text 'Fahrzeug-Tracking aktiv' nur bei laufendem Tracking sichtbar; nicht manuell identifiziert"
+    },
+    {
+      "id": "D10",
+      "class": "Überlappung",
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "bbox": [
+        78,
+        1293,
+        792,
+        125
+      ],
+      "aenderung": "Überschrift 'Zugangsdaten und' (Textumbruch über feste Höhe)"
+    },
+    {
+      "id": "D11",
+      "class": "Überlappung",
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "bbox": [
+        96,
+        858,
+        1014,
+        99
+      ],
+      "aenderung": "Titel 'Wähle den Triage-Ort der aktuellen Einsatzstelle' (home_select_current_triage_location), Höhe 32 mit Textabschnitt. bbox aus Elementposition, Defekt visuell kaum wahrnehmbar. Build B5: Text sichtbar abgeschnitten."
+    },
+    {
+      "id": "D13",
+      "class": "Verdrängtes Element",
+      "folder": "baseline_DE_DE",
+      "page": "06_vehicle_tab",
+      "bbox": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "aenderung": "Katastrophen-Titel im horizontalen Scrollbereich; nur im Katastrophenmodus sichtbar; nicht manuell identifiziert"
+    },
+    {
+      "id": "D14",
+      "class": "Verdrängtes Element",
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "bbox": [
+        96,
+        1014,
+        405,
+        60
+      ],
+      "aenderung": "Label 'Aktuell ausgewählter Triage-Ort der Einsatzstelle:' (home_current_triage_location), horizontale Scrollbox 200. bbox aus Elementposition, Defekt visuell kaum wahrnehmbar. Build B5: Text sichtbar abgeschnitten."
+    },
+    {
+      "id": "D15",
+      "class": "Verdrängtes Element",
+      "folder": "baseline_DE_DE",
+      "page": "language_button",
+      "bbox": [
+        227,
+        751,
+        748,
+        148
+      ],
+      "aenderung": "Zeile Erscheinungsbild, Schalter verdrängt"
+    },
+    {
+      "id": "D16",
+      "class": "Verdrängtes Element",
+      "folder": "baseline_DE_DE",
+      "page": "01_home_tab",
+      "bbox": [
+        34,
+        218,
+        1153,
+        201
+      ],
+      "aenderung": "Startseiten-Slogan überlappt Logo bzw. wird abgeschnitten"
+    }
+  ]
+}

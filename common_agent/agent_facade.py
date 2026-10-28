@@ -77,6 +77,9 @@ class AgentFacade:
         decision,
         tap_x=None,
         tap_y=None,
+        run_id=None,
+        loop_index=None,
+        step_index=None,
     ):
         log_dir = self.model_dir / "diff_results"
         write_interaction_log(
@@ -94,6 +97,9 @@ class AgentFacade:
             decision=decision,
             tap_x=tap_x,
             tap_y=tap_y,
+            run_id=run_id,
+            loop_index=loop_index,
+            step_index=step_index,
         )
 
     def ask_ai_for_element_id(self, annotated_img_path, instruction, elements=None, language=None, model=None, timeout=60):
@@ -202,8 +208,12 @@ class AgentFacade:
                 return decision
 
             print(f"🤖 [{self.provider.upper()} Direct Grounding] Raw: {raw_output}")
+            # Qwen prompts (QwenUntrainClient.query_dg) request normalized [0, 1000] coordinates,
+            # identical to the LoRA agent (Qwen_trained/visual_agent_DG.py, step 4 "normalization scaling").
+            # Claude/OpenAI prompts request absolute pixel coordinates and must not be rescaled.
+            is_qwen = self.provider in ("qwen", "qwen_untrain", "untrained", "qwen_base")
             target_x, target_y, confidence, rationale = parse_dg_coordinates(
-                raw_output, image_width=img_w, image_height=img_h, is_normalized_1000=(self.provider == "qwen")
+                raw_output, image_width=img_w, image_height=img_h, is_normalized_1000=is_qwen
             )
 
             used_fallback = False

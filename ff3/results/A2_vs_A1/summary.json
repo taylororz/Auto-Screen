@@ -1,0 +1,41 @@
+{
+  "baseline": "runs/A1/screenshots",
+  "actual": "runs/A2/screenshots",
+  "gt": null,
+  "pages_compared": 24,
+  "pages_missing": [],
+  "methods": {
+    "pixel": {
+      "defects_total": 0,
+      "defects_detected": 0,
+      "defect_recall": null,
+      "boxes_total": 0,
+      "boxes_tp": 0,
+      "boxes_fp": 0,
+      "box_precision": null,
+      "pages_with_defect": 0,
+      "pages_with_defect_flagged": 0,
+      "pages_without_defect": 24,
+      "pages_without_defect_flagged": 0,
+      "fp_boxes_on_clean_pages": 0,
+      "recall_by_class": {},
+      "missed_defects": []
+    },
+    "cv": {
+      "defects_total": 0,
+      "defects_detected": 0,
+      "defect_recall": null,
+      "boxes_total": 0,
+      "boxes_tp": 0,
+      "boxes_fp": 0,
+      "box_precision": null,
+      "pages_with_defect": 0,
+      "pages_with_defect_flagged": 0,
+      "pages_without_defect": 24,
+      "pages_without_defect_flagged": 0,
+      "fp_boxes_on_clean_pages": 0,
+      "recall_by_class": {},
+      "missed_defects": []
+    }
+  }
+}

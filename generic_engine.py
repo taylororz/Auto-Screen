@@ -132,6 +132,9 @@ class GenericGUITestEngine:
         self.driver = None
         self.reset_between_loops = reset_between_loops
         self._cached_window_size = None
+        # Identifies this engine run in every log record, so rounds and runs can be told apart when evaluating
+        self.run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self._log_ctx = {}
 
         # Prepare log and screenshot output directories under model_dir
         self.diff_dir = self.model_dir / "diff_results"
@@ -390,6 +393,10 @@ class GenericGUITestEngine:
         except Exception as dismiss_err:
             print(f"⚠️ AI popup auto-dismiss notice: {dismiss_err}")
 
+    def _log_interaction(self, **kwargs):
+        """Writes an interaction log record tagged with the current run, loop (round) and step position."""
+        self.agent.log_interaction(**kwargs, **self._log_ctx)
+
     def execute_step(self, step_info, language_info, is_setup_step=False, step_index=None, loop_index=0):
         """Generic visual-agent step execution engine."""
         step_name = step_info["step_name"]
@@ -404,6 +411,7 @@ class GenericGUITestEngine:
                 text_to_type = os.environ[clean_key]
         lang_folder = language_info.get("folder", "default")
         lang_name = language_info.get("language_name", "English")
+        self._log_ctx = {"run_id": self.run_id, "loop_index": loop_index, "step_index": step_index}
 
         folder_dir = self.diff_dir / "states" / lang_folder
         folder_dir.mkdir(parents=True, exist_ok=True)
@@ -449,8 +457,9 @@ class GenericGUITestEngine:
         # 1. Capture current simulator screen (unmarked raw screenshot)
         self.driver.save_screenshot(str(screenshot_path))
 
-        # 2. Save unmarked baseline screenshot to model screenshots directory (on first loop)
-        if loop_index == 0:
+        # 2. Save unmarked baseline screenshot to model screenshots directory (on first loop),
+        # unless the step sets "skip_screenshot" (e.g. a repeated step that revisits an already captured page)
+        if loop_index == 0 and not step_info.get("skip_screenshot", False):
             page_dir = self.screenshot_root / lang_folder
             page_dir.mkdir(parents=True, exist_ok=True)
             clean_sname = step_name.replace(" ", "_")
@@ -596,7 +605,7 @@ class GenericGUITestEngine:
             decision["status"] = "step_failed_low_confidence" if is_low_confidence else "step_failed_target_not_found"
             decision["circuit_broken"] = True
 
-            self.agent.log_interaction(
+            self._log_interaction(
                 language=lang_name,
                 step_name=step_name,
                 instruction=instruction,
@@ -628,7 +637,7 @@ class GenericGUITestEngine:
                 print(f"❌ Heuristic fallback also failed to resolve target ID for step: '{step_name}' ({instruction})")
                 decision["status"] = "step_failed_unresolved_id"
                 decision["circuit_broken"] = True
-                self.agent.log_interaction(
+                self._log_interaction(
                     language=lang_name,
                     step_name=step_name,
                     instruction=instruction,
@@ -714,7 +723,7 @@ class GenericGUITestEngine:
                 print(f"🛑 [Circuit Breaker] Click on '{step_name}' produced no UI change consecutively (possible tap on dead zone or stuck state). Step marked as failed!")
                 decision["status"] = "step_failed_no_page_change"
                 decision["circuit_broken"] = True
-                self.agent.log_interaction(
+                self._log_interaction(
                     language=lang_name,
                     step_name=step_name,
                     instruction=instruction,
@@ -827,21 +836,23 @@ class GenericGUITestEngine:
                 pass
 
 
-        # 8. Log interaction
-        self.agent.log_interaction(
-            language=lang_name,
-            step_name=step_name,
-            instruction=instruction,
-            action=action,
-            target_id=target_id,
-            center_x=center_x,
-            center_y=center_y,
-            screenshot_path=screenshot_path,
-            annotated_image_path=annotated_img_path,
-            decision=decision,
-            tap_x=logical_x,
-            tap_y=logical_y
-        )
+        # 8. Log interaction (a step with "skip_log" still runs, e.g. a repeated navigation step,
+        # but is not recorded as an evaluation sample. Failures are always logged above.)
+        if not step_info.get("skip_log", False):
+            self._log_interaction(
+                language=lang_name,
+                step_name=step_name,
+                instruction=instruction,
+                action=action,
+                target_id=target_id,
+                center_x=center_x,
+                center_y=center_y,
+                screenshot_path=screenshot_path,
+                annotated_image_path=annotated_img_path,
+                decision=decision,
+                tap_x=logical_x,
+                tap_y=logical_y
+            )
         return True
 
     def run(self):

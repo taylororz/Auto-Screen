@@ -71,3 +71,6 @@ upload_*.py
 # Compiled binaries
 tools/swift_ocr
 
+
+# Exports for review chats (FF3)
+ff3/*.zip

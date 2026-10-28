@@ -1,0 +1,14 @@
+D15 language_button.png [227, 751, 748, 148]
+D10 language_button.png [78, 1293, 792, 125]
+D03 language_button.png [326, 1861, 579, 125]
+D04 09_login_field.png [320, 198, 527, 125]
+D08 13_language_choice.png [171, 958, 739, 166]
+D01 06_vehicle_tab.png [276, 198, 643, 145]
+D06 07_settings_tab.png [61, 439, 1092, 168] (korrigiert: vorher als D09 geführt)
+D16 01_home_tab.png [34, 218, 1153, 201]
+D14 01_home_tab.png: keine Auswahl (nicht manuell identifiziert, GT leer)
+D11 01_home_tab.png: keine Auswahl (nicht manuell identifiziert, GT leer)
+D09 keine Auswahl (Fahrzeug-Tracking-Text nur im aktiven Tracking sichtbar, Zustand fehlt)
+D02 keine Auswahl (Zustand "Letzte Aktualisierung" nur nach erfolgreichem Senden sichtbar, im Lauf nicht erreicht, GT leer)
+D05 keine Auswahl (Zustand "Keine Uploads" nicht im Lauf erreicht, GT leer)
+D13 keine Auswahl (Zustand Katastrophenmodus nicht im Lauf erreicht, GT leer)

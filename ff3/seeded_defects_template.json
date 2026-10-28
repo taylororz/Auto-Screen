@@ -1,0 +1,10 @@
+{
+  "beschreibung": "Gezielt eingebrachte Darstellungsfehler in Build B (KatApp). bbox = [x, y, Breite, Hoehe] in Pixeln des Screenshots aus Lauf B1, ermittelt mit bbox_picker.py.",
+  "defects": [
+    {"id": "D01", "class": "Gekürzter Text",     "folder": "baseline_DE_DE", "page": "settings_page", "bbox": [0, 0, 0, 0], "aenderung": "z. B. ARB-Key settingsLanguage verlängert, Text mit maxLines 1 und Ellipse"},
+    {"id": "D02", "class": "Gekürzter Text",     "folder": "baseline_DE_DE", "page": "PAGE", "bbox": [0, 0, 0, 0], "aenderung": ""},
+    {"id": "D06", "class": "Beschnittener Text", "folder": "baseline_DE_DE", "page": "PAGE", "bbox": [0, 0, 0, 0], "aenderung": ""},
+    {"id": "D11", "class": "Überlappung",        "folder": "baseline_DE_DE", "page": "PAGE", "bbox": [0, 0, 0, 0], "aenderung": ""},
+    {"id": "D16", "class": "Verdrängtes Element","folder": "baseline_DE_DE", "page": "PAGE", "bbox": [0, 0, 0, 0], "aenderung": ""}
+  ]
+}

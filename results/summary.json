@@ -1,0 +1,46 @@
+{
+  "base": {
+    "cases_evaluated": 2008,
+    "cases_skipped": {},
+    "images": 231,
+    "accuracy_model": 0.8177,
+    "accuracy_model_ci95": [
+      0.8002,
+      0.834
+    ],
+    "accuracy_system_incl_fallback": 0.8347,
+    "fallback_rate": 0.0314,
+    "accuracy_by_element_type": {
+      "button": "1169/1371 (85.3%)",
+      "icon": "142/262 (54.2%)",
+      "input": "71/73 (97.3%)",
+      "tab": "260/302 (86.1%)"
+    },
+    "median_time_ms": 1388
+  },
+  "lora": {
+    "cases_evaluated": 2008,
+    "cases_skipped": {},
+    "images": 231,
+    "accuracy_model": 0.8611,
+    "accuracy_model_ci95": [
+      0.8452,
+      0.8755
+    ],
+    "accuracy_system_incl_fallback": 0.8665,
+    "fallback_rate": 0.0144,
+    "accuracy_by_element_type": {
+      "button": "1210/1371 (88.3%)",
+      "icon": "167/262 (63.7%)",
+      "input": "71/73 (97.3%)",
+      "tab": "281/302 (93.0%)"
+    },
+    "median_time_ms": 2042
+  },
+  "paired_comparison": {
+    "common_cases": 2008,
+    "only_base_correct": 35,
+    "only_lora_correct": 122,
+    "mcnemar_exact_p": 1.7493089809614943e-12
+  }
+}

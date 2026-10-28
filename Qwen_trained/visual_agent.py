@@ -666,7 +666,7 @@ class VisualNavigationError(Exception):
     pass
 
 
-def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None):
+def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None, run_id=None, loop_index=None, step_index=None):
     """
     Appends execution log record to diff_results/interaction_log.jsonl.
     """
@@ -687,9 +687,12 @@ def log_interaction(language, step_name, instruction, action, target_id, center_
         "decision": decision,
         "tap_x": tap_x,
         "tap_y": tap_y,
+        "run_id": run_id,
+        "loop_index": loop_index,
+        "step_index": step_index,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
-    
+
     with log_file.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 

@@ -1,0 +1,49 @@
+folder,page,method,has_defect,n_defects,n_boxes,tp_boxes,fp_boxes,boxes
+baseline_DE_DE,06_vehicle_tab,pixel,1,3,1,1,0,"[[305, 245, 577, 62]]"
+baseline_DE_DE,06_vehicle_tab,cv,1,3,1,1,0,"[[305, 245, 577, 62]]"
+baseline_DE_DE,07_settings_tab,pixel,1,3,11,1,10,"[[66, 539, 1073, 50], [58, 676, 1090, 20], [100, 738, 64, 64], [205, 745, 183, 46], [58, 843, 1090, 20], [58, 901, 1090, 20], [97, 966, 70, 58], [205, 970, 230, 46], [58, 1068, 1090, 20], [429, 1259, 36, 50], [502, 1263, 297, 49]]"
+baseline_DE_DE,07_settings_tab,cv,1,3,11,1,10,"[[66, 539, 1073, 50], [58, 676, 1090, 20], [100, 738, 64, 64], [205, 745, 183, 46], [58, 843, 1090, 20], [58, 901, 1090, 20], [97, 966, 70, 58], [205, 970, 230, 46], [58, 1068, 1090, 20], [429, 1259, 36, 50], [502, 1263, 297, 49]]"
+baseline_DE_DE,01_home_tab,pixel,1,3,12,6,6,"[[361, 346, 641, 50], [1024, 347, 87, 39], [1130, 357, 32, 28], [488, 875, 439, 79], [95, 876, 340, 61], [94, 1020, 1018, 99], [982, 1142, 64, 68], [156, 1146, 364, 58], [94, 1233, 1018, 37], [96, 1655, 315, 62], [462, 1656, 162, 78], [481, 1919, 244, 115]]"
+baseline_DE_DE,01_home_tab,cv,1,3,11,6,5,"[[361, 346, 641, 50], [1024, 347, 86, 39], [1137, 357, 25, 28], [488, 875, 438, 79], [95, 876, 340, 61], [94, 1020, 1018, 96], [983, 1142, 62, 68], [156, 1147, 364, 57], [94, 1236, 1018, 34], [96, 1655, 315, 62], [462, 1656, 162, 78]]"
+baseline_DE_DE,language_button,pixel,1,3,14,4,10,"[[434, 643, 339, 68], [779, 779, 88, 89], [274, 785, 459, 89], [500, 1003, 204, 67], [58, 1109, 1090, 119], [90, 1328, 709, 67], [58, 1439, 1090, 22], [400, 1476, 70, 46], [493, 1476, 302, 42], [58, 1536, 1090, 22], [450, 1604, 305, 51], [552, 1768, 105, 55], [58, 1874, 1090, 119], [58, 2018, 1090, 119]]"
+baseline_DE_DE,language_button,cv,1,3,14,4,10,"[[434, 643, 339, 68], [779, 779, 88, 89], [274, 785, 459, 89], [500, 1003, 204, 67], [58, 1109, 1090, 119], [90, 1328, 709, 67], [58, 1439, 1090, 20], [400, 1476, 70, 46], [494, 1477, 301, 41], [58, 1538, 1090, 20], [450, 1604, 305, 51], [552, 1768, 105, 55], [58, 1874, 1090, 119], [58, 2018, 1090, 119]]"
+baseline_DE_DE,login_field,pixel,1,1,1,1,0,"[[362, 245, 454, 62]]"
+baseline_DE_DE,login_field,cv,1,1,1,1,0,"[[362, 245, 454, 62]]"
+baseline_DE_DE,13_language_choice,pixel,1,1,14,2,12,"[[435, 643, 337, 68], [779, 779, 88, 89], [274, 785, 459, 89], [193, 1007, 663, 58], [58, 1109, 317, 119], [1021, 1109, 127, 119], [191, 1321, 204, 41], [90, 1328, 32, 47], [58, 1439, 410, 119], [1021, 1439, 127, 119], [194, 1609, 274, 47], [552, 1770, 105, 53], [58, 1874, 1090, 119], [58, 2018, 1090, 119]]"
+baseline_DE_DE,13_language_choice,cv,1,1,20,1,19,"[[435, 643, 337, 68], [779, 779, 88, 89], [274, 785, 459, 89], [193, 1007, 663, 58], [58, 1110, 63, 17], [1085, 1110, 63, 17], [193, 1178, 182, 48], [58, 1210, 64, 17], [1084, 1210, 64, 17], [191, 1321, 204, 41], [90, 1328, 32, 47], [58, 1440, 64, 17], [1084, 1440, 64, 17], [194, 1465, 274, 47], [58, 1540, 64, 17], [1084, 1540, 64, 17], [194, 1609, 274, 47], [552, 1770, 105, 53], [58, 1875, 1090, 117], [58, 2019, 1090, 117]]"
+baseline_EN_US,06_vehicle_tab,pixel,0,0,0,0,0,[]
+baseline_EN_US,06_vehicle_tab,cv,0,0,0,0,0,[]
+baseline_EN_US,07_settings_tab,pixel,0,0,0,0,0,[]
+baseline_EN_US,07_settings_tab,cv,0,0,0,0,0,[]
+baseline_EN_US,01_home_tab,pixel,0,0,0,0,0,[]
+baseline_EN_US,01_home_tab,cv,0,0,0,0,0,[]
+baseline_EN_US,language_button,pixel,0,0,0,0,0,[]
+baseline_EN_US,language_button,cv,0,0,0,0,0,[]
+baseline_EN_US,login_field,pixel,0,0,0,0,0,[]
+baseline_EN_US,login_field,cv,0,0,0,0,0,[]
+baseline_EN_US,13_language_choice,pixel,0,0,0,0,0,[]
+baseline_EN_US,13_language_choice,cv,0,0,0,0,0,[]
+baseline_ZH_CN,06_vehicle_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,06_vehicle_tab,cv,0,0,0,0,0,[]
+baseline_ZH_CN,07_settings_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,07_settings_tab,cv,0,0,0,0,0,[]
+baseline_ZH_CN,01_home_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,01_home_tab,cv,0,0,0,0,0,[]
+baseline_ZH_CN,language_button,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,language_button,cv,0,0,0,0,0,[]
+baseline_ZH_CN,login_field,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,login_field,cv,0,0,0,0,0,[]
+baseline_ZH_CN,13_language_choice,pixel,0,0,0,0,0,[]
+baseline_ZH_CN,13_language_choice,cv,0,0,0,0,0,[]
+baseline_ZH_TW,06_vehicle_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,06_vehicle_tab,cv,0,0,0,0,0,[]
+baseline_ZH_TW,07_settings_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,07_settings_tab,cv,0,0,0,0,0,[]
+baseline_ZH_TW,01_home_tab,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,01_home_tab,cv,0,0,0,0,0,[]
+baseline_ZH_TW,language_button,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,language_button,cv,0,0,0,0,0,[]
+baseline_ZH_TW,login_field,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,login_field,cv,0,0,0,0,0,[]
+baseline_ZH_TW,13_language_choice,pixel,0,0,0,0,0,[]
+baseline_ZH_TW,13_language_choice,cv,0,0,0,0,0,[]

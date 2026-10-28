@@ -738,6 +738,9 @@ def write_interaction_log(
     decision,
     tap_x=None,
     tap_y=None,
+    run_id=None,
+    loop_index=None,
+    step_index=None,
 ):
     """
     Standardized logger:
@@ -763,6 +766,9 @@ def write_interaction_log(
         "decision": decision,
         "tap_x": tap_x,
         "tap_y": tap_y,
+        "run_id": run_id,
+        "loop_index": loop_index,
+        "step_index": step_index,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 

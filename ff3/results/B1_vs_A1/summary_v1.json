@@ -1,0 +1,65 @@
+{
+  "baseline": "runs/A1/screenshots",
+  "actual": "runs/B1/screenshots",
+  "gt": "seeded_defects.json",
+  "pages_compared": 24,
+  "pages_missing": [],
+  "methods": {
+    "pixel": {
+      "defects_total": 14,
+      "defects_detected": 8,
+      "defect_recall": 0.5714285714285714,
+      "boxes_total": 53,
+      "boxes_tp": 12,
+      "boxes_fp": 41,
+      "box_precision": 0.22641509433962265,
+      "pages_with_defect": 6,
+      "pages_with_defect_flagged": 6,
+      "pages_without_defect": 18,
+      "pages_without_defect_flagged": 0,
+      "fp_boxes_on_clean_pages": 0,
+      "recall_by_class": {
+        "Beschnittener Text": "2/3",
+        "Gekürzter Text": "3/4",
+        "Verdrängtes Element": "2/4",
+        "Überlappung": "1/3"
+      },
+      "missed_defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14"
+      ]
+    },
+    "cv": {
+      "defects_total": 14,
+      "defects_detected": 8,
+      "defect_recall": 0.5714285714285714,
+      "boxes_total": 58,
+      "boxes_tp": 11,
+      "boxes_fp": 47,
+      "box_precision": 0.1896551724137931,
+      "pages_with_defect": 6,
+      "pages_with_defect_flagged": 6,
+      "pages_without_defect": 18,
+      "pages_without_defect_flagged": 0,
+      "fp_boxes_on_clean_pages": 0,
+      "recall_by_class": {
+        "Beschnittener Text": "2/3",
+        "Gekürzter Text": "3/4",
+        "Verdrängtes Element": "2/4",
+        "Überlappung": "1/3"
+      },
+      "missed_defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14"
+      ]
+    }
+  }
+}

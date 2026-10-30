@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 🚀 Auto-Screen: Universal Visual GUI Automation, Regression Testing & Data Flywheel Suite
-Masterarbeit Tool for iOS Applications.
+Master's Thesis Tool for iOS Applications.
 """
 
 import os

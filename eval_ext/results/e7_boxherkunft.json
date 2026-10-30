@@ -1,0 +1,15 @@
+{
+  "tolerance_px": 3,
+  "evaluation_split": {
+    "n": 2008,
+    "images": 231,
+    "match_muianno": 1877,
+    "share": 0.9348
+  },
+  "training_ios1k": {
+    "n": 7779,
+    "images": 737,
+    "match_muianno": 3497,
+    "share": 0.4495
+  }
+}

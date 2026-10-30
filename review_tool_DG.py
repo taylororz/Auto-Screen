@@ -187,11 +187,10 @@ def _is_manual_gt(record):
 
 
 def _has_independent_gt(record):
-    """True when the GT point was set by a human click instead of being copied from the AI prediction."""
+    """Returns True when the GT point was set via manual click."""
     source = record.get("gt_source")
     if source is not None:
         return source == "manual_click"
-    # Records saved before gt_source existed: a GT identical to the prediction was an accepted prediction
     return (record.get("gt_x"), record.get("gt_y")) != (record.get("center_x"), record.get("center_y"))
 
 
@@ -207,16 +206,12 @@ def calculate_statistics():
                     except Exception:
                         pass
 
-    # Manually added GT points have no AI prediction, so they are not AI evaluation samples
     manual_gt_count = sum(1 for r in reviewed_records if _is_manual_gt(r))
     reviewed_records = [r for r in reviewed_records if not _is_manual_gt(r)]
 
-    # Same denominator as the review queue (filtered DG logs), so percentages match the progress bar
     log_records = get_dg_log_records()
     total_raw_logs = len(log_records)
-    # Failed steps never produce a coordinate, so they are not in the review queue; count them separately
     unlocated_count = len(get_dg_log_records(include_unlocated=True)) - total_raw_logs
-    # CLEAN_FILE is shared by the eval/train logs in one folder; only count the reviews for this log
     log_ts = {r.get("timestamp") for r in log_records}
     reviewed_records = [r for r in reviewed_records if r.get("timestamp") in log_ts]
     total_reviewed = len(reviewed_records)
@@ -255,7 +250,6 @@ def calculate_statistics():
         is_correct = r.get("is_correct", False)
         is_action_succ = r.get("is_action_successful", is_correct)
 
-        # Accepting a prediction copies it into GT (distance 0 by construction), so only human-set GT points count
         if ai_x is not None and ai_y is not None and gt_x is not None and gt_y is not None and _has_independent_gt(r):
             dist = math.sqrt((ai_x - gt_x)**2 + (ai_y - gt_y)**2)
             distances.append(dist)
@@ -264,7 +258,6 @@ def calculate_statistics():
 
         lang_stats[lang]["total"] += 1
         step_stats[step]["total"] += 1
-        # Repeated rounds of the same task are not independent samples, so track outcomes per task
         task_stats.setdefault((lang, step, r.get("instruction", "")), []).append(bool(is_action_succ))
 
         if is_correct:
@@ -289,12 +282,10 @@ def calculate_statistics():
     distinct_tasks = len(task_stats)
     repeats_per_task = (valid_reviewed / distinct_tasks) if distinct_tasks else 0.0
     inconsistent_tasks = sum(1 for outcomes in task_stats.values() if len(set(outcomes)) > 1)
-    # Each task counts once: mean of the per-task success rates instead of one vote per repeated sample
     task_level_rate = (sum(sum(o) / len(o) for o in task_stats.values()) / distinct_tasks * 100) if distinct_tasks else 0.0
     run_count = len({r.get("run_id") for r in reviewed_records if r.get("run_id")})
     attempts = total_raw_logs + unlocated_count
     failure_rate = (unlocated_count / attempts * 100) if attempts else 0.0
-    # Estimate: action success rate on reviewed samples, scaled by the share of attempts that produced a coordinate
     e2e_rate = action_succ_rate * total_raw_logs / attempts if attempts else 0.0
 
     report_md = f"""### 🎯 Direct Grounding (DG) Evaluation Metrics & Distance Analysis
@@ -501,10 +492,8 @@ def save_corrected(rec_json, manual_x, manual_y, is_action_successful=True):
     ai_x = record.get("center_x")
     ai_y = record.get("center_y")
 
-    # Coordinates of 0 are valid, so check for None instead of truthiness
     has_ai = ai_x is not None and ai_y is not None
     dist = math.sqrt((ai_x - gt_x)**2 + (ai_y - gt_y)**2) if has_ai else 0.0
-    # Without an AI prediction there is nothing to be correct about
     record["is_correct"] = has_ai and dist <= 40.0
     record["is_action_successful"] = bool(is_action_successful)
     record["gt_x"] = gt_x

@@ -285,7 +285,7 @@ def annotate_ui_elements(image_path, output_path=None, min_box_size=18, min_area
         roi_t_mask = cv2.morphologyEx(roi_thresh.copy(), cv2.MORPH_CLOSE, close_kernel, iterations=1)
         roi_combined = cv2.bitwise_or(roi_edge, roi_t_mask)
 
-        contours, _ = cv2.findContours(roi_combined, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(roi_combined, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
         dialog_area = dw * dh
         for c in contours:
             x, y, w, h = cv2.boundingRect(c)
@@ -464,9 +464,11 @@ def local_visual_agent_inference(image_path, instruction, model_path=None, valid
         prompt_text = f"<image>This is a UI testing task. Find the element that matches this instruction: '{instruction}'. Output the target ID in JSON format."
 
     pil_img = Image.open(str(image_path))
+    # LOCAL_MAX_IMAGE_EDGE: longest edge passed to the local model (default 1600, <= 0 keeps the original size)
+    max_edge = int(os.environ.get("LOCAL_MAX_IMAGE_EDGE", "1600"))
     max_dim = max(pil_img.size)
-    if max_dim > 1600:
-        scale = 1600.0 / max_dim
+    if max_edge > 0 and max_dim > max_edge:
+        scale = float(max_edge) / max_dim
         new_size = (int(pil_img.width * scale), int(pil_img.height * scale))
         pil_img = pil_img.resize(new_size, Image.Resampling.LANCZOS)
 
@@ -666,7 +668,7 @@ class VisualNavigationError(Exception):
     pass
 
 
-def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None):
+def log_interaction(language, step_name, instruction, action, target_id, center_x, center_y, screenshot_path, annotated_image_path, decision, tap_x=None, tap_y=None, run_id=None, loop_index=None, step_index=None):
     """
     Appends execution log record to diff_results/interaction_log.jsonl.
     """
@@ -687,9 +689,12 @@ def log_interaction(language, step_name, instruction, action, target_id, center_
         "decision": decision,
         "tap_x": tap_x,
         "tap_y": tap_y,
+        "run_id": run_id,
+        "loop_index": loop_index,
+        "step_index": step_index,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
-    
+
     with log_file.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 

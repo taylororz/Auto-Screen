@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Generic GUI Agent Test Engine 
 Configuration-Driven Architecture for Mobile App Visual Regression Testing.
@@ -11,6 +10,7 @@ import time
 import json
 import shutil
 import argparse
+import subprocess
 import importlib.util
 from pathlib import Path
 from datetime import datetime
@@ -132,11 +132,14 @@ class GenericGUITestEngine:
         self.driver = None
         self.reset_between_loops = reset_between_loops
         self._cached_window_size = None
+        self.run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self._log_ctx = {}
+        self.stability = self.config.get("stability", {})
 
-        # Prepare log and screenshot output directories under model_dir
         self.diff_dir = self.model_dir / "diff_results"
         self.diff_dir.mkdir(parents=True, exist_ok=True)
-        self.screenshot_root = self.model_dir / "screenshots"
+        variant = os.environ.get("AUTOSCREEN_VARIANT")
+        self.screenshot_root = self.model_dir / (f"screenshots_{variant}" if variant else "screenshots")
         self.screenshot_root.mkdir(parents=True, exist_ok=True)
 
     def get_window_size(self):
@@ -156,8 +159,8 @@ class GenericGUITestEngine:
         """Initializes Appium XCUITest options from config."""
         options = XCUITestOptions()
         options.platform_name = self.app_cfg.get("platform_name", "iOS")
-        options.platform_version = self.app_cfg.get("platform_version", "17.0")
-        options.device_name = self.app_cfg.get("device_name", "iPhone 15")
+        options.platform_version = os.environ.get("AUTOSCREEN_PLATFORM_VERSION") or self.app_cfg.get("platform_version", "17.0")
+        options.device_name = os.environ.get("AUTOSCREEN_DEVICE_NAME") or self.app_cfg.get("device_name", "iPhone 15")
         app_target = os.environ.get("AUTOSCREEN_APP_PATH") or self.app_cfg.get("app_path", "")
         if app_target and not Path(app_target).exists():
             ci_fallback = ROOT_DIR / "build" / "ios" / "iphonesimulator" / "Runner.app"
@@ -167,10 +170,8 @@ class GenericGUITestEngine:
         options.automation_name = "XCUITest"
         options.auto_accept_alerts = True
         options.show_keychain_automatically = False
-        # Set long command timeout (1 hour) to prevent Appium killing session during long VLM calls
         options.new_command_timeout = 3600
         options.set_capability("newCommandTimeout", 3600)
-        # Disable Expo DevLauncher onboarding popup from source via processArguments
         options.process_arguments = {
             "args": ["-EXPO_DEV_LAUNCHER_IS_ONBOARDED", "1", "-EXPO_DEV_MENU_IS_DISABLED", "1"],
             "env": {
@@ -178,7 +179,11 @@ class GenericGUITestEngine:
                 "EXPO_PUBLIC_DEV_LAUNCHER": "0"
             }
         }
-        
+        for cap_name, cap_value in self.app_cfg.get("extra_capabilities", {}).items():
+            options.set_capability(cap_name, cap_value)
+        if os.environ.get("AUTOSCREEN_DEVICE_UDID"):
+            options.set_capability("udid", os.environ["AUTOSCREEN_DEVICE_UDID"])
+
         appium_url = self.app_cfg.get("appium_url", "http://localhost:4723")
         print(f"🔌 Connecting to Appium server: {appium_url}")
         try:
@@ -192,12 +197,84 @@ class GenericGUITestEngine:
                 sys.exit(1)
             raise
         time.sleep(3)
+        self._apply_simulator_ui_settings()
         # Pre-cache window size on startup
         try:
             self._cached_window_size = self.driver.get_window_size()
         except Exception:
             pass
         return self.driver
+
+    def _apply_simulator_ui_settings(self):
+        """Applies configured simulator appearance and content size."""
+        settings = [
+            ("appearance", os.environ.get("AUTOSCREEN_APPEARANCE") or self.app_cfg.get("appearance")),
+            ("content_size", os.environ.get("AUTOSCREEN_CONTENT_SIZE") or self.app_cfg.get("content_size")),
+        ]
+        settings = [(name, value) for name, value in settings if value]
+        if not settings:
+            return
+        udid = (self.driver.capabilities or {}).get("udid") or "booted"
+        for name, value in settings:
+            result = subprocess.run(["xcrun", "simctl", "ui", udid, name, value], capture_output=True, text=True)
+            if result.returncode == 0:
+                print(f"🎨 Simulator {name} set to '{value}'")
+            else:
+                print(f"⚠️ Could not set simulator {name} to '{value}' (real device?): {result.stderr.strip()}")
+        self.reset_app(wait_after=3)
+
+    def _stabilize_screen(self, action):
+        """Hides the keyboard and waits for screen stability before capturing a screenshot."""
+        if self.stability.get("hide_keyboard") and action != "type_text":
+            try:
+                if self.driver.is_keyboard_shown():
+                    self.driver.hide_keyboard()
+                    time.sleep(0.5)
+            except Exception as kb_err:
+                print(f"⚠️ Could not hide the keyboard before the screenshot: {kb_err}")
+
+        idle = self.stability.get("wait_for_idle")
+        if not idle:
+            return
+        idle = idle if isinstance(idle, dict) else {}
+        timeout = float(idle.get("timeout", 3.0))
+        interval = float(idle.get("interval", 0.4))
+        max_change = float(idle.get("max_change", 0.001))
+        ignore_top = int(idle.get("ignore_top", 140))
+
+        import cv2
+        import numpy as np
+        deadline = time.time() + timeout
+        previous = None
+        while True:
+            frame = cv2.imdecode(np.frombuffer(self.driver.get_screenshot_as_png(), np.uint8), cv2.IMREAD_GRAYSCALE)
+            if frame is not None:
+                frame = frame[ignore_top:, :]
+                if previous is not None and frame.shape == previous.shape:
+                    changed = np.count_nonzero(cv2.absdiff(frame, previous) > 20) / frame.size
+                    if changed <= max_change:
+                        return
+            if time.time() >= deadline:
+                print(f"⚠️ Screen did not settle within {timeout:.1f}s, taking the screenshot anyway")
+                return
+            previous = frame
+            time.sleep(interval)
+
+    def _relaunch_with_language(self, language, locale=None):
+        """Relaunches the app with the specified system language and locale."""
+        bundle_id = self.app_cfg.get("bundle_id", "")
+        arguments = ["-AppleLanguages", f"({language})"]
+        if locale:
+            arguments += ["-AppleLocale", locale]
+        arguments += ["-EXPO_DEV_LAUNCHER_IS_ONBOARDED", "1", "-EXPO_DEV_MENU_IS_DISABLED", "1"]
+        print(f"🌐 Relaunching {bundle_id} with system language '{language}'" + (f" and locale '{locale}'" if locale else ""))
+        try:
+            self.driver.terminate_app(bundle_id)
+            time.sleep(1.0)
+            self.driver.execute_script("mobile: launchApp", {"bundleId": bundle_id, "arguments": arguments})
+            time.sleep(4)
+        except Exception as launch_err:
+            print(f"⚠️ Relaunch with language '{language}' failed: {launch_err}")
 
     def reset_app(self, wait_after=4):
         """Forcefully terminates and reactivates app state (lightweight process restart preserving app data/auth)."""
@@ -390,6 +467,10 @@ class GenericGUITestEngine:
         except Exception as dismiss_err:
             print(f"⚠️ AI popup auto-dismiss notice: {dismiss_err}")
 
+    def _log_interaction(self, **kwargs):
+        """Writes an interaction log record tagged with the current run, loop (round) and step position."""
+        self.agent.log_interaction(**kwargs, **self._log_ctx)
+
     def execute_step(self, step_info, language_info, is_setup_step=False, step_index=None, loop_index=0):
         """Generic visual-agent step execution engine."""
         step_name = step_info["step_name"]
@@ -404,6 +485,7 @@ class GenericGUITestEngine:
                 text_to_type = os.environ[clean_key]
         lang_folder = language_info.get("folder", "default")
         lang_name = language_info.get("language_name", "English")
+        self._log_ctx = {"run_id": self.run_id, "loop_index": loop_index, "step_index": step_index}
 
         folder_dir = self.diff_dir / "states" / lang_folder
         folder_dir.mkdir(parents=True, exist_ok=True)
@@ -446,11 +528,14 @@ class GenericGUITestEngine:
         except Exception:
             pass
 
+        if self.stability and step_info.get("stabilize", True):
+            self._stabilize_screen(action)
+
         # 1. Capture current simulator screen (unmarked raw screenshot)
         self.driver.save_screenshot(str(screenshot_path))
 
-        # 2. Save unmarked baseline screenshot to model screenshots directory (on first loop)
-        if loop_index == 0:
+        # 2. Save unmarked baseline screenshot on first loop
+        if loop_index == 0 and not step_info.get("skip_screenshot", False):
             page_dir = self.screenshot_root / lang_folder
             page_dir.mkdir(parents=True, exist_ok=True)
             clean_sname = step_name.replace(" ", "_")
@@ -596,7 +681,7 @@ class GenericGUITestEngine:
             decision["status"] = "step_failed_low_confidence" if is_low_confidence else "step_failed_target_not_found"
             decision["circuit_broken"] = True
 
-            self.agent.log_interaction(
+            self._log_interaction(
                 language=lang_name,
                 step_name=step_name,
                 instruction=instruction,
@@ -628,7 +713,7 @@ class GenericGUITestEngine:
                 print(f"❌ Heuristic fallback also failed to resolve target ID for step: '{step_name}' ({instruction})")
                 decision["status"] = "step_failed_unresolved_id"
                 decision["circuit_broken"] = True
-                self.agent.log_interaction(
+                self._log_interaction(
                     language=lang_name,
                     step_name=step_name,
                     instruction=instruction,
@@ -714,7 +799,7 @@ class GenericGUITestEngine:
                 print(f"🛑 [Circuit Breaker] Click on '{step_name}' produced no UI change consecutively (possible tap on dead zone or stuck state). Step marked as failed!")
                 decision["status"] = "step_failed_no_page_change"
                 decision["circuit_broken"] = True
-                self.agent.log_interaction(
+                self._log_interaction(
                     language=lang_name,
                     step_name=step_name,
                     instruction=instruction,
@@ -828,20 +913,21 @@ class GenericGUITestEngine:
 
 
         # 8. Log interaction
-        self.agent.log_interaction(
-            language=lang_name,
-            step_name=step_name,
-            instruction=instruction,
-            action=action,
-            target_id=target_id,
-            center_x=center_x,
-            center_y=center_y,
-            screenshot_path=screenshot_path,
-            annotated_image_path=annotated_img_path,
-            decision=decision,
-            tap_x=logical_x,
-            tap_y=logical_y
-        )
+        if not step_info.get("skip_log", False):
+            self._log_interaction(
+                language=lang_name,
+                step_name=step_name,
+                instruction=instruction,
+                action=action,
+                target_id=target_id,
+                center_x=center_x,
+                center_y=center_y,
+                screenshot_path=screenshot_path,
+                annotated_image_path=annotated_img_path,
+                decision=decision,
+                tap_x=logical_x,
+                tap_y=logical_y
+            )
         return True
 
     def run(self):
@@ -886,6 +972,8 @@ class GenericGUITestEngine:
                             "language_name": flow.get("language_name", "English")
                         }
                         print(f"\n🚀 Running test flow for language: {lang_info['language_name']} (Loop {loop + 1}/{self.loops})")
+                        if flow.get("launch_language"):
+                            self._relaunch_with_language(flow["launch_language"], flow.get("launch_locale"))
                         flow_broken = False
                         for s_i, step in enumerate(flow.get("steps", []), 1):
                             ok = self.execute_step(step, lang_info, is_setup_step=False, step_index=s_i, loop_index=loop)

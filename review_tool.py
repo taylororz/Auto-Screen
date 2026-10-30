@@ -117,7 +117,6 @@ def resolve_image_path(record_or_path):
 
 def calculate_statistics():
     """Calculates comprehensive error rate statistics from finetune_dataset.jsonl and interaction_log.jsonl."""
-    # Keep only the latest entry per timestamp, so duplicate lines are not counted twice
     reviewed_by_ts = {}
     if os.path.exists(CLEAN_FILE):
         with open(CLEAN_FILE, 'r', encoding='utf-8') as f:
@@ -131,9 +130,7 @@ def calculate_statistics():
     reviewed_records = list(reviewed_by_ts.values())
 
 
-    # Same denominator as the review queue (DG-mode logs excluded), so percentages match the progress bar
     log_records, total_raw_logs = get_logs(show_all=True)
-    # CLEAN_FILE can hold reviews from other logs in the same folder; only count the ones for this log
     log_ts = {r.get("timestamp") for r in log_records}
     reviewed_records = [r for r in reviewed_records if r.get("timestamp") in log_ts]
     total_reviewed = len(reviewed_records)
@@ -173,7 +170,6 @@ def calculate_statistics():
 
         lang_stats[lang]["total"] += 1
         step_stats[step]["total"] += 1
-        # Repeated rounds of the same task are not independent samples, so track outcomes per task
         task_stats.setdefault((lang, step, r.get("instruction", "")), []).append(ai_id == gt_id and ai_id != -1)
 
         if ai_id == gt_id and ai_id != -1:
@@ -191,7 +187,6 @@ def calculate_statistics():
     distinct_tasks = len(task_stats)
     repeats_per_task = (valid_reviewed / distinct_tasks) if distinct_tasks else 0.0
     inconsistent_tasks = sum(1 for outcomes in task_stats.values() if len(set(outcomes)) > 1)
-    # Each task counts once: mean of the per-task accuracies instead of one vote per repeated sample
     task_level_rate = (sum(sum(o) / len(o) for o in task_stats.values()) / distinct_tasks * 100) if distinct_tasks else 0.0
     run_count = len({r.get("run_id") for r in reviewed_records if r.get("run_id")})
 

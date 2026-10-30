@@ -1,0 +1,15 @@
+{
+  "steps": 598,
+  "same_as_2809": "598/598",
+  "correct_vs_reviewed": "598/598",
+  "fallback_or_error": 0,
+  "different_by_step": {},
+  "same_by_language": {
+    "German": "177/177",
+    "English": "181/181",
+    "中文（简体）": "65/65",
+    "中文（繁體）": "65/65",
+    "Chinese": "110/110"
+  },
+  "median_time_ms": 2020
+}

@@ -1,0 +1,21 @@
+{
+  "cases": 500,
+  "matched": 432,
+  "unmatched": {
+    "mehrdeutig": 32,
+    "kein Rechteck": 36
+  },
+  "hits_inside_without": 312,
+  "hits_inside_with": 317,
+  "acc_without": 0.7222,
+  "acc_with": 0.7338,
+  "only_without_hit": 5,
+  "only_with_hit": 10,
+  "mcnemar_exact_p": 0.3018,
+  "by_element_type": {
+    "button": "ohne 215/295, mit 220/295",
+    "icon": "ohne 30/59, mit 30/59",
+    "input": "ohne 13/15, mit 13/15",
+    "tab": "ohne 54/63, mit 54/63"
+  }
+}

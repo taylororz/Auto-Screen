@@ -20,7 +20,7 @@ jobs:
       - name: 1. Checkout test suite repository
         uses: actions/checkout@v4
 
-      # Identify the upstream KatApp build: from the dispatch payload, otherwise the latest successful build run
+      # Resolve upstream KatApp build from dispatch payload or latest successful run
       - name: 2a. Resolve upstream katapp build
         id: upstream
         env:
@@ -50,10 +50,9 @@ jobs:
           EOF
           fi
 
-      # Replaces 'gh run download' (gh is not installed on the runner)
       - name: 2b. Download upstream katapp build artifact
         if: steps.upstream.outputs.run_id != ''
-        continue-on-error: true  # e.g. expired artifact (retention 1 day); step 3 then uses the local build
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: katapp-runner-app
@@ -62,8 +61,7 @@ jobs:
           run-id: ${{ steps.upstream.outputs.run_id }}
           github-token: ${{ secrets.AUTO_SCREEN_TRIGGER_PAT }}
 
-      # The identity of the app build decides which screenshots serve as baseline for the version comparison:
-      # the upstream commit SHA, or for a local build the hash of the app binary.
+      # Extract app bundle and record build identity (commit SHA or binary hash)
       - name: 3. Extract target application bundle and record its identity
         id: app
         env:
@@ -129,8 +127,7 @@ jobs:
           python3 -m pip install --upgrade pip
           if [ -f requirements.txt ]; then python3 -m pip install -r requirements.txt; fi
 
-      # Use the local Qwen3-VL-4B-V2 weights (same model as the experiments).
-      # The Hugging Face repo Auto-Screen-Qwen3-VL-Agent holds an older model and is not used here.
+      # Link local Qwen3-VL-4B-V2 weights
       - name: 6. Prepare fine-tuned Qwen model
         run: |
           mkdir -p Qwen_trained
@@ -152,14 +149,14 @@ jobs:
           fi
           echo "✅ Appium environment is ready"
 
-      # Version comparison: the baseline is the newest screenshots artifact of a different app build on this branch.
-      # Artifacts are named screenshots-<identity>, so a rerun of the same build is compared with the previous build.
+      # Resolve baseline screenshots artifact (previous build on branch or approved baseline)
       - name: 8a. Find the baseline screenshots of the previous app build
         id: previous
         env:
           GH_TOKEN: ${{ github.token }}
           CURRENT_ID: ${{ steps.app.outputs.identity }}
           BRANCH: ${{ github.ref_name }}
+          BASELINE_MODE: ${{ vars.BASELINE_MODE || 'previous' }}
         run: |
           curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?per_page=100" \
@@ -171,20 +168,27 @@ jobs:
           except Exception:
               artifacts = []
           current, branch = os.environ["CURRENT_ID"], os.environ["BRANCH"]
-          candidates = [
-              a for a in artifacts
-              if a["name"].startswith("screenshots-") and not a.get("expired")
-              and (a.get("workflow_run") or {}).get("head_branch") == branch
-              and a["name"] != f"screenshots-{current}"
-          ]
+          approved = os.environ.get("BASELINE_MODE") == "approved"
+          if approved:
+              candidates = [a for a in artifacts if a["name"] == f"approved-baseline-{branch}" and not a.get("expired")]
+          else:
+              candidates = [
+                  a for a in artifacts
+                  if a["name"].startswith("screenshots-") and not a.get("expired")
+                  and (a.get("workflow_run") or {}).get("head_branch") == branch
+                  and a["name"] != f"screenshots-{current}"
+              ]
           candidates.sort(key=lambda a: a["created_at"], reverse=True)
           best = candidates[0] if candidates else None
+          identity = ("approved" if approved else best["name"][len("screenshots-"):]) if best else ""
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
               out.write(f"run_id={best['workflow_run']['id'] if best else ''}\n")
               out.write(f"name={best['name'] if best else ''}\n")
-              out.write(f"identity={best['name'][len('screenshots-'):] if best else ''}\n")
+              out.write(f"identity={identity}\n")
           if best:
               print(f"📥 Baseline: {best['name']} from run {best['workflow_run']['id']} (current build: {current})")
+          elif approved:
+              print(f"ℹ️ BASELINE_MODE=approved, but no artifact approved-baseline-{branch} found, the version comparison is skipped")
           else:
               print(f"ℹ️ No screenshots of a different app build found (current build: {current}), the version comparison is skipped")
           EOF
@@ -203,10 +207,15 @@ jobs:
         env:
           CURRENT_APP_ID: ${{ steps.app.outputs.identity }}
           PREVIOUS_APP_ID: ${{ steps.previous.outputs.identity }}
+          LOCAL_TRIAGE: ${{ vars.LOCAL_TRIAGE || '0' }}
+          GATE_ON_AI_FAIL: ${{ vars.GATE_ON_AI_FAIL || '0' }}
         run: |
           chmod +x run_pipeline_local.sh
+          if [ -f previous_screenshots/baseline.json ]; then
+            export PREVIOUS_APP_ID="approved-$(python3 -c "import json; print(json.load(open('previous_screenshots/baseline.json')).get('label', ''))")"
+          fi
           if [ -d previous_screenshots ] && [ -n "$(ls -A previous_screenshots)" ]; then
-            # Compare only if baseline and current run used the same test environment
+            # Require matching test environment between baseline and current run
             if python3 - <<'EOF'
           import json, sys
           try:

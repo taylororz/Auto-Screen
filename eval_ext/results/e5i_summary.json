@@ -1,0 +1,38 @@
+{
+  "GPT-6 Sol | Original": {
+    "English": "auswahlliste (8, analyzed_openai)",
+    "German": "auswahlliste (8, analyzed_openai)",
+    "中文（简体）": "auswahlliste (8, analyzed_openai)",
+    "中文（繁體）": "auswahlliste (8, analyzed_openai)"
+  },
+  "GPT-6 Sol | max. 1600 px": {
+    "English": "auswahlliste (8, analyzed_openai)",
+    "German": "auswahlliste (8, analyzed_openai)",
+    "中文（简体）": "auswahlliste (8, analyzed_openai)",
+    "中文（繁體）": "auswahlliste (8, analyzed_openai)"
+  },
+  "GPT-6 Luna | Original": {
+    "English": "auswahlliste (8, analyzed_openai)",
+    "German": "auswahlliste (8, analyzed_openai)",
+    "中文（简体）": "auswahlliste (8, analyzed_openai)",
+    "中文（繁體）": "auswahlliste (8, analyzed_openai)"
+  },
+  "GPT-6 Luna | max. 1600 px": {
+    "English": "auswahlliste (8, analyzed_openai)",
+    "German": "auswahlliste (8, analyzed_openai)",
+    "中文（简体）": "auswahlliste (8, analyzed_openai)",
+    "中文（繁體）": "auswahlliste (8, analyzed_openai)"
+  },
+  "Claude Sonnet 5.5 | Original": {
+    "English": "auswahlliste (8, analyzed_anthropic)",
+    "German": "auswahlliste (8, analyzed_anthropic)",
+    "中文（简体）": "auswahlliste (8, analyzed_anthropic)",
+    "中文（繁體）": "auswahlliste (8, analyzed_anthropic)"
+  },
+  "Claude Sonnet 5.5 | max. 1600 px": {
+    "English": "auswahlliste (8, analyzed_anthropic)",
+    "German": "auswahlliste (8, analyzed_anthropic)",
+    "中文（简体）": "auswahlliste (8, analyzed_anthropic)",
+    "中文（繁體）": "auswahlliste (8, analyzed_anthropic)"
+  }
+}

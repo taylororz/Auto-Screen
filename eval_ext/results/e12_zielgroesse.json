@@ -1,0 +1,77 @@
+{
+  "KatApp": {
+    "n": 262,
+    "min_width_px": 65,
+    "min_height_px": 44,
+    "short_side_min_px": 44,
+    "short_side_q05_px": 50,
+    "short_side_median_px": 68.0,
+    "short_side_min_pt": 14.7,
+    "short_side_median_pt": 22.7,
+    "share_short_side_below_80px": 0.6107
+  },
+  "Bluesky": {
+    "n": 336,
+    "min_width_px": 26,
+    "min_height_px": 39,
+    "short_side_min_px": 26,
+    "short_side_q05_px": 39,
+    "short_side_median_px": 57.0,
+    "short_side_min_pt": 8.7,
+    "short_side_median_pt": 19.0,
+    "share_short_side_below_80px": 0.9464
+  },
+  "gesamt": {
+    "n": 598,
+    "min_width_px": 26,
+    "min_height_px": 39,
+    "short_side_min_px": 26,
+    "short_side_q05_px": 39,
+    "short_side_median_px": 64.0,
+    "short_side_min_pt": 8.7,
+    "short_side_median_pt": 21.3,
+    "share_short_side_below_80px": 0.7993
+  },
+  "smallest_targets": [
+    {
+      "short_side_px": 26,
+      "app": "Bluesky",
+      "step_name": "open_app_language_dropdown",
+      "language": "Chinese",
+      "width_px": 26,
+      "height_px": 40
+    },
+    {
+      "short_side_px": 26,
+      "app": "Bluesky",
+      "step_name": "open_app_language_dropdown",
+      "language": "Chinese",
+      "width_px": 26,
+      "height_px": 40
+    },
+    {
+      "short_side_px": 26,
+      "app": "Bluesky",
+      "step_name": "open_app_language_dropdown",
+      "language": "Chinese",
+      "width_px": 26,
+      "height_px": 40
+    },
+    {
+      "short_side_px": 26,
+      "app": "Bluesky",
+      "step_name": "open_app_language_dropdown",
+      "language": "Chinese",
+      "width_px": 26,
+      "height_px": 40
+    },
+    {
+      "short_side_px": 26,
+      "app": "Bluesky",
+      "step_name": "open_app_language_dropdown",
+      "language": "Chinese",
+      "width_px": 26,
+      "height_px": 40
+    }
+  ]
+}

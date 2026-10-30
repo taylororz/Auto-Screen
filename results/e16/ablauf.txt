@@ -1,0 +1,13 @@
+2026-10-30 02:54:51 Lauf 1 Start: Qwen_trained_e16 som katapp
+2026-10-30 03:16:59 Lauf 1 Ende: exit 0
+2026-10-30 03:16:59 Lauf 2 Start: Qwen_trained_e16 som bluesky
+2026-10-30 03:55:41 Lauf 2 Ende: exit 0
+2026-10-30 03:55:41 Lauf 3 Start: Qwen_trained_e16 dg katapp
+2026-10-30 04:25:25 Lauf 3 Ende: exit 0
+2026-10-30 04:25:25 Lauf 4 Start: Qwen_trained_e16 dg bluesky
+2026-10-30 05:13:38 Lauf 4 Ende: exit 0
+2026-10-30 05:13:38 Lauf 5 Start: Qwen_untrain_e16 som katapp
+2026-10-30 05:19:16 Lauf 5 Ende: exit 0
+2026-10-30 05:19:16 Lauf 6 Start: Qwen_untrain_e16 som bluesky
+2026-10-30 05:51:58 Lauf 6 Ende: exit 0
+2026-10-30 05:51:58 E16 beendet

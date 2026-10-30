@@ -1,0 +1,509 @@
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 1 semantische Unterschiede (39.85ms)
+   ✅ Pixel-Matching: 1 semantische Unterschiede (49.21ms)
+   📊 Vergleich: CV=1 Diffs, Pixel=1 Diffs | CV:39.85ms vs Pixel:49.21ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 11 semantische Unterschiede (33.00ms)
+   ✅ Pixel-Matching: 11 semantische Unterschiede (51.78ms)
+   📊 Vergleich: CV=11 Diffs, Pixel=11 Diffs | CV:33.00ms vs Pixel:51.78ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/01_home_tab.png
+   ✅ OpenCV-Graustufe: 11 semantische Unterschiede (36.06ms)
+   ✅ Pixel-Matching: 12 semantische Unterschiede (62.72ms)
+   📊 Vergleich: CV=11 Diffs, Pixel=12 Diffs | CV:36.06ms vs Pixel:62.72ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/language_button.png
+   ✅ OpenCV-Graustufe: 14 semantische Unterschiede (37.66ms)
+   ✅ Pixel-Matching: 14 semantische Unterschiede (53.61ms)
+   📊 Vergleich: CV=14 Diffs, Pixel=14 Diffs | CV:37.66ms vs Pixel:53.61ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/login_field.png
+   ✅ OpenCV-Graustufe: 1 semantische Unterschiede (30.41ms)
+   ✅ Pixel-Matching: 1 semantische Unterschiede (45.36ms)
+   📊 Vergleich: CV=1 Diffs, Pixel=1 Diffs | CV:30.41ms vs Pixel:45.36ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_DE_DE/13_language_choice.png
+   ✅ OpenCV-Graustufe: 20 semantische Unterschiede (35.75ms)
+   ✅ Pixel-Matching: 14 semantische Unterschiede (55.27ms)
+   📊 Vergleich: CV=20 Diffs, Pixel=14 Diffs | CV:35.75ms vs Pixel:55.27ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (31.30ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (47.60ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:31.30ms vs Pixel:47.60ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (31.01ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (47.09ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:31.01ms vs Pixel:47.09ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/01_home_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (32.85ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (54.47ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:32.85ms vs Pixel:54.47ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/language_button.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (31.19ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (53.59ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:31.19ms vs Pixel:53.59ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/login_field.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (25.54ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (43.50ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:25.54ms vs Pixel:43.50ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_EN_US/13_language_choice.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (47.55ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (49.55ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:47.55ms vs Pixel:49.55ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (34.97ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (51.96ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:34.97ms vs Pixel:51.96ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (31.37ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (53.36ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:31.37ms vs Pixel:53.36ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/01_home_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (46.69ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (49.67ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:46.69ms vs Pixel:49.67ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/language_button.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (34.63ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (54.92ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:34.63ms vs Pixel:54.92ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/login_field.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (29.34ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (53.34ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:29.34ms vs Pixel:53.34ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_CN/13_language_choice.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (36.44ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (48.88ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:36.44ms vs Pixel:48.88ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (28.40ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (42.55ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:28.40ms vs Pixel:42.55ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (31.74ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (50.27ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:31.74ms vs Pixel:50.27ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/01_home_tab.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (37.07ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (57.64ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:37.07ms vs Pixel:57.64ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/language_button.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (33.62ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (48.76ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:33.62ms vs Pixel:48.76ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/login_field.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (26.22ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (42.05ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:26.22ms vs Pixel:42.05ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/B5/screenshots/baseline_ZH_TW/13_language_choice.png
+   ✅ OpenCV-Graustufe: 0 semantische Unterschiede (32.51ms)
+   ✅ Pixel-Matching: 0 semantische Unterschiede (59.37ms)
+   📊 Vergleich: CV=0 Diffs, Pixel=0 Diffs | CV:32.51ms vs Pixel:59.37ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 3 semantische Unterschiede (37.57ms)
+   ✅ Pixel-Matching: 3 semantische Unterschiede (43.45ms)
+   📊 Vergleich: CV=3 Diffs, Pixel=3 Diffs | CV:37.57ms vs Pixel:43.45ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 7 semantische Unterschiede (30.34ms)
+   ✅ Pixel-Matching: 7 semantische Unterschiede (47.91ms)
+   📊 Vergleich: CV=7 Diffs, Pixel=7 Diffs | CV:30.34ms vs Pixel:47.91ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/01_home_tab.png
+   ✅ OpenCV-Graustufe: 16 semantische Unterschiede (33.04ms)
+   ✅ Pixel-Matching: 16 semantische Unterschiede (64.54ms)
+   📊 Vergleich: CV=16 Diffs, Pixel=16 Diffs | CV:33.04ms vs Pixel:64.54ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/language_button.png
+   ✅ OpenCV-Graustufe: 12 semantische Unterschiede (43.53ms)
+   ✅ Pixel-Matching: 12 semantische Unterschiede (76.88ms)
+   📊 Vergleich: CV=12 Diffs, Pixel=12 Diffs | CV:43.53ms vs Pixel:76.88ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/login_field.png
+   ✅ OpenCV-Graustufe: 2 semantische Unterschiede (32.79ms)
+   ✅ Pixel-Matching: 2 semantische Unterschiede (60.06ms)
+   📊 Vergleich: CV=2 Diffs, Pixel=2 Diffs | CV:32.79ms vs Pixel:60.06ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_EN_US/13_language_choice.png
+   ✅ OpenCV-Graustufe: 10 semantische Unterschiede (56.78ms)
+   ✅ Pixel-Matching: 10 semantische Unterschiede (98.52ms)
+   📊 Vergleich: CV=10 Diffs, Pixel=10 Diffs | CV:56.78ms vs Pixel:98.52ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 8 semantische Unterschiede (51.23ms)
+   ✅ Pixel-Matching: 8 semantische Unterschiede (75.05ms)
+   📊 Vergleich: CV=8 Diffs, Pixel=8 Diffs | CV:51.23ms vs Pixel:75.05ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 17 semantische Unterschiede (54.06ms)
+   ✅ Pixel-Matching: 16 semantische Unterschiede (79.11ms)
+   📊 Vergleich: CV=17 Diffs, Pixel=16 Diffs | CV:54.06ms vs Pixel:79.11ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/01_home_tab.png
+   ✅ OpenCV-Graustufe: 20 semantische Unterschiede (49.45ms)
+   ✅ Pixel-Matching: 20 semantische Unterschiede (69.02ms)
+   📊 Vergleich: CV=20 Diffs, Pixel=20 Diffs | CV:49.45ms vs Pixel:69.02ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/language_button.png
+   ✅ OpenCV-Graustufe: 18 semantische Unterschiede (45.95ms)
+   ✅ Pixel-Matching: 18 semantische Unterschiede (67.06ms)
+   📊 Vergleich: CV=18 Diffs, Pixel=18 Diffs | CV:45.95ms vs Pixel:67.06ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/login_field.png
+   ✅ OpenCV-Graustufe: 5 semantische Unterschiede (37.80ms)
+   ✅ Pixel-Matching: 5 semantische Unterschiede (64.24ms)
+   📊 Vergleich: CV=5 Diffs, Pixel=5 Diffs | CV:37.80ms vs Pixel:64.24ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_CN/13_language_choice.png
+   ✅ OpenCV-Graustufe: 26 semantische Unterschiede (49.35ms)
+   ✅ Pixel-Matching: 26 semantische Unterschiede (67.45ms)
+   📊 Vergleich: CV=26 Diffs, Pixel=26 Diffs | CV:49.35ms vs Pixel:67.45ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/06_vehicle_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/06_vehicle_tab.png
+   ✅ OpenCV-Graustufe: 8 semantische Unterschiede (46.60ms)
+   ✅ Pixel-Matching: 8 semantische Unterschiede (56.95ms)
+   📊 Vergleich: CV=8 Diffs, Pixel=8 Diffs | CV:46.60ms vs Pixel:56.95ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/07_settings_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/07_settings_tab.png
+   ✅ OpenCV-Graustufe: 17 semantische Unterschiede (45.34ms)
+   ✅ Pixel-Matching: 16 semantische Unterschiede (67.23ms)
+   📊 Vergleich: CV=17 Diffs, Pixel=16 Diffs | CV:45.34ms vs Pixel:67.23ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/01_home_tab.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/01_home_tab.png
+   ✅ OpenCV-Graustufe: 20 semantische Unterschiede (45.71ms)
+   ✅ Pixel-Matching: 20 semantische Unterschiede (67.39ms)
+   📊 Vergleich: CV=20 Diffs, Pixel=20 Diffs | CV:45.71ms vs Pixel:67.39ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/language_button.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/language_button.png
+   ✅ OpenCV-Graustufe: 18 semantische Unterschiede (45.03ms)
+   ✅ Pixel-Matching: 18 semantische Unterschiede (63.79ms)
+   📊 Vergleich: CV=18 Diffs, Pixel=18 Diffs | CV:45.03ms vs Pixel:63.79ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/login_field.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/login_field.png
+   ✅ OpenCV-Graustufe: 5 semantische Unterschiede (36.88ms)
+   ✅ Pixel-Matching: 5 semantische Unterschiede (57.24ms)
+   📊 Vergleich: CV=5 Diffs, Pixel=5 Diffs | CV:36.88ms vs Pixel:57.24ms
+🔍 Vergleiche: /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_DE_DE/13_language_choice.png vs /Users/taylorzhuang/Auto-Screen/ff3/runs/A1/screenshots/baseline_ZH_TW/13_language_choice.png
+   ✅ OpenCV-Graustufe: 26 semantische Unterschiede (43.90ms)
+   ✅ Pixel-Matching: 26 semantische Unterschiede (64.34ms)
+   📊 Vergleich: CV=26 Diffs, Pixel=26 Diffs | CV:43.90ms vs Pixel:64.34ms
+296 Boxen: V 58, L 238
+🔄 Loading local triage model: Qwen/Qwen3-VL-4B-Instruct ...
+Loading weights:   0%|          | 0/713 [00:00<?, ?it/s]Loading weights: 100%|██████████| 713/713 [00:00<00:00, 10292.43it/s]
+✅ Triage model loaded
+1/296 V baseline_DE_DE 06_vehicle_tab [305, 245, 577, 62] -> defect
+2/296 V baseline_DE_DE 07_settings_tab [66, 539, 1073, 50] -> acceptable
+3/296 V baseline_DE_DE 07_settings_tab [58, 676, 1090, 20] -> acceptable
+4/296 V baseline_DE_DE 07_settings_tab [100, 738, 64, 64] -> acceptable
+5/296 V baseline_DE_DE 07_settings_tab [205, 745, 183, 46] -> acceptable
+6/296 V baseline_DE_DE 07_settings_tab [58, 843, 1090, 20] -> acceptable
+7/296 V baseline_DE_DE 07_settings_tab [58, 901, 1090, 20] -> acceptable
+8/296 V baseline_DE_DE 07_settings_tab [97, 966, 70, 58] -> acceptable
+9/296 V baseline_DE_DE 07_settings_tab [205, 970, 230, 46] -> acceptable
+10/296 V baseline_DE_DE 07_settings_tab [58, 1068, 1090, 20] -> acceptable
+11/296 V baseline_DE_DE 07_settings_tab [429, 1259, 36, 50] -> acceptable
+12/296 V baseline_DE_DE 07_settings_tab [502, 1263, 297, 49] -> acceptable
+13/296 V baseline_DE_DE 01_home_tab [361, 346, 641, 50] -> acceptable
+14/296 V baseline_DE_DE 01_home_tab [1024, 347, 86, 39] -> defect
+15/296 V baseline_DE_DE 01_home_tab [1137, 357, 25, 28] -> defect
+16/296 V baseline_DE_DE 01_home_tab [488, 875, 438, 79] -> acceptable
+17/296 V baseline_DE_DE 01_home_tab [95, 876, 340, 61] -> acceptable
+18/296 V baseline_DE_DE 01_home_tab [94, 1020, 1018, 96] -> acceptable
+19/296 V baseline_DE_DE 01_home_tab [983, 1142, 62, 68] -> acceptable
+20/296 V baseline_DE_DE 01_home_tab [156, 1147, 364, 57] -> acceptable
+21/296 V baseline_DE_DE 01_home_tab [94, 1236, 1018, 34] -> acceptable
+22/296 V baseline_DE_DE 01_home_tab [96, 1655, 315, 62] -> acceptable
+23/296 V baseline_DE_DE 01_home_tab [462, 1656, 162, 78] -> acceptable
+24/296 V baseline_DE_DE language_button [434, 643, 339, 68] -> acceptable
+25/296 V baseline_DE_DE language_button [779, 779, 88, 89] -> acceptable
+26/296 V baseline_DE_DE language_button [274, 785, 459, 89] -> acceptable
+27/296 V baseline_DE_DE language_button [500, 1003, 204, 67] -> acceptable
+28/296 V baseline_DE_DE language_button [58, 1109, 1090, 119] -> acceptable
+29/296 V baseline_DE_DE language_button [90, 1328, 709, 67] -> acceptable
+30/296 V baseline_DE_DE language_button [58, 1439, 1090, 20] -> acceptable
+31/296 V baseline_DE_DE language_button [400, 1476, 70, 46] -> acceptable
+32/296 V baseline_DE_DE language_button [494, 1477, 301, 41] -> acceptable
+33/296 V baseline_DE_DE language_button [58, 1538, 1090, 20] -> acceptable
+34/296 V baseline_DE_DE language_button [450, 1604, 305, 51] -> acceptable
+35/296 V baseline_DE_DE language_button [552, 1768, 105, 55] -> acceptable
+36/296 V baseline_DE_DE language_button [58, 1874, 1090, 119] -> defect
+37/296 V baseline_DE_DE language_button [58, 2018, 1090, 119] -> acceptable
+38/296 V baseline_DE_DE login_field [362, 245, 454, 62] -> acceptable
+39/296 V baseline_DE_DE 13_language_choice [435, 643, 337, 68] -> acceptable
+40/296 V baseline_DE_DE 13_language_choice [779, 779, 88, 89] -> acceptable
+41/296 V baseline_DE_DE 13_language_choice [274, 785, 459, 89] -> acceptable
+42/296 V baseline_DE_DE 13_language_choice [193, 1007, 663, 58] -> defect
+43/296 V baseline_DE_DE 13_language_choice [58, 1110, 63, 17] -> acceptable
+44/296 V baseline_DE_DE 13_language_choice [1085, 1110, 63, 17] -> acceptable
+45/296 V baseline_DE_DE 13_language_choice [193, 1178, 182, 48] -> acceptable
+46/296 V baseline_DE_DE 13_language_choice [58, 1210, 64, 17] -> acceptable
+47/296 V baseline_DE_DE 13_language_choice [1084, 1210, 64, 17] -> acceptable
+48/296 V baseline_DE_DE 13_language_choice [191, 1321, 204, 41] -> acceptable
+49/296 V baseline_DE_DE 13_language_choice [90, 1328, 32, 47] -> acceptable
+50/296 V baseline_DE_DE 13_language_choice [58, 1440, 64, 17] -> acceptable
+51/296 V baseline_DE_DE 13_language_choice [1084, 1440, 64, 17] -> acceptable
+52/296 V baseline_DE_DE 13_language_choice [194, 1465, 274, 47] -> acceptable
+53/296 V baseline_DE_DE 13_language_choice [58, 1540, 64, 17] -> acceptable
+54/296 V baseline_DE_DE 13_language_choice [1084, 1540, 64, 17] -> acceptable
+55/296 V baseline_DE_DE 13_language_choice [194, 1609, 274, 47] -> acceptable
+56/296 V baseline_DE_DE 13_language_choice [552, 1770, 105, 53] -> acceptable
+57/296 V baseline_DE_DE 13_language_choice [58, 1875, 1090, 117] -> defect
+58/296 V baseline_DE_DE 13_language_choice [58, 2019, 1090, 117] -> acceptable
+59/296 L baseline_EN_US 06_vehicle_tab [423, 245, 361, 62] -> acceptable
+60/296 L baseline_EN_US 06_vehicle_tab [293, 390, 621, 45] -> acceptable
+61/296 L baseline_EN_US 06_vehicle_tab [535, 2454, 135, 43] -> acceptable
+62/296 L baseline_EN_US 07_settings_tab [363, 245, 481, 62] -> acceptable
+63/296 L baseline_EN_US 07_settings_tab [66, 482, 1073, 107] -> acceptable
+64/296 L baseline_EN_US 07_settings_tab [204, 745, 184, 50] -> acceptable
+65/296 L baseline_EN_US 07_settings_tab [204, 970, 287, 50] -> acceptable
+66/296 L baseline_EN_US 07_settings_tab [429, 1259, 370, 47] -> acceptable
+67/296 L baseline_EN_US 07_settings_tab [62, 2165, 1082, 121] -> acceptable
+68/296 L baseline_EN_US 07_settings_tab [959, 2454, 166, 44] -> acceptable
+69/296 L baseline_EN_US 01_home_tab [0, 184, 1206, 274] -> acceptable
+70/296 L baseline_EN_US 01_home_tab [434, 650, 337, 60] -> acceptable
+71/296 L baseline_EN_US 01_home_tab [95, 785, 703, 169] -> acceptable
+72/296 L baseline_EN_US 01_home_tab [94, 1009, 610, 61] -> acceptable
+73/296 L baseline_EN_US 01_home_tab [58, 1082, 1090, 184] -> acceptable
+74/296 L baseline_EN_US 01_home_tab [441, 1334, 322, 48] -> acceptable
+75/296 L baseline_EN_US 01_home_tab [58, 1440, 1090, 111] -> acceptable
+76/296 L baseline_EN_US 01_home_tab [469, 1604, 267, 36] -> acceptable
+77/296 L baseline_EN_US 01_home_tab [96, 1655, 528, 77] -> acceptable
+78/296 L baseline_EN_US 01_home_tab [58, 1769, 1090, 361] -> acceptable
+79/296 L baseline_EN_US 01_home_tab [747, 2380, 160, 118] -> acceptable
+80/296 L baseline_EN_US 01_home_tab [78, 2382, 142, 107] -> acceptable
+81/296 L baseline_EN_US 01_home_tab [297, 2400, 64, 64] -> acceptable
+82/296 L baseline_EN_US 01_home_tab [406, 2400, 65, 64] -> acceptable
+83/296 L baseline_EN_US 01_home_tab [519, 2409, 58, 46] -> acceptable
+84/296 L baseline_EN_US 01_home_tab [629, 2409, 58, 46] -> acceptable
+85/296 L baseline_EN_US language_button [432, 245, 343, 62] -> acceptable
+86/296 L baseline_EN_US language_button [434, 649, 339, 62] -> acceptable
+87/296 L baseline_EN_US language_button [611, 785, 97, 89] -> acceptable
+88/296 L baseline_EN_US language_button [363, 811, 211, 44] -> acceptable
+89/296 L baseline_EN_US language_button [463, 1140, 272, 64] -> acceptable
+90/296 L baseline_EN_US language_button [405, 1334, 394, 61] -> acceptable
+91/296 L baseline_EN_US language_button [450, 1604, 305, 45] -> acceptable
+92/296 L baseline_EN_US language_button [437, 1899, 66, 64] -> acceptable
+93/296 L baseline_EN_US language_button [530, 1912, 231, 43] -> acceptable
+94/296 L baseline_EN_US language_button [371, 2043, 66, 64] -> acceptable
+95/296 L baseline_EN_US language_button [457, 2056, 376, 35] -> acceptable
+96/296 L baseline_EN_US language_button [702, 2453, 241, 45] -> acceptable
+97/296 L baseline_EN_US login_field [95, 399, 453, 38] -> acceptable
+98/296 L baseline_EN_US login_field [461, 727, 284, 112] -> acceptable
+99/296 L baseline_EN_US 13_language_choice [432, 245, 343, 62] -> acceptable
+100/296 L baseline_EN_US 13_language_choice [435, 649, 337, 62] -> acceptable
+101/296 L baseline_EN_US 13_language_choice [612, 785, 96, 89] -> acceptable
+102/296 L baseline_EN_US 13_language_choice [363, 811, 211, 44] -> acceptable
+103/296 L baseline_EN_US 13_language_choice [254, 1015, 402, 50] -> acceptable
+104/296 L baseline_EN_US 13_language_choice [438, 1901, 65, 61] -> acceptable
+105/296 L baseline_EN_US 13_language_choice [531, 1912, 230, 43] -> acceptable
+106/296 L baseline_EN_US 13_language_choice [371, 2043, 66, 64] -> acceptable
+107/296 L baseline_EN_US 13_language_choice [458, 2056, 374, 34] -> acceptable
+108/296 L baseline_EN_US 13_language_choice [702, 2454, 241, 43] -> acceptable
+109/296 L baseline_ZH_CN 06_vehicle_tab [411, 239, 382, 68] -> acceptable
+110/296 L baseline_ZH_CN 06_vehicle_tab [293, 390, 621, 49] -> acceptable
+111/296 L baseline_ZH_CN 06_vehicle_tab [574, 2380, 58, 54] -> acceptable
+112/296 L baseline_ZH_CN 06_vehicle_tab [297, 2392, 64, 72] -> acceptable
+113/296 L baseline_ZH_CN 06_vehicle_tab [847, 2393, 60, 70] -> acceptable
+114/296 L baseline_ZH_CN 06_vehicle_tab [78, 2395, 63, 45] -> acceptable
+115/296 L baseline_ZH_CN 06_vehicle_tab [1061, 2398, 70, 60] -> acceptable
+116/296 L baseline_ZH_CN 06_vehicle_tab [535, 2448, 135, 50] -> acceptable
+117/296 L baseline_ZH_CN 07_settings_tab [363, 239, 481, 68] -> acceptable
+118/296 L baseline_ZH_CN 07_settings_tab [66, 482, 1073, 107] -> acceptable
+119/296 L baseline_ZH_CN 07_settings_tab [58, 628, 1090, 168] -> acceptable
+120/296 L baseline_ZH_CN 07_settings_tab [58, 810, 1090, 47] -> acceptable
+121/296 L baseline_ZH_CN 07_settings_tab [58, 868, 1090, 47] -> acceptable
+122/296 L baseline_ZH_CN 07_settings_tab [205, 937, 230, 73] -> acceptable
+123/296 L baseline_ZH_CN 07_settings_tab [97, 940, 70, 78] -> acceptable
+124/296 L baseline_ZH_CN 07_settings_tab [58, 1050, 1090, 32] -> acceptable
+125/296 L baseline_ZH_CN 07_settings_tab [485, 1241, 314, 65] -> acceptable
+126/296 L baseline_ZH_CN 07_settings_tab [429, 1259, 36, 44] -> acceptable
+127/296 L baseline_ZH_CN 07_settings_tab [62, 2165, 1081, 121] -> acceptable
+128/296 L baseline_ZH_CN 07_settings_tab [1006, 2377, 71, 60] -> defect
+129/296 L baseline_ZH_CN 07_settings_tab [297, 2392, 64, 72] -> acceptable
+130/296 L baseline_ZH_CN 07_settings_tab [738, 2393, 59, 70] -> acceptable
+131/296 L baseline_ZH_CN 07_settings_tab [78, 2395, 63, 45] -> acceptable
+132/296 L baseline_ZH_CN 07_settings_tab [519, 2401, 58, 54] -> acceptable
+133/296 L baseline_ZH_CN 07_settings_tab [959, 2448, 166, 50] -> acceptable
+134/296 L baseline_ZH_CN 01_home_tab [0, 184, 1206, 274] -> acceptable
+135/296 L baseline_ZH_CN 01_home_tab [542, 618, 121, 60] -> acceptable
+136/296 L baseline_ZH_CN 01_home_tab [609, 766, 88, 88] -> acceptable
+137/296 L baseline_ZH_CN 01_home_tab [373, 788, 189, 43] -> acceptable
+138/296 L baseline_ZH_CN 01_home_tab [95, 877, 703, 77] -> acceptable
+139/296 L baseline_ZH_CN 01_home_tab [543, 989, 120, 60] -> acceptable
+140/296 L baseline_ZH_CN 01_home_tab [94, 1020, 405, 50] -> acceptable
+141/296 L baseline_ZH_CN 01_home_tab [58, 1082, 1090, 184] -> acceptable
+142/296 L baseline_ZH_CN 01_home_tab [481, 1325, 243, 60] -> acceptable
+143/296 L baseline_ZH_CN 01_home_tab [58, 1444, 1090, 112] -> acceptable
+144/296 L baseline_ZH_CN 01_home_tab [96, 1610, 590, 122] -> acceptable
+145/296 L baseline_ZH_CN 01_home_tab [58, 1778, 1090, 254] -> acceptable
+146/296 L baseline_ZH_CN 01_home_tab [58, 2044, 1090, 112] -> acceptable
+147/296 L baseline_ZH_CN 01_home_tab [779, 2372, 128, 118] -> acceptable
+148/296 L baseline_ZH_CN 01_home_tab [78, 2382, 142, 107] -> acceptable
+149/296 L baseline_ZH_CN 01_home_tab [297, 2392, 64, 64] -> acceptable
+150/296 L baseline_ZH_CN 01_home_tab [1061, 2398, 70, 60] -> acceptable
+151/296 L baseline_ZH_CN 01_home_tab [406, 2400, 65, 64] -> acceptable
+152/296 L baseline_ZH_CN 01_home_tab [519, 2401, 58, 46] -> acceptable
+153/296 L baseline_ZH_CN 01_home_tab [629, 2409, 58, 46] -> acceptable
+154/296 L baseline_ZH_CN language_button [432, 240, 343, 67] -> acceptable
+155/296 L baseline_ZH_CN language_button [434, 618, 339, 93] -> acceptable
+156/296 L baseline_ZH_CN language_button [609, 766, 99, 108] -> acceptable
+157/296 L baseline_ZH_CN language_button [363, 788, 211, 58] -> acceptable
+158/296 L baseline_ZH_CN language_button [500, 989, 204, 81] -> acceptable
+159/296 L baseline_ZH_CN language_button [58, 1108, 1090, 120] -> acceptable
+160/296 L baseline_ZH_CN language_button [405, 1325, 394, 70] -> acceptable
+161/296 L baseline_ZH_CN language_button [58, 1439, 1090, 18] -> acceptable
+162/296 L baseline_ZH_CN language_button [400, 1476, 395, 48] -> acceptable
+163/296 L baseline_ZH_CN language_button [58, 1538, 1090, 18] -> defect
+164/296 L baseline_ZH_CN language_button [450, 1604, 305, 50] -> acceptable
+165/296 L baseline_ZH_CN language_button [541, 1768, 122, 74] -> acceptable
+166/296 L baseline_ZH_CN language_button [58, 1874, 1090, 282] -> acceptable
+167/296 L baseline_ZH_CN language_button [702, 2372, 241, 126] -> acceptable
+168/296 L baseline_ZH_CN language_button [297, 2392, 64, 72] -> acceptable
+169/296 L baseline_ZH_CN language_button [78, 2395, 63, 45] -> acceptable
+170/296 L baseline_ZH_CN language_button [1061, 2398, 70, 60] -> acceptable
+171/296 L baseline_ZH_CN language_button [519, 2401, 58, 54] -> acceptable
+172/296 L baseline_ZH_CN login_field [533, 239, 141, 68] -> acceptable
+173/296 L baseline_ZH_CN login_field [95, 392, 453, 45] -> acceptable
+174/296 L baseline_ZH_CN login_field [95, 482, 1017, 53] -> acceptable
+175/296 L baseline_ZH_CN login_field [58, 579, 1090, 20] -> acceptable
+176/296 L baseline_ZH_CN login_field [461, 727, 284, 118] -> acceptable
+177/296 L baseline_ZH_CN 13_language_choice [432, 241, 343, 66] -> acceptable
+178/296 L baseline_ZH_CN 13_language_choice [435, 618, 337, 93] -> acceptable
+179/296 L baseline_ZH_CN 13_language_choice [609, 766, 99, 108] -> acceptable
+180/296 L baseline_ZH_CN 13_language_choice [363, 789, 211, 57] -> acceptable
+181/296 L baseline_ZH_CN 13_language_choice [254, 1011, 402, 54] -> acceptable
+182/296 L baseline_ZH_CN 13_language_choice [58, 1108, 127, 19] -> acceptable
+183/296 L baseline_ZH_CN 13_language_choice [1021, 1108, 127, 19] -> acceptable
+184/296 L baseline_ZH_CN 13_language_choice [256, 1178, 119, 45] -> acceptable
+185/296 L baseline_ZH_CN 13_language_choice [58, 1208, 127, 19] -> acceptable
+186/296 L baseline_ZH_CN 13_language_choice [1021, 1208, 127, 19] -> acceptable
+187/296 L baseline_ZH_CN 13_language_choice [254, 1321, 141, 38] -> acceptable
+188/296 L baseline_ZH_CN 13_language_choice [58, 1440, 127, 16] -> acceptable
+189/296 L baseline_ZH_CN 13_language_choice [1021, 1440, 127, 16] -> acceptable
+190/296 L baseline_ZH_CN 13_language_choice [257, 1465, 77, 44] -> acceptable
+191/296 L baseline_ZH_CN 13_language_choice [360, 1465, 108, 44] -> acceptable
+192/296 L baseline_ZH_CN 13_language_choice [58, 1540, 127, 16] -> acceptable
+193/296 L baseline_ZH_CN 13_language_choice [1021, 1540, 127, 16] -> acceptable
+194/296 L baseline_ZH_CN 13_language_choice [257, 1609, 77, 44] -> acceptable
+195/296 L baseline_ZH_CN 13_language_choice [360, 1609, 108, 44] -> acceptable
+196/296 L baseline_ZH_CN 13_language_choice [542, 1770, 120, 71] -> acceptable
+197/296 L baseline_ZH_CN 13_language_choice [58, 1875, 1090, 281] -> acceptable
+198/296 L baseline_ZH_CN 13_language_choice [702, 2373, 241, 124] -> acceptable
+199/296 L baseline_ZH_CN 13_language_choice [297, 2392, 64, 72] -> acceptable
+200/296 L baseline_ZH_CN 13_language_choice [79, 2396, 62, 44] -> acceptable
+201/296 L baseline_ZH_CN 13_language_choice [1062, 2398, 69, 60] -> acceptable
+202/296 L baseline_ZH_CN 13_language_choice [520, 2401, 57, 54] -> acceptable
+203/296 L baseline_ZH_TW 06_vehicle_tab [411, 239, 384, 68] -> acceptable
+204/296 L baseline_ZH_TW 06_vehicle_tab [293, 390, 621, 49] -> acceptable
+205/296 L baseline_ZH_TW 06_vehicle_tab [574, 2380, 58, 54] -> acceptable
+206/296 L baseline_ZH_TW 06_vehicle_tab [297, 2392, 64, 72] -> acceptable
+207/296 L baseline_ZH_TW 06_vehicle_tab [847, 2393, 60, 70] -> acceptable
+208/296 L baseline_ZH_TW 06_vehicle_tab [78, 2395, 63, 45] -> acceptable
+209/296 L baseline_ZH_TW 06_vehicle_tab [1061, 2398, 70, 60] -> acceptable
+210/296 L baseline_ZH_TW 06_vehicle_tab [517, 2448, 171, 50] -> acceptable
+211/296 L baseline_ZH_TW 07_settings_tab [363, 239, 481, 68] -> acceptable
+212/296 L baseline_ZH_TW 07_settings_tab [66, 482, 1073, 107] -> acceptable
+213/296 L baseline_ZH_TW 07_settings_tab [58, 628, 1090, 168] -> acceptable
+214/296 L baseline_ZH_TW 07_settings_tab [58, 810, 1090, 47] -> acceptable
+215/296 L baseline_ZH_TW 07_settings_tab [58, 868, 1090, 47] -> acceptable
+216/296 L baseline_ZH_TW 07_settings_tab [205, 936, 230, 74] -> acceptable
+217/296 L baseline_ZH_TW 07_settings_tab [97, 940, 70, 78] -> acceptable
+218/296 L baseline_ZH_TW 07_settings_tab [58, 1050, 1090, 32] -> acceptable
+219/296 L baseline_ZH_TW 07_settings_tab [485, 1241, 314, 65] -> acceptable
+220/296 L baseline_ZH_TW 07_settings_tab [429, 1259, 36, 44] -> acceptable
+221/296 L baseline_ZH_TW 07_settings_tab [62, 2165, 1081, 121] -> acceptable
+222/296 L baseline_ZH_TW 07_settings_tab [1006, 2377, 71, 60] -> defect
+223/296 L baseline_ZH_TW 07_settings_tab [297, 2392, 64, 72] -> acceptable
+224/296 L baseline_ZH_TW 07_settings_tab [738, 2393, 59, 70] -> acceptable
+225/296 L baseline_ZH_TW 07_settings_tab [78, 2395, 63, 45] -> acceptable
+226/296 L baseline_ZH_TW 07_settings_tab [519, 2401, 58, 54] -> acceptable
+227/296 L baseline_ZH_TW 07_settings_tab [959, 2448, 166, 50] -> acceptable
+228/296 L baseline_ZH_TW 01_home_tab [0, 184, 1206, 274] -> acceptable
+229/296 L baseline_ZH_TW 01_home_tab [542, 618, 121, 59] -> acceptable
+230/296 L baseline_ZH_TW 01_home_tab [609, 766, 88, 88] -> acceptable
+231/296 L baseline_ZH_TW 01_home_tab [374, 788, 188, 43] -> acceptable
+232/296 L baseline_ZH_TW 01_home_tab [95, 877, 703, 77] -> acceptable
+233/296 L baseline_ZH_TW 01_home_tab [543, 989, 120, 60] -> acceptable
+234/296 L baseline_ZH_TW 01_home_tab [94, 1020, 405, 50] -> acceptable
+235/296 L baseline_ZH_TW 01_home_tab [58, 1082, 1090, 184] -> acceptable
+236/296 L baseline_ZH_TW 01_home_tab [481, 1325, 243, 61] -> acceptable
+237/296 L baseline_ZH_TW 01_home_tab [58, 1444, 1090, 112] -> acceptable
+238/296 L baseline_ZH_TW 01_home_tab [96, 1610, 600, 122] -> acceptable
+239/296 L baseline_ZH_TW 01_home_tab [58, 1778, 1090, 254] -> acceptable
+240/296 L baseline_ZH_TW 01_home_tab [58, 2044, 1090, 112] -> acceptable
+241/296 L baseline_ZH_TW 01_home_tab [780, 2372, 127, 118] -> acceptable
+242/296 L baseline_ZH_TW 01_home_tab [78, 2382, 142, 107] -> acceptable
+243/296 L baseline_ZH_TW 01_home_tab [297, 2392, 64, 64] -> acceptable
+244/296 L baseline_ZH_TW 01_home_tab [1061, 2398, 70, 60] -> acceptable
+245/296 L baseline_ZH_TW 01_home_tab [406, 2400, 65, 64] -> acceptable
+246/296 L baseline_ZH_TW 01_home_tab [519, 2401, 58, 46] -> acceptable
+247/296 L baseline_ZH_TW 01_home_tab [629, 2409, 58, 46] -> acceptable
+248/296 L baseline_ZH_TW language_button [432, 239, 343, 68] -> acceptable
+249/296 L baseline_ZH_TW language_button [434, 618, 339, 93] -> acceptable
+250/296 L baseline_ZH_TW language_button [609, 766, 99, 108] -> acceptable
+251/296 L baseline_ZH_TW language_button [363, 788, 211, 58] -> acceptable
+252/296 L baseline_ZH_TW language_button [500, 989, 204, 81] -> acceptable
+253/296 L baseline_ZH_TW language_button [58, 1108, 1090, 120] -> acceptable
+254/296 L baseline_ZH_TW language_button [405, 1325, 394, 70] -> acceptable
+255/296 L baseline_ZH_TW language_button [58, 1439, 1090, 18] -> acceptable
+256/296 L baseline_ZH_TW language_button [400, 1476, 395, 48] -> acceptable
+257/296 L baseline_ZH_TW language_button [58, 1538, 1090, 18] -> defect
+258/296 L baseline_ZH_TW language_button [450, 1604, 305, 50] -> acceptable
+259/296 L baseline_ZH_TW language_button [543, 1768, 120, 74] -> acceptable
+260/296 L baseline_ZH_TW language_button [58, 1874, 1090, 282] -> acceptable
+261/296 L baseline_ZH_TW language_button [702, 2372, 241, 126] -> acceptable
+262/296 L baseline_ZH_TW language_button [297, 2392, 64, 72] -> acceptable
+263/296 L baseline_ZH_TW language_button [78, 2395, 63, 45] -> acceptable
+264/296 L baseline_ZH_TW language_button [1061, 2398, 70, 60] -> acceptable
+265/296 L baseline_ZH_TW language_button [519, 2401, 58, 54] -> acceptable
+266/296 L baseline_ZH_TW login_field [533, 239, 141, 68] -> acceptable
+267/296 L baseline_ZH_TW login_field [95, 393, 453, 44] -> acceptable
+268/296 L baseline_ZH_TW login_field [95, 482, 1017, 53] -> acceptable
+269/296 L baseline_ZH_TW login_field [58, 579, 1090, 20] -> acceptable
+270/296 L baseline_ZH_TW login_field [461, 727, 284, 118] -> acceptable
+271/296 L baseline_ZH_TW 13_language_choice [432, 239, 343, 68] -> acceptable
+272/296 L baseline_ZH_TW 13_language_choice [435, 618, 337, 93] -> acceptable
+273/296 L baseline_ZH_TW 13_language_choice [609, 766, 99, 108] -> acceptable
+274/296 L baseline_ZH_TW 13_language_choice [363, 788, 211, 58] -> acceptable
+275/296 L baseline_ZH_TW 13_language_choice [254, 1011, 402, 54] -> acceptable
+276/296 L baseline_ZH_TW 13_language_choice [58, 1108, 127, 19] -> acceptable
+277/296 L baseline_ZH_TW 13_language_choice [1021, 1108, 127, 19] -> acceptable
+278/296 L baseline_ZH_TW 13_language_choice [256, 1178, 119, 45] -> acceptable
+279/296 L baseline_ZH_TW 13_language_choice [58, 1208, 127, 19] -> acceptable
+280/296 L baseline_ZH_TW 13_language_choice [1021, 1208, 127, 19] -> acceptable
+281/296 L baseline_ZH_TW 13_language_choice [254, 1321, 141, 38] -> acceptable
+282/296 L baseline_ZH_TW 13_language_choice [58, 1440, 127, 16] -> acceptable
+283/296 L baseline_ZH_TW 13_language_choice [1021, 1440, 127, 16] -> acceptable
+284/296 L baseline_ZH_TW 13_language_choice [257, 1465, 77, 44] -> acceptable
+285/296 L baseline_ZH_TW 13_language_choice [360, 1465, 108, 44] -> acceptable
+286/296 L baseline_ZH_TW 13_language_choice [58, 1540, 127, 16] -> acceptable
+287/296 L baseline_ZH_TW 13_language_choice [1021, 1540, 127, 16] -> acceptable
+288/296 L baseline_ZH_TW 13_language_choice [257, 1609, 77, 44] -> acceptable
+289/296 L baseline_ZH_TW 13_language_choice [360, 1609, 108, 44] -> acceptable
+290/296 L baseline_ZH_TW 13_language_choice [543, 1770, 120, 71] -> acceptable
+291/296 L baseline_ZH_TW 13_language_choice [58, 1875, 1090, 281] -> acceptable
+292/296 L baseline_ZH_TW 13_language_choice [702, 2373, 241, 124] -> acceptable
+293/296 L baseline_ZH_TW 13_language_choice [297, 2392, 64, 72] -> acceptable
+294/296 L baseline_ZH_TW 13_language_choice [79, 2396, 62, 44] -> acceptable
+295/296 L baseline_ZH_TW 13_language_choice [1062, 2398, 69, 60] -> acceptable
+296/296 L baseline_ZH_TW 13_language_choice [520, 2401, 57, 54] -> acceptable
+{
+  "boxes": {
+    "V_total": 58,
+    "V_defect_boxes": 14,
+    "V_other_boxes": 44,
+    "L_total": 238
+  },
+  "verdicts": {
+    "V": {
+      "defect": 6,
+      "acceptable": 52
+    },
+    "L": {
+      "acceptable": 234,
+      "defect": 4
+    }
+  },
+  "1_defect_boxes_rated_defect": "5/14 (35.7%)",
+  "1_defect_boxes_rated_defect_or_unclear": "5/14 (35.7%)",
+  "2_defects_with_box_defect": "4/10 (40.0%)",
+  "2_defects_with_box_defect_or_unclear": "4/10 (40.0%)",
+  "2_defects_lost_if_only_defect_or_unclear_reviewed": [
+    "D04",
+    "D06",
+    "D10",
+    "D11",
+    "D14",
+    "D15"
+  ],
+  "3_V_other_boxes_acceptable": "43/44 (97.7%)",
+  "3_L_boxes_acceptable": "234/238 (98.3%)",
+  "4_boxes_skippable_acceptable": "286/296 (96.6%)",
+  "4_defects_lost_when_skipping": [
+    "D04",
+    "D06",
+    "D10",
+    "D11",
+    "D14",
+    "D15"
+  ]
+}

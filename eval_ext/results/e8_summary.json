@@ -1,0 +1,37 @@
+{
+  "steps_with_hint": 398,
+  "correct_without_hint": 383,
+  "correct_e5d": 398,
+  "only_e5d_correct": 15,
+  "only_e8_correct": 0,
+  "mcnemar_exact_p": 6.1e-05,
+  "fallback_or_error": 0,
+  "by_instruction": {
+    "Bluesky | Click the input field under header 'Password'": "1/1",
+    "Bluesky | click the '@' icon in the bottom bar": "15/15",
+    "Bluesky | click the 'Notification' icon in the bottom bar": "15/15",
+    "Bluesky | click the 'Search' icon in the bottom bar": "15/15",
+    "Bluesky | click the chat bubble icon in the bottom bar": "15/15",
+    "Bluesky | click the home icon in the bottom bar": "15/15",
+    "Bluesky | click the menu icon in the top left corner": "45/45",
+    "Bluesky | go to # page in the top right corner.": "0/15",
+    "Bluesky | go to the back icon in the top left corner.": "45/45",
+    "Bluesky | go to the home icon in the bottom bar.": "15/15",
+    "KatApp | Click the Home icon (1st tab from left) in the bottom navigation bar": "20/20",
+    "KatApp | Click the Save button below the input field": "21/21",
+    "KatApp | Click the Scan icon (2nd tab from left) in the bottom navigation bar": "20/20",
+    "KatApp | Click the Settings gear icon (4th tab from left) in the bottom navigation bar": "40/40",
+    "KatApp | Click the Triages overview icon (3rd tab in the center) in the bottom navigation bar": "20/20",
+    "KatApp | Click the Vehicle truck icon (5th tab on the far right) in the bottom navigation bar": "20/20",
+    "KatApp | Click the triage location dropdown menu in the upper-middle area": "20/20",
+    "KatApp | Enter activation token in the text input field in the center": "21/21",
+    "KatApp | Select the Incident option labeled 'Incident' (1st option in the dropdown list)": "5/5",
+    "KatApp | Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)": "5/5",
+    "KatApp | Select the Incident option labeled '事件' (1st option in the dropdown list)": "10/10"
+  },
+  "flows_without_error": {
+    "KatApp": "20/20",
+    "Bluesky": "0/15"
+  },
+  "median_time_ms": 1996
+}

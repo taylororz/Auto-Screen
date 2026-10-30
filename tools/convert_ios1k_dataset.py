@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-🚀 Pure Computer Vision (OpenCV) + AI (Apple Vision OCR + GPT-4o-mini) UI Grounding Pipeline for iOS-1K
-Replaces legacy heuristics with an end-to-end CV + AI perception and semantic decision engine:
-1. OpenCV visual contour and edge extraction (buttons, cards, pills, tabs, inputs)
-2. Native Apple Vision OCR (swift_ocr.swift) for high-precision multilingual text bounding boxes
-3. OpenAI GPT-4o-mini multimodal reasoning for occlusion filtering, role classification, and instruction synthesis
-4. Protection for human-reviewed ground truth screens (0001 - 0300)
-"""
+"""OpenCV, Apple Vision OCR, and GPT-4o-mini UI grounding pipeline for iOS-1K."""
 
 import os
 import sys
@@ -613,17 +606,7 @@ def fuse_cv_and_ocr(cv_boxes, ocr_items, img_w=828, img_h=1792):
 
 
 def clean_instruction(el_type, text, raw_inst, item_idx=None, total_items=None):
-    """
-    Ensures 100% adherence to standard dataset instruction conventions (Aufgabenanweisung):
-    - Back button: "Click the back button"
-    - Tab: "Click the '<Name>' tab"
-    - Play button: "Click the first/second play button" or "Click the play button"
-    - Add button: "Click the first/second add button" or "Click the add button"
-    - More options: "Click the '•••' more options button for the first release" or "Click the '•••' more options button"
-    - Card: "Click the '<Name>' card" or "Click the first release '<Title>'"
-    - Button: "Click the '<Name>' button"
-    - Input: "Click the '<Name>' input field"
-    """
+    """Normalizes instruction text to standard dataset conventions."""
     txt = (text or "").strip()
     low_t = txt.lower()
     raw = (raw_inst or "").strip()
@@ -765,7 +748,7 @@ def ai_semantic_grounding(image_path, candidates, model="gpt-4o-mini"):
         "   - Filter chips / pills (e.g. 'Collections', 'Pins', 'Notes', 'Male', 'Female'): mark as 'Button'.\n"
         "   - Bottom Tab bar items (e.g. Home, Planner, Library, Stats): mark each tab with its actual visible label as 'Tab'!\n"
         "   - Inputs / Search bars: mark as 'Input'.\n"
-        "3. ACCURATE INSTRUCTION SYNTAX (Aufgabenanweisung):\n"
+        "3. ACCURATE INSTRUCTION SYNTAX:\n"
         "   Every instruction MUST start with 'Click the ...' following these exact conventions:\n"
         "   - Back button: 'Click the back button'\n"
         "   - Button: 'Click the '<Name>' button' (e.g. 'Click the 'Continue' button', 'Click the 'Get Started' button')\n"

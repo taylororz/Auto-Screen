@@ -1,0 +1,352 @@
+[
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 0,
+    "language": "English",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN_US/home_tab_20261030_051439_428.png",
+    "nr": 1
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 0,
+    "language": "German",
+    "steps": 3,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE_DE/initial_login_save_button_20261030_051417_525.png",
+    "nr": 2
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 0,
+    "language": "中文（简体）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/home_tab_20261030_051451_797.png",
+    "nr": 3
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 0,
+    "language": "中文（繁體）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_TW/home_tab_20261030_051504_055.png",
+    "nr": 4
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 1,
+    "language": "English",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN_US/home_tab_20261030_051537_972.png",
+    "nr": 5
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 1,
+    "language": "German",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE_DE/home_tab_20261030_051525_459.png",
+    "nr": 6
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 1,
+    "language": "中文（简体）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/home_tab_20261030_051550_395.png",
+    "nr": 7
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 1,
+    "language": "中文（繁體）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_TW/home_tab_20261030_051602_862.png",
+    "nr": 8
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 2,
+    "language": "English",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN_US/home_tab_20261030_051637_236.png",
+    "nr": 9
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 2,
+    "language": "German",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE_DE/home_tab_20261030_051624_444.png",
+    "nr": 10
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 2,
+    "language": "中文（简体）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/home_tab_20261030_051650_510.png",
+    "nr": 11
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 2,
+    "language": "中文（繁體）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_TW/home_tab_20261030_051703_405.png",
+    "nr": 12
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 3,
+    "language": "English",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN_US/home_tab_20261030_051737_694.png",
+    "nr": 13
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 3,
+    "language": "German",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE_DE/home_tab_20261030_051725_169.png",
+    "nr": 14
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 3,
+    "language": "中文（简体）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/home_tab_20261030_051750_181.png",
+    "nr": 15
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 3,
+    "language": "中文（繁體）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_TW/home_tab_20261030_051802_754.png",
+    "nr": 16
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 4,
+    "language": "English",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN_US/home_tab_20261030_051836_869.png",
+    "nr": 17
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 4,
+    "language": "German",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE_DE/home_tab_20261030_051824_404.png",
+    "nr": 18
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 4,
+    "language": "中文（简体）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/home_tab_20261030_051849_343.png",
+    "nr": 19
+  },
+  {
+    "model": "Basis SoM",
+    "app": "KatApp",
+    "run_id": "20261030_051338",
+    "loop_index": 4,
+    "language": "中文（繁體）",
+    "steps": 1,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_TW/home_tab_20261030_051901_963.png",
+    "nr": 20
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 0,
+    "language": "Chinese",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/open_app_menu_20261030_052644_986.png",
+    "nr": 21
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 0,
+    "language": "English",
+    "steps": 28,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN/go_to_notification_page_20261030_052129_993.png",
+    "nr": 22
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 0,
+    "language": "German",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE/open_app_menu_20261030_052411_924.png",
+    "nr": 23
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 1,
+    "language": "Chinese",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/open_app_menu_20261030_053301_341.png",
+    "nr": 24
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 1,
+    "language": "English",
+    "steps": 8,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN/go_to_Feeds_page_20261030_052831_469.png",
+    "nr": 25
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 1,
+    "language": "German",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE/open_app_menu_20261030_053032_339.png",
+    "nr": 26
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 2,
+    "language": "Chinese",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/open_app_menu_20261030_054013_104.png",
+    "nr": 27
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 2,
+    "language": "English",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN/open_app_menu_20261030_053539_528.png",
+    "nr": 28
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 2,
+    "language": "German",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE/open_app_menu_20261030_053749_075.png",
+    "nr": 29
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 3,
+    "language": "Chinese",
+    "steps": 8,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/go_to_Feeds_page_20261030_054514_745.png",
+    "nr": 30
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 3,
+    "language": "English",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN/open_app_menu_20261030_054241_202.png",
+    "nr": 31
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 3,
+    "language": "German",
+    "steps": 8,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE/go_to_Feeds_page_20261030_054403_006.png",
+    "nr": 32
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 4,
+    "language": "Chinese",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_ZH_CN/open_app_menu_20261030_055102_080.png",
+    "nr": 33
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 4,
+    "language": "English",
+    "steps": 8,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_EN/go_to_Feeds_page_20261030_054646_771.png",
+    "nr": 34
+  },
+  {
+    "model": "Basis SoM",
+    "app": "Bluesky",
+    "run_id": "20261030_051916",
+    "loop_index": 4,
+    "language": "German",
+    "steps": 22,
+    "image": "/Users/taylorzhuang/Auto-Screen/Qwen_untrain_e16/diff_results/states/baseline_DE/open_app_menu_20261030_054843_600.png",
+    "nr": 35
+  }
+]

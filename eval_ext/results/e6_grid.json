@@ -1,0 +1,50 @@
+{
+  "input": [
+    1206,
+    2622
+  ],
+  "SoM, max. 1600 px": {
+    "passed": [
+      735,
+      1600
+    ],
+    "processed_px": [
+      736,
+      1600
+    ],
+    "image_tokens": 1150
+  },
+  "SoM, Original": {
+    "passed": [
+      1206,
+      2622
+    ],
+    "processed_px": [
+      1216,
+      2624
+    ],
+    "image_tokens": 3116
+  },
+  "DG, max. 1280 px": {
+    "passed": [
+      588,
+      1280
+    ],
+    "processed_px": [
+      576,
+      1280
+    ],
+    "image_tokens": 720
+  },
+  "DG, Original": {
+    "passed": [
+      1206,
+      2622
+    ],
+    "processed_px": [
+      1216,
+      2624
+    ],
+    "image_tokens": 3116
+  }
+}

@@ -1,0 +1,857 @@
+[
+  {
+    "nr": 1,
+    "case": "ios1k_som_0074_2_106_141",
+    "image": "0074",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 2,
+    "case": "ios1k_som_0074_3_75_354",
+    "image": "0074",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 3,
+    "case": "ios1k_som_0157_4_418_1212",
+    "image": "0157",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 2,
+    "fallback": true
+  },
+  {
+    "nr": 4,
+    "case": "ios1k_som_0162_2_764_141",
+    "image": "0162",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 10,
+    "fallback": false
+  },
+  {
+    "nr": 5,
+    "case": "ios1k_som_0168_1_763_140",
+    "image": "0168",
+    "instruction": "Click the close button",
+    "gt_id": 1,
+    "pred_id": 1,
+    "fallback": true
+  },
+  {
+    "nr": 6,
+    "case": "ios1k_som_0168_2_91_214",
+    "image": "0168",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 7,
+    "case": "ios1k_som_0170_3_90_213",
+    "image": "0170",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 3,
+    "fallback": true
+  },
+  {
+    "nr": 8,
+    "case": "ios1k_som_0176_1_71_221",
+    "image": "0176",
+    "instruction": "Tap the search icon",
+    "gt_id": 1,
+    "pred_id": 14,
+    "fallback": false
+  },
+  {
+    "nr": 9,
+    "case": "ios1k_som_0221_2_747_144",
+    "image": "0221",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 10,
+    "case": "ios1k_som_0229_2_748_142",
+    "image": "0229",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 11,
+    "case": "ios1k_som_0253_2_148_263",
+    "image": "0253",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 12,
+    "case": "ios1k_som_0285_7_230_1292",
+    "image": "0285",
+    "instruction": "Click the close button",
+    "gt_id": 7,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 13,
+    "case": "ios1k_som_0286_2_739_142",
+    "image": "0286",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 14,
+    "case": "ios1k_som_0323_1_185_162",
+    "image": "0323",
+    "instruction": "Tap the search icon",
+    "gt_id": 1,
+    "pred_id": 7,
+    "fallback": true
+  },
+  {
+    "nr": 15,
+    "case": "ios1k_som_0353_7_775_589",
+    "image": "0353",
+    "instruction": "Click the back button",
+    "gt_id": 7,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 16,
+    "case": "ios1k_som_0368_2_603_283",
+    "image": "0368",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 18,
+    "fallback": false
+  },
+  {
+    "nr": 17,
+    "case": "ios1k_som_0371_3_415_1197",
+    "image": "0371",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 18,
+    "case": "ios1k_som_0380_3_474_130",
+    "image": "0380",
+    "instruction": "Tap the action icon",
+    "gt_id": 3,
+    "pred_id": 14,
+    "fallback": true
+  },
+  {
+    "nr": 19,
+    "case": "ios1k_som_0383_4_206_261",
+    "image": "0383",
+    "instruction": "Click the back button",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 20,
+    "case": "ios1k_som_0383_5_622_259",
+    "image": "0383",
+    "instruction": "Tap the action icon",
+    "gt_id": 5,
+    "pred_id": 4,
+    "fallback": false
+  },
+  {
+    "nr": 21,
+    "case": "ios1k_som_0388_16_415_1685",
+    "image": "0388",
+    "instruction": "Click the close button",
+    "gt_id": 16,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 22,
+    "case": "ios1k_som_0395_4_773_144",
+    "image": "0395",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 24,
+    "fallback": false
+  },
+  {
+    "nr": 23,
+    "case": "ios1k_som_0406_2_767_134",
+    "image": "0406",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 24,
+    "case": "ios1k_som_0406_3_55_132",
+    "image": "0406",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 25,
+    "case": "ios1k_som_0406_4_139_132",
+    "image": "0406",
+    "instruction": "Tap the search icon",
+    "gt_id": 4,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 26,
+    "case": "ios1k_som_0446_2_137_237",
+    "image": "0446",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 27,
+    "case": "ios1k_som_0446_3_501_239",
+    "image": "0446",
+    "instruction": "Tap the action icon",
+    "gt_id": 3,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 28,
+    "case": "ios1k_som_0460_2_684_151",
+    "image": "0460",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 29,
+    "case": "ios1k_som_0470_3_50_252",
+    "image": "0470",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 30,
+    "case": "ios1k_som_0471_3_776_151",
+    "image": "0471",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 31,
+    "case": "ios1k_som_0480_14_223_1713",
+    "image": "0480",
+    "instruction": "Click the close button",
+    "gt_id": 14,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 32,
+    "case": "ios1k_som_0480_15_613_1712",
+    "image": "0480",
+    "instruction": "Click the close button",
+    "gt_id": 15,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 33,
+    "case": "ios1k_som_0485_6_220_1672",
+    "image": "0485",
+    "instruction": "Click the close button",
+    "gt_id": 6,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 34,
+    "case": "ios1k_som_0501_2_164_133",
+    "image": "0501",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 35,
+    "case": "ios1k_som_0501_3_671_137",
+    "image": "0501",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 36,
+    "case": "ios1k_som_0501_4_751_137",
+    "image": "0501",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 37,
+    "case": "ios1k_som_0506_2_664_160",
+    "image": "0506",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 38,
+    "case": "ios1k_som_0506_7_461_808",
+    "image": "0506",
+    "instruction": "Tap the search icon",
+    "gt_id": 7,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 39,
+    "case": "ios1k_som_0522_2_93_219",
+    "image": "0522",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 40,
+    "case": "ios1k_som_0542_5_147_1611",
+    "image": "0542",
+    "instruction": "Click the back button",
+    "gt_id": 5,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 41,
+    "case": "ios1k_som_0552_1_646_243",
+    "image": "0552",
+    "instruction": "Click the close button",
+    "gt_id": 1,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 42,
+    "case": "ios1k_som_0563_2_782_148",
+    "image": "0563",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 43,
+    "case": "ios1k_som_0563_3_54_255",
+    "image": "0563",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 44,
+    "case": "ios1k_som_0563_4_312_257",
+    "image": "0563",
+    "instruction": "Tap the action icon",
+    "gt_id": 4,
+    "pred_id": 5,
+    "fallback": true
+  },
+  {
+    "nr": 45,
+    "case": "ios1k_som_0563_5_570_261",
+    "image": "0563",
+    "instruction": "Tap the action icon",
+    "gt_id": 5,
+    "pred_id": 5,
+    "fallback": true
+  },
+  {
+    "nr": 46,
+    "case": "ios1k_som_0567_2_276_143",
+    "image": "0567",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 16,
+    "fallback": false
+  },
+  {
+    "nr": 47,
+    "case": "ios1k_som_0567_3_778_143",
+    "image": "0567",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 16,
+    "fallback": false
+  },
+  {
+    "nr": 48,
+    "case": "ios1k_som_0567_4_137_241",
+    "image": "0567",
+    "instruction": "Click the back button",
+    "gt_id": 4,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 49,
+    "case": "ios1k_som_0567_5_415_239",
+    "image": "0567",
+    "instruction": "Tap the action icon",
+    "gt_id": 5,
+    "pred_id": 16,
+    "fallback": false
+  },
+  {
+    "nr": 50,
+    "case": "ios1k_som_0567_6_690_239",
+    "image": "0567",
+    "instruction": "Click the close button",
+    "gt_id": 6,
+    "pred_id": 16,
+    "fallback": false
+  },
+  {
+    "nr": 51,
+    "case": "ios1k_som_0568_2_758_139",
+    "image": "0568",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 52,
+    "case": "ios1k_som_0575_2_581_150",
+    "image": "0575",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 4,
+    "fallback": false
+  },
+  {
+    "nr": 53,
+    "case": "ios1k_som_0575_3_666_146",
+    "image": "0575",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 54,
+    "case": "ios1k_som_0575_4_758_147",
+    "image": "0575",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 55,
+    "case": "ios1k_som_0592_3_49_233",
+    "image": "0592",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 56,
+    "case": "ios1k_som_0605_7_676_1562",
+    "image": "0605",
+    "instruction": "Click the play button",
+    "gt_id": 7,
+    "pred_id": 8,
+    "fallback": false
+  },
+  {
+    "nr": 57,
+    "case": "ios1k_som_0605_8_771_1561",
+    "image": "0605",
+    "instruction": "Click the next track button",
+    "gt_id": 8,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 58,
+    "case": "ios1k_som_0611_2_673_153",
+    "image": "0611",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 59,
+    "case": "ios1k_som_0611_3_774_152",
+    "image": "0611",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 60,
+    "case": "ios1k_som_0611_4_260_260",
+    "image": "0611",
+    "instruction": "Tap the action icon",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 61,
+    "case": "ios1k_som_0611_5_574_255",
+    "image": "0611",
+    "instruction": "Tap the action icon",
+    "gt_id": 5,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 62,
+    "case": "ios1k_som_0617_9_676_1564",
+    "image": "0617",
+    "instruction": "Click the play button",
+    "gt_id": 9,
+    "pred_id": 10,
+    "fallback": false
+  },
+  {
+    "nr": 63,
+    "case": "ios1k_som_0619_2_770_150",
+    "image": "0619",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 64,
+    "case": "ios1k_som_0634_3_674_153",
+    "image": "0634",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 65,
+    "case": "ios1k_som_0666_5_72_236",
+    "image": "0666",
+    "instruction": "Click the back button",
+    "gt_id": 5,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 66,
+    "case": "ios1k_som_0666_6_208_234",
+    "image": "0666",
+    "instruction": "Click the back button",
+    "gt_id": 6,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 67,
+    "case": "ios1k_som_0666_7_416_232",
+    "image": "0666",
+    "instruction": "Tap the action icon",
+    "gt_id": 7,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 68,
+    "case": "ios1k_som_0666_8_613_237",
+    "image": "0666",
+    "instruction": "Tap the action icon",
+    "gt_id": 8,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 69,
+    "case": "ios1k_som_0672_5_70_238",
+    "image": "0672",
+    "instruction": "Click the back button",
+    "gt_id": 5,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 70,
+    "case": "ios1k_som_0672_6_212_237",
+    "image": "0672",
+    "instruction": "Click the back button",
+    "gt_id": 6,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 71,
+    "case": "ios1k_som_0672_7_416_235",
+    "image": "0672",
+    "instruction": "Tap the action icon",
+    "gt_id": 7,
+    "pred_id": 8,
+    "fallback": false
+  },
+  {
+    "nr": 72,
+    "case": "ios1k_som_0675_5_73_222",
+    "image": "0675",
+    "instruction": "Click the back button",
+    "gt_id": 5,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 73,
+    "case": "ios1k_som_0676_5_77_221",
+    "image": "0676",
+    "instruction": "Click the back button",
+    "gt_id": 5,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 74,
+    "case": "ios1k_som_0678_3_733_146",
+    "image": "0678",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 6,
+    "fallback": false
+  },
+  {
+    "nr": 75,
+    "case": "ios1k_som_0722_2_762_142",
+    "image": "0722",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 2,
+    "fallback": true
+  },
+  {
+    "nr": 76,
+    "case": "ios1k_som_0734_2_576_140",
+    "image": "0734",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 14,
+    "fallback": true
+  },
+  {
+    "nr": 77,
+    "case": "ios1k_som_0734_3_649_141",
+    "image": "0734",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 78,
+    "case": "ios1k_som_0735_1_322_132",
+    "image": "0735",
+    "instruction": "Tap the action icon",
+    "gt_id": 1,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 79,
+    "case": "ios1k_som_0735_3_765_138",
+    "image": "0735",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 80,
+    "case": "ios1k_som_0740_1_72_125",
+    "image": "0740",
+    "instruction": "Click the back button",
+    "gt_id": 1,
+    "pred_id": 5,
+    "fallback": false
+  },
+  {
+    "nr": 81,
+    "case": "ios1k_som_0740_5_746_243",
+    "image": "0740",
+    "instruction": "Click the close button",
+    "gt_id": 5,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 82,
+    "case": "ios1k_som_0792_2_717_190",
+    "image": "0792",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 3,
+    "fallback": true
+  },
+  {
+    "nr": 83,
+    "case": "ios1k_som_0795_2_716_189",
+    "image": "0795",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 4,
+    "fallback": false
+  },
+  {
+    "nr": 84,
+    "case": "ios1k_som_0845_3_665_139",
+    "image": "0845",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 85,
+    "case": "ios1k_som_0845_4_763_140",
+    "image": "0845",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 2,
+    "fallback": false
+  },
+  {
+    "nr": 86,
+    "case": "ios1k_som_0864_3_413_308",
+    "image": "0864",
+    "instruction": "Click the back button",
+    "gt_id": 3,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 87,
+    "case": "ios1k_som_0867_5_594_1674",
+    "image": "0867",
+    "instruction": "Click the close button",
+    "gt_id": 5,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 88,
+    "case": "ios1k_som_0882_2_635_140",
+    "image": "0882",
+    "instruction": "Click the close button",
+    "gt_id": 2,
+    "pred_id": 7,
+    "fallback": false
+  },
+  {
+    "nr": 89,
+    "case": "ios1k_som_0891_2_519_152",
+    "image": "0891",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 3,
+    "fallback": false
+  },
+  {
+    "nr": 90,
+    "case": "ios1k_som_0891_3_762_149",
+    "image": "0891",
+    "instruction": "Click the close button",
+    "gt_id": 3,
+    "pred_id": 3,
+    "fallback": true
+  },
+  {
+    "nr": 91,
+    "case": "ios1k_som_0891_4_87_266",
+    "image": "0891",
+    "instruction": "Click the back button",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 92,
+    "case": "ios1k_som_0895_2_520_154",
+    "image": "0895",
+    "instruction": "Tap the action icon",
+    "gt_id": 2,
+    "pred_id": 5,
+    "fallback": false
+  },
+  {
+    "nr": 93,
+    "case": "ios1k_som_0895_4_764_148",
+    "image": "0895",
+    "instruction": "Click the close button",
+    "gt_id": 4,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 94,
+    "case": "ios1k_som_0908_2_106_140",
+    "image": "0908",
+    "instruction": "Click the back button",
+    "gt_id": 2,
+    "pred_id": 1,
+    "fallback": false
+  },
+  {
+    "nr": 95,
+    "case": "ios1k_som_0987_1_520_172",
+    "image": "0987",
+    "instruction": "Tap the action icon",
+    "gt_id": 1,
+    "pred_id": 2,
+    "fallback": false
+  }
+]

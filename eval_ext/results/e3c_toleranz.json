@@ -1,0 +1,138 @@
+{
+  "ff2_review_files": {
+    "Auto-Screen/Qwen_trained/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 598,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Auto-Screen/Qwen_untrain/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 577,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Auto-Screen/openAI_6.0_Luna/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 841,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Auto-Screen/openAI_6.0_Sol/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 598,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Masterarbeit/Auto-Screen/Qwen_trained/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 539,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Masterarbeit/Auto-Screen/Qwen_untrain/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 0,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Masterarbeit/Auto-Screen/openAI_6.0_Luna/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 599,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    },
+    "Masterarbeit/Auto-Screen/openAI_6.0_Sol/diff_results/finetune_dataset_DG.jsonl": {
+      "records": 598,
+      "manual_click": 0,
+      "distance_gt_0": 0
+    }
+  },
+  "ea3": {
+    "cases": 500,
+    "matched": 432,
+    "by_tolerance": {
+      "20": {
+        "acc_without": 0.628,
+        "acc_with": 0.634,
+        "only_without_hit": 19,
+        "only_with_hit": 22,
+        "mcnemar_exact_p": 0.7552,
+        "agreement_with_rectangle": 391,
+        "agreement_share": 0.9051,
+        "within_t_outside_rectangle": 0,
+        "beyond_t_inside_rectangle": 41
+      },
+      "27": {
+        "acc_without": 0.654,
+        "acc_with": 0.654,
+        "only_without_hit": 16,
+        "only_with_hit": 16,
+        "mcnemar_exact_p": 1.0,
+        "agreement_with_rectangle": 397,
+        "agreement_share": 0.919,
+        "within_t_outside_rectangle": 0,
+        "beyond_t_inside_rectangle": 35
+      },
+      "30": {
+        "acc_without": 0.666,
+        "acc_with": 0.66,
+        "only_without_hit": 17,
+        "only_with_hit": 14,
+        "mcnemar_exact_p": 0.7201,
+        "agreement_with_rectangle": 401,
+        "agreement_share": 0.9282,
+        "within_t_outside_rectangle": 0,
+        "beyond_t_inside_rectangle": 31
+      },
+      "40": {
+        "acc_without": 0.682,
+        "acc_with": 0.678,
+        "only_without_hit": 14,
+        "only_with_hit": 12,
+        "mcnemar_exact_p": 0.845,
+        "agreement_with_rectangle": 402,
+        "agreement_share": 0.9306,
+        "within_t_outside_rectangle": 3,
+        "beyond_t_inside_rectangle": 27
+      },
+      "50": {
+        "acc_without": 0.69,
+        "acc_with": 0.688,
+        "only_without_hit": 13,
+        "only_with_hit": 12,
+        "mcnemar_exact_p": 1.0,
+        "agreement_with_rectangle": 402,
+        "agreement_share": 0.9306,
+        "within_t_outside_rectangle": 4,
+        "beyond_t_inside_rectangle": 26
+      },
+      "60": {
+        "acc_without": 0.706,
+        "acc_with": 0.694,
+        "only_without_hit": 16,
+        "only_with_hit": 10,
+        "mcnemar_exact_p": 0.3269,
+        "agreement_with_rectangle": 406,
+        "agreement_share": 0.9398,
+        "within_t_outside_rectangle": 6,
+        "beyond_t_inside_rectangle": 20
+      },
+      "80": {
+        "acc_without": 0.722,
+        "acc_with": 0.712,
+        "only_without_hit": 15,
+        "only_with_hit": 10,
+        "mcnemar_exact_p": 0.4244,
+        "agreement_with_rectangle": 404,
+        "agreement_share": 0.9352,
+        "within_t_outside_rectangle": 11,
+        "beyond_t_inside_rectangle": 17
+      },
+      "100": {
+        "acc_without": 0.742,
+        "acc_with": 0.734,
+        "only_without_hit": 13,
+        "only_with_hit": 9,
+        "mcnemar_exact_p": 0.5235,
+        "agreement_with_rectangle": 395,
+        "agreement_share": 0.9144,
+        "within_t_outside_rectangle": 20,
+        "beyond_t_inside_rectangle": 17
+      }
+    }
+  }
+}

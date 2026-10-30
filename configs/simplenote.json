@@ -1,0 +1,139 @@
+{
+  "app_config": {
+    "platform_name": "iOS",
+    "platform_version": "27.0",
+    "device_name": "iPhone 18 Pro",
+    "app_path": "/Users/taylorzhuang/Masterarbeit/simplenote-ios/build/DerivedData/Build/Products/Debug-iphonesimulator/Simplenote.app",
+    "bundle_id": "com.codality.NotationalFlow.Development",
+    "appium_url": "http://localhost:4723"
+  },
+  "initial_setup_steps": [
+    {
+      "step_name": "click_login_button",
+      "instruction": "Click the login button",
+      "action": "click"
+    },
+    {
+      "step_name": "click_log_in_manually",
+      "instruction": "Click the log in manually text",
+      "action": "click"
+    },
+    {
+      "step_name": "click_the_input_field_Email_address",
+      "instruction": "Click the input field Email",
+      "action": "click"
+    },
+    {
+      "step_name": "type_the_email_address",
+      "instruction": "type the email address ",
+      "action": "type_text",
+      "text": "[EMAIL_ADDRESS]"
+    },
+    {
+      "step_name": "click_the_input_field_password",
+      "instruction": "Click the input field password",
+      "action": "click"
+    },
+    {
+      "step_name": "type_the_password",
+      "instruction": "type the password",
+      "action": "type_text",
+      "text": "[SIMPLENOTE_PASSWORD]"
+    },
+    {
+      "step_name": "click_the_log_in_button",
+      "instruction": "Click the Log In button below the password field",
+      "action": "click",
+      "wait_after": 2
+    }
+  ],
+  "test_flows": [
+    {
+      "folder": "baseline_EN",
+      "launch_language": "en",
+      "launch_locale": "en_US",
+      "language_name": "English",
+      "steps": [
+         {
+          "step_name": "close_the_pop_up_windows",
+          "instruction": "close the pop up windows",
+          "action": "click the x button in the pop up windows"
+        },
+        {
+          "step_name": "click_the_write_button",
+          "instruction": "Click the write button",
+          "action": "click"
+        },
+        {
+          "step_name": "type_the_content_in_the_note",
+          "instruction": "type the content in the note",
+          "action": "type_text",
+          "text": "Hello World!"
+        },
+        {
+          "step_name": "click_the_back_button",
+          "instruction": "Click the back button",
+          "action": "click"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_DE",      
+      "launch_language": "de",
+      "launch_locale": "de_DE",
+      "language_name": "German",
+      "steps": [
+         {
+          "step_name": "close_the_pop_up_windows",
+          "instruction": "close the pop up windows",
+          "action": "click the x button in the pop up windows"
+        },
+        {
+          "step_name": "click_the_write_button",
+          "instruction": "Click the write button",
+          "action": "click"
+        },
+        {
+          "step_name": "type_the_content_in_the_note",
+          "instruction": "type the content in the note",
+          "action": "type_text",
+          "text": "Hallo Welt!"
+        },
+        {
+          "step_name": "click_the_back_button",
+          "instruction": "Click the back button",
+          "action": "click"
+        }
+      ]
+    },
+    {
+      "folder": "baseline_CH",
+      "launch_language": "zh-Hans-CN",
+      "launch_locale": "zh_CN",
+      "language_name": "Chinese",
+      "steps": [
+         {
+          "step_name": "close_the_pop_up_windows",
+          "instruction": "close the pop up windows",
+          "action": "click the x button in the pop up windows"
+        },
+        {
+          "step_name": "click_the_write_button",
+          "instruction": "Click the write button",
+          "action": "click"
+        },
+        {
+          "step_name": "type_the_content_in_the_note",
+          "instruction": "type the content in the note",
+          "action": "type_text",
+          "text": "欢迎世界!"
+        },
+        {
+          "step_name": "click_the_back_button",
+          "instruction": "Click the back button",
+          "action": "click"
+        }
+      ]
+    }
+  ]
+}

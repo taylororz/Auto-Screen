@@ -1,0 +1,17 @@
+{
+  "steps": 598,
+  "same_as_2809": "595/598",
+  "correct_vs_reviewed": "595/598",
+  "fallback_or_error": 0,
+  "different_by_step": {
+    "open_app_language_dropdown": 3
+  },
+  "same_by_language": {
+    "German": "176/177",
+    "English": "179/181",
+    "中文（简体）": "65/65",
+    "中文（繁體）": "65/65",
+    "Chinese": "110/110"
+  },
+  "median_time_ms": 6295
+}

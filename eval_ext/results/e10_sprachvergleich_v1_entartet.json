@@ -1,0 +1,986 @@
+{
+  "reference": "baseline_EN_US",
+  "language": "baseline_DE_DE",
+  "defect_steps_B5": {
+    "01_home_tab": [
+      "D02",
+      "D05",
+      "D09",
+      "D11",
+      "D13",
+      "D14",
+      "D16"
+    ],
+    "02_triage_dropdown": [
+      "D02",
+      "D05",
+      "D09",
+      "D11",
+      "D13",
+      "D14",
+      "D16"
+    ],
+    "03_triage_option": [
+      "D02",
+      "D05",
+      "D09",
+      "D13"
+    ],
+    "04_scan_tab": [
+      "D02",
+      "D05",
+      "D09",
+      "D11",
+      "D13",
+      "D14",
+      "D16"
+    ],
+    "05_overview_tab": [
+      "D02",
+      "D05",
+      "D09",
+      "D13"
+    ],
+    "06_vehicle_tab": [
+      "D01",
+      "D02",
+      "D05",
+      "D09",
+      "D13"
+    ],
+    "07_settings_tab": [
+      "D02",
+      "D05",
+      "D06",
+      "D09",
+      "D13"
+    ],
+    "08_activation_token_button": [
+      "D02",
+      "D03",
+      "D05",
+      "D09",
+      "D10",
+      "D13",
+      "D15"
+    ],
+    "09_login_field": [
+      "D02",
+      "D04",
+      "D05",
+      "D09",
+      "D13"
+    ],
+    "10_login_save_button": [
+      "D02",
+      "D04",
+      "D05",
+      "D09",
+      "D13"
+    ],
+    "11_settings_tab": [
+      "D02",
+      "D05",
+      "D09",
+      "D11",
+      "D13",
+      "D14",
+      "D16"
+    ],
+    "12_language_button": [
+      "D02",
+      "D03",
+      "D05",
+      "D09",
+      "D10",
+      "D13",
+      "D15"
+    ],
+    "13_language_choice": [
+      "D02",
+      "D05",
+      "D08",
+      "D09",
+      "D13"
+    ]
+  },
+  "runs": {
+    "A1": {
+      "units": [
+        {
+          "unit": [
+            "01_home_tab"
+          ],
+          "pixel": 16,
+          "cv": 16,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "02_triage_dropdown"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "03_triage_option"
+          ],
+          "pixel": 10,
+          "cv": 10,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "04_scan_tab"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "05_overview_tab"
+          ],
+          "pixel": 1,
+          "cv": 1,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "06_vehicle_tab"
+          ],
+          "pixel": 3,
+          "cv": 3,
+          "defects": [
+            "D01",
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D01"
+          ]
+        },
+        {
+          "unit": [
+            "07_settings_tab"
+          ],
+          "pixel": 7,
+          "cv": 7,
+          "defects": [
+            "D02",
+            "D05",
+            "D06",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D06"
+          ]
+        },
+        {
+          "unit": [
+            "08_activation_token_button",
+            "12_language_button"
+          ],
+          "pixel": 12,
+          "cv": 12,
+          "defects": [
+            "D02",
+            "D03",
+            "D05",
+            "D09",
+            "D10",
+            "D13",
+            "D15"
+          ],
+          "defects_clearly_visible": [
+            "D03",
+            "D10",
+            "D15"
+          ]
+        },
+        {
+          "unit": [
+            "09_login_field"
+          ],
+          "pixel": 2,
+          "cv": 2,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "10_login_save_button"
+          ],
+          "pixel": 2,
+          "cv": 3,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "11_settings_tab"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "13_language_choice"
+          ],
+          "pixel": 10,
+          "cv": 10,
+          "defects": [
+            "D02",
+            "D05",
+            "D08",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D08"
+          ]
+        }
+      ],
+      "metrics": {
+        "pixel_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "pixel_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.625
+        },
+        "cv_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "cv_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.625
+        }
+      }
+    },
+    "A2": {
+      "units": [
+        {
+          "unit": [
+            "01_home_tab"
+          ],
+          "pixel": 16,
+          "cv": 16,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "02_triage_dropdown"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "03_triage_option"
+          ],
+          "pixel": 10,
+          "cv": 10,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "04_scan_tab"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "05_overview_tab"
+          ],
+          "pixel": 1,
+          "cv": 1,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "06_vehicle_tab"
+          ],
+          "pixel": 3,
+          "cv": 3,
+          "defects": [
+            "D01",
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D01"
+          ]
+        },
+        {
+          "unit": [
+            "07_settings_tab"
+          ],
+          "pixel": 7,
+          "cv": 7,
+          "defects": [
+            "D02",
+            "D05",
+            "D06",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D06"
+          ]
+        },
+        {
+          "unit": [
+            "08_activation_token_button",
+            "12_language_button"
+          ],
+          "pixel": 12,
+          "cv": 12,
+          "defects": [
+            "D02",
+            "D03",
+            "D05",
+            "D09",
+            "D10",
+            "D13",
+            "D15"
+          ],
+          "defects_clearly_visible": [
+            "D03",
+            "D10",
+            "D15"
+          ]
+        },
+        {
+          "unit": [
+            "09_login_field"
+          ],
+          "pixel": 2,
+          "cv": 2,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "10_login_save_button"
+          ],
+          "pixel": 3,
+          "cv": 4,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "11_settings_tab"
+          ],
+          "pixel": 5,
+          "cv": 5,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "13_language_choice"
+          ],
+          "pixel": 10,
+          "cv": 10,
+          "defects": [
+            "D02",
+            "D05",
+            "D08",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D08"
+          ]
+        }
+      ],
+      "metrics": {
+        "pixel_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "pixel_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.625
+        },
+        "cv_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "cv_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.625
+        }
+      }
+    },
+    "B5": {
+      "units": [
+        {
+          "unit": [
+            "01_home_tab"
+          ],
+          "pixel": 16,
+          "cv": 16,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "02_triage_dropdown"
+          ],
+          "pixel": 10,
+          "cv": 9,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "03_triage_option"
+          ],
+          "pixel": 14,
+          "cv": 13,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "04_scan_tab"
+          ],
+          "pixel": 10,
+          "cv": 9,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "05_overview_tab"
+          ],
+          "pixel": 1,
+          "cv": 1,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": []
+        },
+        {
+          "unit": [
+            "06_vehicle_tab"
+          ],
+          "pixel": 3,
+          "cv": 3,
+          "defects": [
+            "D01",
+            "D02",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D01"
+          ]
+        },
+        {
+          "unit": [
+            "07_settings_tab"
+          ],
+          "pixel": 13,
+          "cv": 13,
+          "defects": [
+            "D02",
+            "D05",
+            "D06",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D06"
+          ]
+        },
+        {
+          "unit": [
+            "08_activation_token_button",
+            "12_language_button"
+          ],
+          "pixel": 16,
+          "cv": 16,
+          "defects": [
+            "D02",
+            "D03",
+            "D05",
+            "D09",
+            "D10",
+            "D13",
+            "D15"
+          ],
+          "defects_clearly_visible": [
+            "D03",
+            "D10",
+            "D15"
+          ]
+        },
+        {
+          "unit": [
+            "09_login_field"
+          ],
+          "pixel": 3,
+          "cv": 3,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "10_login_save_button"
+          ],
+          "pixel": 3,
+          "cv": 4,
+          "defects": [
+            "D02",
+            "D04",
+            "D05",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D04"
+          ]
+        },
+        {
+          "unit": [
+            "11_settings_tab"
+          ],
+          "pixel": 10,
+          "cv": 9,
+          "defects": [
+            "D02",
+            "D05",
+            "D09",
+            "D11",
+            "D13",
+            "D14",
+            "D16"
+          ],
+          "defects_clearly_visible": [
+            "D16"
+          ]
+        },
+        {
+          "unit": [
+            "13_language_choice"
+          ],
+          "pixel": 16,
+          "cv": 22,
+          "defects": [
+            "D02",
+            "D05",
+            "D08",
+            "D09",
+            "D13"
+          ],
+          "defects_clearly_visible": [
+            "D08"
+          ]
+        }
+      ],
+      "metrics": {
+        "pixel_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "pixel_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.65
+        },
+        "cv_all": {
+          "units": 12,
+          "defect_units": 12,
+          "precision_at_k": 1.0,
+          "auc": null
+        },
+        "cv_clearly_visible": {
+          "units": 12,
+          "defect_units": 10,
+          "precision_at_k": 0.9,
+          "auc": 0.675
+        }
+      }
+    }
+  },
+  "defect_units_B5_minus_A1": [
+    {
+      "step": "01_home_tab",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14",
+        "D16"
+      ],
+      "pixel_B5_minus_A1": 0,
+      "cv_B5_minus_A1": 0
+    },
+    {
+      "step": "02_triage_dropdown",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14",
+        "D16"
+      ],
+      "pixel_B5_minus_A1": 5,
+      "cv_B5_minus_A1": 4
+    },
+    {
+      "step": "03_triage_option",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 4,
+      "cv_B5_minus_A1": 3
+    },
+    {
+      "step": "04_scan_tab",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14",
+        "D16"
+      ],
+      "pixel_B5_minus_A1": 5,
+      "cv_B5_minus_A1": 4
+    },
+    {
+      "step": "05_overview_tab",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 0,
+      "cv_B5_minus_A1": 0
+    },
+    {
+      "step": "06_vehicle_tab",
+      "defects": [
+        "D01",
+        "D02",
+        "D05",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 0,
+      "cv_B5_minus_A1": 0
+    },
+    {
+      "step": "07_settings_tab",
+      "defects": [
+        "D02",
+        "D05",
+        "D06",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 6,
+      "cv_B5_minus_A1": 6
+    },
+    {
+      "step": "08_activation_token_button",
+      "defects": [
+        "D02",
+        "D03",
+        "D05",
+        "D09",
+        "D10",
+        "D13",
+        "D15"
+      ],
+      "pixel_B5_minus_A1": 4,
+      "cv_B5_minus_A1": 4
+    },
+    {
+      "step": "09_login_field",
+      "defects": [
+        "D02",
+        "D04",
+        "D05",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 1,
+      "cv_B5_minus_A1": 1
+    },
+    {
+      "step": "10_login_save_button",
+      "defects": [
+        "D02",
+        "D04",
+        "D05",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 1,
+      "cv_B5_minus_A1": 1
+    },
+    {
+      "step": "11_settings_tab",
+      "defects": [
+        "D02",
+        "D05",
+        "D09",
+        "D11",
+        "D13",
+        "D14",
+        "D16"
+      ],
+      "pixel_B5_minus_A1": 5,
+      "cv_B5_minus_A1": 4
+    },
+    {
+      "step": "13_language_choice",
+      "defects": [
+        "D02",
+        "D05",
+        "D08",
+        "D09",
+        "D13"
+      ],
+      "pixel_B5_minus_A1": 6,
+      "cv_B5_minus_A1": 12
+    }
+  ]
+}

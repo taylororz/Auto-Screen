@@ -1,0 +1,162 @@
+[
+  {
+    "model": "Sol SoM",
+    "app": "KatApp",
+    "condition": "Original",
+    "run_start": "29.09. 23:51",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Sol SoM",
+    "app": "KatApp",
+    "condition": "1600",
+    "run_start": "06.10. 07:54",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Sol SoM",
+    "app": "Bluesky",
+    "condition": "Original",
+    "run_start": "30.09. 00:48",
+    "steps": 336,
+    "auto_correct": 325,
+    "manual_outside_reference": 11,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Sol SoM",
+    "app": "Bluesky",
+    "condition": "1600",
+    "run_start": "05.10. 23:31",
+    "steps": 336,
+    "auto_correct": 322,
+    "manual_outside_reference": 14,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Luna SoM",
+    "app": "KatApp",
+    "condition": "Original",
+    "run_start": "30.09. 02:37",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Luna SoM",
+    "app": "KatApp",
+    "condition": "1600",
+    "run_start": "05.10. 15:03",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Luna SoM",
+    "app": "Bluesky",
+    "condition": "Original",
+    "run_start": "30.09. 03:01",
+    "steps": 336,
+    "auto_correct": 324,
+    "manual_outside_reference": 12,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Luna SoM",
+    "app": "Bluesky",
+    "condition": "1600",
+    "run_start": "05.10. 19:55",
+    "steps": 317,
+    "auto_correct": 303,
+    "manual_outside_reference": 14,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude SoM",
+    "app": "KatApp",
+    "condition": "Original",
+    "run_start": "03.10. 21:16",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude SoM",
+    "app": "KatApp",
+    "condition": "1600",
+    "run_start": "05.10. 13:20",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude SoM",
+    "app": "Bluesky",
+    "condition": "Original",
+    "run_start": "05.10. 10:07",
+    "steps": 336,
+    "auto_correct": 325,
+    "manual_outside_reference": 11,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude SoM",
+    "app": "Bluesky",
+    "condition": "1600",
+    "run_start": "05.10. 13:44",
+    "steps": 318,
+    "auto_correct": 306,
+    "manual_outside_reference": 12,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude DG",
+    "app": "KatApp",
+    "condition": "Original",
+    "run_start": "03.10. 20:08",
+    "steps": 262,
+    "auto_correct": 127,
+    "manual_outside_reference": 135,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude DG",
+    "app": "KatApp",
+    "condition": "1600",
+    "run_start": "05.10. 12:02",
+    "steps": 262,
+    "auto_correct": 262,
+    "manual_outside_reference": 0,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude DG",
+    "app": "Bluesky",
+    "condition": "Original",
+    "run_start": "03.10. 20:30",
+    "steps": 336,
+    "auto_correct": 174,
+    "manual_outside_reference": 162,
+    "manual_no_reference": 0
+  },
+  {
+    "model": "Claude DG",
+    "app": "Bluesky",
+    "condition": "1600",
+    "run_start": "05.10. 12:33",
+    "steps": 336,
+    "auto_correct": 294,
+    "manual_outside_reference": 42,
+    "manual_no_reference": 0
+  }
+]

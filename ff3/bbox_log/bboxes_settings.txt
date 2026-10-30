@@ -1,0 +1,14 @@
+D15 language_button.png [227, 751, 748, 148]
+D10 language_button.png [78, 1293, 792, 125]
+D03 language_button.png [326, 1861, 579, 125]
+D04 09_login_field.png [320, 198, 527, 125]
+D08 13_language_choice.png [171, 958, 739, 166]
+D01 06_vehicle_tab.png [276, 198, 643, 145]
+D06 07_settings_tab.png [61, 439, 1092, 168] (corrected: previously listed as D09)
+D16 01_home_tab.png [34, 218, 1153, 201]
+D14 01_home_tab.png: no selection (not manually identified, GT empty)
+D11 01_home_tab.png: no selection (not manually identified, GT empty)
+D09 no selection (vehicle tracking text only visible during active tracking, state missing)
+D02 no selection ("Last updated" state only visible after successful transmission, not reached in run, GT empty)
+D05 no selection ("No uploads" state not reached in run, GT empty)
+D13 no selection (disaster mode state not reached in run, GT empty)

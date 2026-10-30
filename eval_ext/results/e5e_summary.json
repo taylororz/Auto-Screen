@@ -1,0 +1,21 @@
+{
+  "steps": 598,
+  "same_as_2809": "567/598",
+  "correct_vs_reviewed": "567/598",
+  "fallback_or_error": 5,
+  "different_by_step": {
+    "triage_dropdown": 10,
+    "go_to_Lists_page": 10,
+    "triage_option": 5,
+    "go_to_Saved_page": 5,
+    "home_tab": 1
+  },
+  "same_by_language": {
+    "German": "161/177",
+    "English": "181/181",
+    "中文（简体）": "60/65",
+    "中文（繁體）": "60/65",
+    "Chinese": "105/110"
+  },
+  "median_time_ms": 2015
+}

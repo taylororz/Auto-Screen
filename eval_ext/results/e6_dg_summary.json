@@ -1,0 +1,74 @@
+{
+  "steps_paired": 598,
+  "tolerance_px": 40,
+  "1280|KatApp": {
+    "n": 262,
+    "within_tolerance": 262,
+    "manual_true": 0,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 262,
+    "median_shift_px": 0.0,
+    "fallback_or_error": 0,
+    "median_time_s": 9.2
+  },
+  "1280|Bluesky": {
+    "n": 336,
+    "within_tolerance": 336,
+    "manual_true": 0,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 336,
+    "median_shift_px": 0.0,
+    "fallback_or_error": 0,
+    "median_time_s": 8.7
+  },
+  "1280|gesamt": {
+    "n": 598,
+    "within_tolerance": 598,
+    "manual_true": 0,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 598,
+    "median_shift_px": 0.0,
+    "fallback_or_error": 0,
+    "median_time_s": 9.0
+  },
+  "original|KatApp": {
+    "n": 262,
+    "within_tolerance": 262,
+    "manual_true": 0,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 80,
+    "median_shift_px": 2.0,
+    "fallback_or_error": 0,
+    "median_time_s": 22.7
+  },
+  "original|Bluesky": {
+    "n": 336,
+    "within_tolerance": 307,
+    "manual_true": 29,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 10,
+    "median_shift_px": 4.2,
+    "fallback_or_error": 0,
+    "median_time_s": 18.1
+  },
+  "original|gesamt": {
+    "n": 598,
+    "within_tolerance": 569,
+    "manual_true": 29,
+    "manual_false": 0,
+    "manual_open": 0,
+    "same_point_as_2809": 90,
+    "median_shift_px": 3.6,
+    "fallback_or_error": 0,
+    "median_time_s": 20.4
+  },
+  "paired": {
+    "only_1280_hit": 0,
+    "only_original_hit": 0
+  }
+}

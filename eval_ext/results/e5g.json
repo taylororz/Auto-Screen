@@ -1,0 +1,158 @@
+[
+  {
+    "step": "login_field",
+    "logged_point": [
+      499,
+      189
+    ],
+    "logged_head": "{\n    \"point\": [\n        499,\n        189\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The text input field is centra",
+    "a_1280": {
+      "point": [
+        499,
+        189
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [\n        499,\n        189\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The text input field is centra"
+    },
+    "b_ohne": {
+      "point": [
+        499,
+        189
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [\n        499,\n        189\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The text input field is centra"
+    }
+  },
+  {
+    "step": "initial_login_save_button",
+    "logged_point": [
+      499,
+      324
+    ],
+    "logged_head": "{\n    \"point\": [499, 324],\n    \"confidence\": 1.0,\n    \"rationale\": \"The 'Speichern' button is centrally located below th",
+    "a_1280": {
+      "point": [
+        499,
+        324
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [499, 324],\n    \"confidence\": 1.0,\n    \"rationale\": \"The 'Speichern' button is centrally located below th"
+    },
+    "b_ohne": {
+      "point": [
+        499,
+        324
+      ],
+      "same_point": true,
+      "same_head": false,
+      "head": "{\n  \"point\": [499, 324],\n  \"confidence\": 1.0,\n  \"rationale\": \"The 'Speichern' button is centrally located below the inpu"
+    }
+  },
+  {
+    "step": "home_tab",
+    "logged_point": [
+      130,
+      925
+    ],
+    "logged_head": "{\n    \"point\": [130, 925],\n    \"confidence\": 1.0,\n    \"rationale\": \"The Home icon is located at the far left of the bott",
+    "a_1280": {
+      "point": [
+        130,
+        925
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [130, 925],\n    \"confidence\": 1.0,\n    \"rationale\": \"The Home icon is located at the far left of the bott"
+    },
+    "b_ohne": {
+      "point": [
+        133,
+        927
+      ],
+      "same_point": false,
+      "same_head": false,
+      "head": "{\n    \"point\": [133, 927],\n    \"confidence\": 1.0,\n    \"rationale\": \"The Home icon is located at the far left of the bott"
+    }
+  },
+  {
+    "step": "triage_dropdown",
+    "logged_point": [
+      499,
+      446
+    ],
+    "logged_head": "{\n    \"point\": [\n        499,\n        446\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The dropdown menu labeled 'Sch",
+    "a_1280": {
+      "point": [
+        499,
+        446
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [\n        499,\n        446\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The dropdown menu labeled 'Sch"
+    },
+    "b_ohne": {
+      "point": [
+        499,
+        446
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [\n        499,\n        446\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The dropdown menu labeled 'Sch"
+    }
+  },
+  {
+    "step": "triage_option",
+    "logged_point": [
+      499,
+      592
+    ],
+    "logged_head": "{\n    \"point\": [\n        499,\n        592\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The dropdown menu is open, and",
+    "a_1280": {
+      "point": [
+        499,
+        592
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [\n        499,\n        592\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The dropdown menu is open, and"
+    },
+    "b_ohne": {
+      "point": [
+        499,
+        592
+      ],
+      "same_point": true,
+      "same_head": false,
+      "head": "{\n    \"point\": [\n        499,\n        592\n    ],\n    \"confidence\": 1.0,\n    \"rationale\": \"The 'Schadensort' option is th"
+    }
+  },
+  {
+    "step": "scan_tab",
+    "logged_point": [
+      358,
+      925
+    ],
+    "logged_head": "{\n    \"point\": [358, 925],\n    \"confidence\": 1.0,\n    \"rationale\": \"The bottom navigation bar contains five icons. The s",
+    "a_1280": {
+      "point": [
+        358,
+        925
+      ],
+      "same_point": true,
+      "same_head": true,
+      "head": "{\n    \"point\": [358, 925],\n    \"confidence\": 1.0,\n    \"rationale\": \"The bottom navigation bar contains five icons. The s"
+    },
+    "b_ohne": {
+      "point": [
+        358,
+        927
+      ],
+      "same_point": false,
+      "same_head": false,
+      "head": "{\n    \"point\": [358, 927],\n    \"confidence\": 1.0,\n    \"rationale\": \"The bottom navigation bar contains five icons. The s"
+    }
+  }
+]

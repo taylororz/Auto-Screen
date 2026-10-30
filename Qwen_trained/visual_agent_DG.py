@@ -103,10 +103,14 @@ def get_local_model_and_processor(model_path=None):
         if not torch.cuda.is_available():
             _model.to(device)
 
+        # LOCAL_DG_MAX_PIXELS: pixel limit of the image processor (default 1024 * 28 * 28, <= 0 keeps the processor default)
+        max_pixels = int(os.environ.get("LOCAL_DG_MAX_PIXELS", str(1024 * 28 * 28)))
+        pixel_kwargs = {"min_pixels": 256 * 28 * 28}
+        if max_pixels > 0:
+            pixel_kwargs["max_pixels"] = max_pixels  # Optimize image tokens for faster inference
         _processor = AutoProcessor.from_pretrained(
             model_path,
-            min_pixels=256 * 28 * 28,
-            max_pixels=1024 * 28 * 28  # Optimize image tokens for faster inference
+            **pixel_kwargs
         )
         print("✅ Qwen-VL model & processor loaded successfully!")
     return _model, _processor
@@ -235,9 +239,11 @@ def local_visual_agent_inference(image_path, instruction, model_path=None):
     from PIL import Image
 
     pil_img = Image.open(str(image_path))
+    # LOCAL_MAX_IMAGE_EDGE: longest edge passed to the local model (default 1280 for DG, <= 0 keeps the original size)
+    max_edge = int(os.environ.get("LOCAL_MAX_IMAGE_EDGE", "1280"))
     max_dim = max(pil_img.size)
-    if max_dim > 1280:
-        scale = 1280.0 / max_dim
+    if max_edge > 0 and max_dim > max_edge:
+        scale = float(max_edge) / max_dim
         new_size = (int(pil_img.width * scale), int(pil_img.height * scale))
         pil_img = pil_img.resize(new_size, Image.Resampling.LANCZOS)
 
@@ -333,6 +339,39 @@ def heuristic_fallback(instruction, elements=None, image_size=(1206, 2622)):
     return int(physical_w * 0.5), int(physical_h * 0.5)
 
 
+def _refine_in_subimage(img, image_path, instruction, coarse_x, coarse_y, model_path=None):
+    """Refines the predicted point in the upper or lower half-screen crop."""
+    img_h, img_w = img.shape[:2]
+    overlap = float(os.environ.get("DG_SUBIMAGE_OVERLAP", "0.1"))
+    max_shift = float(os.environ.get("DG_SUBIMAGE_MAX_SHIFT", "0.15"))
+    half = img_h / 2.0
+    if coarse_y < half:
+        top, bottom = 0, int(min(img_h, half + overlap * img_h))
+    else:
+        top, bottom = int(max(0, half - overlap * img_h)), img_h
+
+    crop_path = Path(image_path).with_name(f"{Path(image_path).stem}_sub_{top}_{bottom}.png")
+    cv2.imwrite(str(crop_path), img[top:bottom, :])
+    raw_output = local_visual_agent_inference(crop_path, instruction, model_path=model_path)
+    print(f"🔎 [Direct Grounding] Sub-image {top}-{bottom}px output: {raw_output}")
+
+    result = {"subimage": [0, top, img_w, bottom - top], "coarse_point": [coarse_x, coarse_y], "raw_output": raw_output, "accepted": False}
+    norm_x, norm_y, _, _ = _parse_direct_grounding_coordinates(raw_output, image_width=10000, image_height=10000)
+    if norm_x is None or norm_y is None:
+        result["reason"] = "no coordinates in the sub-image answer, kept the first prediction"
+        return result
+
+    refined_x = int(round(norm_x / 10000.0 * img_w))
+    refined_y = int(round(top + norm_y / 10000.0 * (bottom - top)))
+    result["refined_point"] = [refined_x, refined_y]
+    shift = ((refined_x - coarse_x) ** 2 + (refined_y - coarse_y) ** 2) ** 0.5
+    if shift > max_shift * img_h:
+        result["reason"] = f"refined point {shift:.0f}px away from the first prediction, kept the first prediction"
+        return result
+    result.update({"accepted": True, "point": [refined_x, refined_y]})
+    return result
+
+
 def predict_target_coordinates(image_path, instruction, model_path=None):
     """
     Main function for Direct Grounding:
@@ -361,6 +400,12 @@ def predict_target_coordinates(image_path, instruction, model_path=None):
             used_fallback = True
             confidence = 0.5
 
+        refinement = None
+        if not used_fallback and img is not None and os.environ.get("DG_SUBIMAGE_REFINE") == "1":
+            refinement = _refine_in_subimage(img, image_path, instruction, target_x, target_y, model_path=model_path)
+            if refinement["accepted"]:
+                target_x, target_y = refinement["point"]
+
         decision = {
             "status": "analyzed_fallback" if used_fallback else "analyzed_direct_grounding",
             "model": "qwen_vl_direct_grounding",
@@ -372,6 +417,8 @@ def predict_target_coordinates(image_path, instruction, model_path=None):
             "raw_output": raw_output,
             "time_ms": (time.time() - start_time) * 1000,
         }
+        if refinement is not None:
+            decision["subimage_refinement"] = refinement
         return (target_x, target_y), decision
     except Exception as exc:
         print(f"⚠️ [Direct Grounding] Inference exception: {exc}. Heuristic fallback activated.")

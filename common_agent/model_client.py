@@ -344,8 +344,6 @@ class QwenUntrainClient:
         from qwen_vl_utils import process_vision_info
 
         model, processor = self._get_model_and_processor()
-        # Same prompt, preprocessing and decoding settings as the fine-tuned agent (Qwen_trained/visual_agent.py),
-        # so the baseline and the LoRA model are compared under identical inference conditions
         valid_ids = {element["id"] for element in elements}
         id_list_str = ", ".join(str(i) for i in sorted(valid_ids))
         prompt_text = (
@@ -416,8 +414,6 @@ class QwenUntrainClient:
             f'{{"point": [x, y], "confidence": 1.0, "rationale": "..."}}'
         )
 
-        # Same preprocessing and decoding settings as the fine-tuned agent (Qwen_trained/visual_agent_DG.py),
-        # so the baseline and the LoRA model are compared under identical inference conditions
         pil_img = Image.open(str(image_path))
         max_dim = max(pil_img.size)
         if max_dim > 1280:

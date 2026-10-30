@@ -1,0 +1,15 @@
+{
+  "cases": 95,
+  "by_category": {
+    "(a) Anweisung mehrdeutig": 16,
+    "(b) ähnliches Symbol gewählt": 2,
+    "(c) Nummer verdeckt oder unlesbar": 0,
+    "(d) keine gültige Nummer (Rückfallebene)": 11,
+    "(e) sonstiges": 10,
+    "(f) dasselbe Bedienelement (in der Wirkung richtig)": 3,
+    "(g) Referenz falsch, rote Box passt auch nicht": 32,
+    "(h) Referenz falsch, rote Box passt zur Anweisung (Modell in der Sache richtig)": 21
+  },
+  "unassigned": 0,
+  "fallback_cases_not_d": 0
+}

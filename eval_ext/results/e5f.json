@@ -1,0 +1,23 @@
+{
+ "1310": {
+  "target_id": 5,
+  "status": "analyzed_local",
+  "raw": "{\"target_id\": 5}"
+ },
+ "2809": {
+  "target_id": 5,
+  "status": "analyzed_local",
+  "raw": "{\"target_id\": 5}"
+ },
+ "pixel_diff": {
+  "bbox": [
+   1104,
+   474,
+   1110,
+   531
+  ],
+  "pixels_gt30": 342,
+  "total": 3162132
+ },
+ "model_path": "/Users/taylorzhuang/.cache/huggingface/hub/models--Qwen--Qwen3-VL-4B-Instruct/snapshots/ebb281ec70b05090aa6165b016eac8ec08e71b17"
+}

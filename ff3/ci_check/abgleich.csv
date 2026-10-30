@@ -1,0 +1,13 @@
+pruefung,seite,ergebnis
+A1: identisch mit,triage_option_page,03_triage_option triage_option
+A1: identisch mit,scan_page,01_home_tab 02_triage_dropdown 04_scan_tab 11_settings_tab home_page home_tab scan_tab settings_page settings_tab triage_dropdown triage_location_menu
+A1: identisch mit,activation_token_page,08_activation_token_button 12_language_button activation_token_button language_button language_dialog
+A1: identisch mit,language_choice_page,13_language_choice language_choice
+B5: identisch mit,triage_option_page,03_triage_option triage_option
+B5: identisch mit,scan_page,01_home_tab 02_triage_dropdown 04_scan_tab 11_settings_tab home_tab scan_tab settings_page settings_tab triage_dropdown triage_location_menu
+B5: identisch mit,activation_token_page,08_activation_token_button 12_language_button activation_token_button language_button language_dialog
+B5: identisch mit,language_choice_page,13_language_choice language_choice
+Diff-Pixel (Schwelle 38),triage_option_page,A1-B5=33888 A1-CI=0 B5-CI=33888
+Diff-Pixel (Schwelle 38),scan_page,A1-B5=45292 A1-CI=0 B5-CI=45292
+Diff-Pixel (Schwelle 38),activation_token_page,A1-B5=132452 A1-CI=0 B5-CI=132452
+Diff-Pixel (Schwelle 38),language_choice_page,A1-B5=119948 A1-CI=0 B5-CI=119948

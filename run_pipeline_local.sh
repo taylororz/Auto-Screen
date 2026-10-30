@@ -73,23 +73,33 @@ fi
 
 # 5. Cross-language visual comparison and report generation
 echo "🔍 [Step 4/5] Running pixel & OpenCV visual regression diff..."
-# Report 1: language comparison (reference language against the other languages, same build).
-# The CI quality gate reads this report.
-# --model points explicitly to <model>/screenshots instead of relying on the fallback from ./screenshots.
+# Language comparison (same build across locales)
 python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME"
 
-# Report 2 (optional): version comparison against the screenshots of the previous release,
-# each language folder against the folder of the same name, e.g.:
-#   PREVIOUS_SCREENSHOTS=<prev_release>/screenshots ./run_pipeline_local.sh
+# Use approved baseline when BASELINE_MODE=approved and PREVIOUS_SCREENSHOTS is not set
+if [ "${BASELINE_MODE:-previous}" = "approved" ] && [ -z "${PREVIOUS_SCREENSHOTS:-}" ]; then
+    APPROVED_DIR="${APPROVED_BASELINE_DIR:-$PROJECT_ROOT/baselines/$APP_NAME}"
+    if [ -d "$APPROVED_DIR/screenshots" ]; then
+        export PREVIOUS_SCREENSHOTS="$APPROVED_DIR/screenshots"
+        PREVIOUS_APP_ID="${PREVIOUS_APP_ID:-approved-$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('label', ''))" "$APPROVED_DIR/baseline.json" 2>/dev/null)}"
+        echo "✅ Using approved baseline $PREVIOUS_APP_ID from $APPROVED_DIR"
+    else
+        echo "⚠️ BASELINE_MODE=approved, but no approved baseline in $APPROVED_DIR. Version comparison skipped."
+    fi
+fi
+
+# Version comparison against previous build screenshots
 if [ -n "${PREVIOUS_SCREENSHOTS:-}" ]; then
     echo "🔍 [Step 4b/5] Running version comparison against $PREVIOUS_SCREENSHOTS..."
-    # Optional identities of the two app builds (set by CI), shown in the report
     LABEL_ARGS=()
     if [ -n "${PREVIOUS_APP_ID:-}" ]; then
         LABEL_ARGS+=(--baseline-label "$PREVIOUS_APP_ID")
     fi
     if [ -n "${CURRENT_APP_ID:-}" ]; then
         LABEL_ARGS+=(--actual-label "$CURRENT_APP_ID")
+    fi
+    if [ "${LOCAL_TRIAGE:-0}" = "1" ]; then
+        LABEL_ARGS+=(--ai-local)
     fi
     python3 compare_images.py --batch --app "$APP_NAME" --model "$MODEL_NAME" \
         --version-baseline-root "$PREVIOUS_SCREENSHOTS" \

@@ -1,0 +1,102 @@
+{
+  "paired_cases": 500,
+  "images": 188,
+  "tolerance_40": {
+    "base": 331,
+    "ft": 341,
+    "base_share": 0.662,
+    "ft_share": 0.682,
+    "base_wilson": [
+      0.6194,
+      0.7021
+    ],
+    "ft_wilson": [
+      0.6399,
+      0.7213
+    ],
+    "only_ft": 34,
+    "only_base": 24,
+    "mcnemar_exact_p": 0.237
+  },
+  "by_tolerance": {
+    "20": {
+      "base": 0.614,
+      "ft": 0.628,
+      "only_ft": 34,
+      "only_base": 27,
+      "p": 0.4426
+    },
+    "27": {
+      "base": 0.646,
+      "ft": 0.654,
+      "only_ft": 31,
+      "only_base": 27,
+      "p": 0.694
+    },
+    "30": {
+      "base": 0.65,
+      "ft": 0.666,
+      "only_ft": 32,
+      "only_base": 24,
+      "p": 0.3497
+    },
+    "40": {
+      "base": 0.662,
+      "ft": 0.682,
+      "only_ft": 34,
+      "only_base": 24,
+      "p": 0.237
+    },
+    "50": {
+      "base": 0.678,
+      "ft": 0.69,
+      "only_ft": 33,
+      "only_base": 27,
+      "p": 0.519
+    },
+    "60": {
+      "base": 0.694,
+      "ft": 0.706,
+      "only_ft": 32,
+      "only_base": 26,
+      "p": 0.5118
+    },
+    "80": {
+      "base": 0.71,
+      "ft": 0.722,
+      "only_ft": 32,
+      "only_base": 26,
+      "p": 0.5118
+    },
+    "100": {
+      "base": 0.732,
+      "ft": 0.742,
+      "only_ft": 33,
+      "only_base": 28,
+      "p": 0.6089
+    }
+  },
+  "inside_rectangle": {
+    "matched": 432,
+    "base": 313,
+    "ft": 312,
+    "only_ft": 17,
+    "only_base": 18,
+    "mcnemar_exact_p": 1.0
+  },
+  "by_element_type_40px": {
+    "button": "Basis 214/343, LoRA 227/343",
+    "icon": "Basis 36/62, LoRA 32/62",
+    "input": "Basis 14/17, LoRA 15/17",
+    "tab": "Basis 67/78, LoRA 67/78"
+  },
+  "base_median_dist": 9.2,
+  "ft_median_dist": 9.5,
+  "base_without_point_or_fallback": 33,
+  "base_median_time_s": 3.6,
+  "ft_reproduction": {
+    "n": 20,
+    "identical_point": 20,
+    "within_3px": 20
+  }
+}

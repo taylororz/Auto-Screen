@@ -1,0 +1,36 @@
+{
+  "answered": 80,
+  "cases": 80,
+  "part_A": {
+    "n": 40,
+    "ja": 40,
+    "nein": 0,
+    "unklar": 0,
+    "leer": 0,
+    "share_ja_of_judged": 1.0,
+    "wilson_95": [
+      0.9124,
+      1.0
+    ]
+  },
+  "part_B_all": {
+    "n": 40,
+    "judged": 36,
+    "unklar": 4,
+    "leer": 0,
+    "agreement": 0.9722,
+    "cohens_kappa": 0.9328,
+    "author_ja_rater_nein": 0,
+    "author_nein_rater_ja": 1
+  },
+  "part_B_deviations": {
+    "n": 31,
+    "judged": 27,
+    "unklar": 4,
+    "leer": 0,
+    "agreement": 0.963,
+    "cohens_kappa": 0.9222,
+    "author_ja_rater_nein": 0,
+    "author_nein_rater_ja": 1
+  }
+}

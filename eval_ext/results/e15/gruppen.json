@@ -1,0 +1,710 @@
+[
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_login_button",
+    "instruction": "Click the login button",
+    "x": 602,
+    "y": 2389,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:00.847817+00:00"
+    ],
+    "nr": 1
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_log_in_manually",
+    "instruction": "Click the log in manually text",
+    "x": 774,
+    "y": 844,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:07.920453+00:00"
+    ],
+    "nr": 2
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_the_input_field_Email_address",
+    "instruction": "Click the input field Email",
+    "x": 602,
+    "y": 530,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:14.813893+00:00"
+    ],
+    "nr": 3
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "type_the_email_address",
+    "instruction": "type the email address ",
+    "x": 602,
+    "y": 530,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:23.840582+00:00"
+    ],
+    "nr": 4
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_the_input_field_password",
+    "instruction": "Click the input field password",
+    "x": 602,
+    "y": 687,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:30.997668+00:00"
+    ],
+    "nr": 5
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "type_the_password",
+    "instruction": "type the password",
+    "x": 602,
+    "y": 687,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:39.597594+00:00"
+    ],
+    "nr": 6
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_the_log_in_button",
+    "instruction": "Click the Log In button below the password field",
+    "x": 602,
+    "y": 842,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:37:46.568532+00:00"
+    ],
+    "nr": 7
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 1107,
+    "y": 273,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:03.062721+00:00",
+      "2026-10-29T22:40:08.903258+00:00",
+      "2026-10-29T22:42:14.154021+00:00",
+      "2026-10-29T22:44:21.767444+00:00",
+      "2026-10-29T22:46:29.000403+00:00"
+    ],
+    "nr": 8
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 1090,
+    "y": 244,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:10.022933+00:00",
+      "2026-10-29T22:40:15.786825+00:00",
+      "2026-10-29T22:42:21.588764+00:00",
+      "2026-10-29T22:44:29.030020+00:00",
+      "2026-10-29T22:46:36.489220+00:00"
+    ],
+    "nr": 9
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 602,
+    "y": 962,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:19.041042+00:00",
+      "2026-10-29T22:40:24.891232+00:00",
+      "2026-10-29T22:42:31.759454+00:00"
+    ],
+    "nr": 10
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 106,
+    "y": 244,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:26.582085+00:00",
+      "2026-10-29T22:40:32.115470+00:00",
+      "2026-10-29T22:42:39.074392+00:00",
+      "2026-10-29T22:44:45.174595+00:00",
+      "2026-10-29T22:46:52.902744+00:00"
+    ],
+    "nr": 11
+  },
+  {
+    "mode": "DG",
+    "language": "German",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 1107,
+    "y": 273,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:42.721342+00:00",
+      "2026-10-29T22:40:48.352687+00:00",
+      "2026-10-29T22:42:55.810082+00:00",
+      "2026-10-29T22:45:00.126778+00:00",
+      "2026-10-29T22:47:07.896192+00:00"
+    ],
+    "nr": 12
+  },
+  {
+    "mode": "DG",
+    "language": "German",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 1090,
+    "y": 244,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:49.700687+00:00",
+      "2026-10-29T22:40:55.181585+00:00",
+      "2026-10-29T22:43:03.178165+00:00",
+      "2026-10-29T22:45:07.413158+00:00",
+      "2026-10-29T22:47:15.380806+00:00"
+    ],
+    "nr": 13
+  },
+  {
+    "mode": "DG",
+    "language": "German",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 602,
+    "y": 918,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:38:58.732111+00:00",
+      "2026-10-29T22:41:04.151037+00:00"
+    ],
+    "nr": 14
+  },
+  {
+    "mode": "DG",
+    "language": "German",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 106,
+    "y": 244,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:39:06.604794+00:00",
+      "2026-10-29T22:41:11.288847+00:00",
+      "2026-10-29T22:43:19.472155+00:00",
+      "2026-10-29T22:45:23.635621+00:00",
+      "2026-10-29T22:47:31.542738+00:00"
+    ],
+    "nr": 15
+  },
+  {
+    "mode": "DG",
+    "language": "Chinese",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 1103,
+    "y": 273,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:39:22.073048+00:00",
+      "2026-10-29T22:41:26.488788+00:00",
+      "2026-10-29T22:43:34.835450+00:00",
+      "2026-10-29T22:45:38.373130+00:00",
+      "2026-10-29T22:47:46.884448+00:00"
+    ],
+    "nr": 16
+  },
+  {
+    "mode": "DG",
+    "language": "Chinese",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 1090,
+    "y": 244,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:39:28.935836+00:00",
+      "2026-10-29T22:41:33.390825+00:00",
+      "2026-10-29T22:43:41.516262+00:00",
+      "2026-10-29T22:45:45.797059+00:00",
+      "2026-10-29T22:47:54.530412+00:00"
+    ],
+    "nr": 17
+  },
+  {
+    "mode": "DG",
+    "language": "Chinese",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 602,
+    "y": 1308,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:39:37.470260+00:00",
+      "2026-10-29T22:41:42.390833+00:00",
+      "2026-10-29T22:43:50.379480+00:00",
+      "2026-10-29T22:45:54.684714+00:00",
+      "2026-10-29T22:48:03.461908+00:00"
+    ],
+    "nr": 18
+  },
+  {
+    "mode": "DG",
+    "language": "Chinese",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 106,
+    "y": 246,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:39:44.747551+00:00",
+      "2026-10-29T22:41:49.545994+00:00",
+      "2026-10-29T22:43:57.550398+00:00",
+      "2026-10-29T22:46:03.415938+00:00",
+      "2026-10-29T22:48:10.579702+00:00"
+    ],
+    "nr": 19
+  },
+  {
+    "mode": "DG",
+    "language": "German",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 602,
+    "y": 1308,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:43:12.315950+00:00",
+      "2026-10-29T22:45:16.428988+00:00",
+      "2026-10-29T22:47:24.455222+00:00"
+    ],
+    "nr": 20
+  },
+  {
+    "mode": "DG",
+    "language": "English",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 602,
+    "y": 1308,
+    "model_id": 1,
+    "tapped_id": 1,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:44:38.036579+00:00",
+      "2026-10-29T22:46:45.646861+00:00"
+    ],
+    "nr": 21
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_login_button",
+    "instruction": "Click the login button",
+    "x": 603,
+    "y": 2400,
+    "model_id": 6,
+    "tapped_id": 6,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:48:43.552313+00:00"
+    ],
+    "nr": 22
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_log_in_manually",
+    "instruction": "Click the log in manually text",
+    "x": 658,
+    "y": 849,
+    "model_id": 4,
+    "tapped_id": 4,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:48:48.841884+00:00"
+    ],
+    "nr": 23
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_the_input_field_Email_address",
+    "instruction": "Click the input field Email",
+    "x": 603,
+    "y": 689,
+    "model_id": 3,
+    "tapped_id": 3,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:48:53.900260+00:00"
+    ],
+    "nr": 24
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "type_the_email_address",
+    "instruction": "type the email address ",
+    "x": 603,
+    "y": 691,
+    "model_id": 3,
+    "tapped_id": 3,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:00.914634+00:00"
+    ],
+    "nr": 25
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_the_input_field_password",
+    "instruction": "Click the input field password",
+    "x": 603,
+    "y": 691,
+    "model_id": 3,
+    "tapped_id": 3,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:05.685416+00:00"
+    ],
+    "nr": 26
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "type_the_password",
+    "instruction": "type the password",
+    "x": 603,
+    "y": 691,
+    "model_id": 3,
+    "tapped_id": 3,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:12.834758+00:00"
+    ],
+    "nr": 27
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_the_log_in_button",
+    "instruction": "Click the Log In button below the password field",
+    "x": 603,
+    "y": 691,
+    "model_id": 3,
+    "tapped_id": 3,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:18.484909+00:00"
+    ],
+    "nr": 28
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 603,
+    "y": 2400,
+    "model_id": 6,
+    "tapped_id": 6,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:32.687454+00:00",
+      "2026-10-29T22:51:24.122410+00:00",
+      "2026-10-29T22:53:17.323462+00:00",
+      "2026-10-29T22:55:09.301018+00:00",
+      "2026-10-29T22:57:02.859871+00:00"
+    ],
+    "nr": 29
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 602,
+    "y": 1157,
+    "model_id": 3,
+    "tapped_id": 7,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:49:39.701796+00:00",
+      "2026-10-29T22:51:31.113030+00:00",
+      "2026-10-29T22:53:24.402544+00:00",
+      "2026-10-29T22:55:16.293435+00:00",
+      "2026-10-29T22:57:09.900088+00:00"
+    ],
+    "nr": 30
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 329,
+    "y": 337,
+    "model_id": 4,
+    "tapped_id": 4,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:49:46.506293+00:00"
+    ],
+    "nr": 31
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 99,
+    "y": 301,
+    "model_id": 5,
+    "tapped_id": 2,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:49:53.577752+00:00",
+      "2026-10-29T22:51:44.780044+00:00",
+      "2026-10-29T22:53:38.115393+00:00",
+      "2026-10-29T22:55:30.097535+00:00",
+      "2026-10-29T22:57:23.846260+00:00"
+    ],
+    "nr": 32
+  },
+  {
+    "mode": "SoM",
+    "language": "German",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 602,
+    "y": 2394,
+    "model_id": 6,
+    "tapped_id": 6,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:50:07.167226+00:00",
+      "2026-10-29T22:51:58.470838+00:00",
+      "2026-10-29T22:53:51.686893+00:00",
+      "2026-10-29T22:55:43.690037+00:00",
+      "2026-10-29T22:57:37.644064+00:00"
+    ],
+    "nr": 33
+  },
+  {
+    "mode": "SoM",
+    "language": "German",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 602,
+    "y": 1157,
+    "model_id": 3,
+    "tapped_id": 7,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:50:14.091305+00:00",
+      "2026-10-29T22:52:06.412933+00:00",
+      "2026-10-29T22:53:58.652603+00:00",
+      "2026-10-29T22:55:50.804663+00:00",
+      "2026-10-29T22:57:44.675312+00:00"
+    ],
+    "nr": 34
+  },
+  {
+    "mode": "SoM",
+    "language": "German",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 603,
+    "y": 791,
+    "model_id": 4,
+    "tapped_id": 4,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:50:20.140012+00:00",
+      "2026-10-29T22:52:13.032809+00:00",
+      "2026-10-29T22:54:05.322799+00:00",
+      "2026-10-29T22:55:58.037185+00:00",
+      "2026-10-29T22:57:51.183998+00:00"
+    ],
+    "nr": 35
+  },
+  {
+    "mode": "SoM",
+    "language": "German",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 99,
+    "y": 301,
+    "model_id": 5,
+    "tapped_id": 2,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:50:27.108959+00:00",
+      "2026-10-29T22:52:20.076753+00:00",
+      "2026-10-29T22:54:12.354861+00:00",
+      "2026-10-29T22:56:05.153414+00:00",
+      "2026-10-29T22:57:58.247466+00:00"
+    ],
+    "nr": 36
+  },
+  {
+    "mode": "SoM",
+    "language": "Chinese",
+    "step_name": "close_the_pop_up_windows",
+    "instruction": "close the pop up windows",
+    "x": 601,
+    "y": 2396,
+    "model_id": 6,
+    "tapped_id": 6,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:50:40.965508+00:00",
+      "2026-10-29T22:52:33.869535+00:00",
+      "2026-10-29T22:54:25.996307+00:00",
+      "2026-10-29T22:56:19.386357+00:00",
+      "2026-10-29T22:58:12.494952+00:00"
+    ],
+    "nr": 37
+  },
+  {
+    "mode": "SoM",
+    "language": "Chinese",
+    "step_name": "click_the_write_button",
+    "instruction": "Click the write button",
+    "x": 602,
+    "y": 1157,
+    "model_id": 3,
+    "tapped_id": 8,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:50:48.023247+00:00",
+      "2026-10-29T22:52:40.897645+00:00",
+      "2026-10-29T22:54:32.943116+00:00",
+      "2026-10-29T22:56:26.399513+00:00",
+      "2026-10-29T22:58:19.537982+00:00"
+    ],
+    "nr": 38
+  },
+  {
+    "mode": "SoM",
+    "language": "Chinese",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 603,
+    "y": 791,
+    "model_id": 4,
+    "tapped_id": 4,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:50:54.267304+00:00",
+      "2026-10-29T22:52:47.436493+00:00",
+      "2026-10-29T22:54:39.333633+00:00",
+      "2026-10-29T22:56:32.778232+00:00",
+      "2026-10-29T22:58:26.203902+00:00"
+    ],
+    "nr": 39
+  },
+  {
+    "mode": "SoM",
+    "language": "Chinese",
+    "step_name": "click_the_back_button",
+    "instruction": "Click the back button",
+    "x": 99,
+    "y": 301,
+    "model_id": 5,
+    "tapped_id": 2,
+    "healed": true,
+    "members": [
+      "2026-10-29T22:51:01.258428+00:00",
+      "2026-10-29T22:52:54.439993+00:00",
+      "2026-10-29T22:54:46.374123+00:00",
+      "2026-10-29T22:56:39.793002+00:00",
+      "2026-10-29T22:58:33.241983+00:00"
+    ],
+    "nr": 40
+  },
+  {
+    "mode": "SoM",
+    "language": "English",
+    "step_name": "type_the_content_in_the_note",
+    "instruction": "type the content in the note",
+    "x": 603,
+    "y": 791,
+    "model_id": 4,
+    "tapped_id": 4,
+    "healed": false,
+    "members": [
+      "2026-10-29T22:51:37.752592+00:00",
+      "2026-10-29T22:53:31.090396+00:00",
+      "2026-10-29T22:55:23.070555+00:00",
+      "2026-10-29T22:57:16.699889+00:00"
+    ],
+    "nr": 41
+  }
+]

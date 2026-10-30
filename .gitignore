@@ -54,6 +54,9 @@ datasets/
 *.onnx
 Qwen_trained/Qwen3-VL-4B-V2/
 Qwen_trained/Katapp-Qwen3-VL-Agent/
+Qwen_trained_e5/
+Qwen_trained_e16/
+Qwen_untrain_e16/
 checkpoints/
 
 # ==========================================
@@ -71,3 +74,13 @@ upload_*.py
 # Compiled binaries
 tools/swift_ocr
 
+
+# Exports for review chats (FF3)
+ff3/*.zip
+
+# Approved baselines (tools/approve_baseline.py), machine-specific
+baselines/
+
+# Large embedded-image HTML review sheets
+eval_ext/results/**/*.html
+results/**/*.html

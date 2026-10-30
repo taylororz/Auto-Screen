@@ -1,0 +1,20 @@
+{
+  "DG": {
+    "steps": 67,
+    "counted_steps": 67,
+    "wrong_page_not_counted": 0,
+    "model_choice_correct": 67,
+    "wrong": 0,
+    "unclear_or_open": 0,
+    "healed_steps": 0
+  },
+  "SoM": {
+    "steps": 67,
+    "counted_steps": 7,
+    "wrong_page_not_counted": 60,
+    "model_choice_correct": 2,
+    "wrong": 5,
+    "unclear_or_open": 0,
+    "healed_steps": 30
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "English": {
+    "A0": "ueberschrift_unten (9)",
+    "A_tausch": "auswahlliste (9)",
+    "C_zusammengelegt": "auswahlliste (7)",
+    "B_gewaehlte_box": {
+      "auswahlliste": 17,
+      "andere": 3
+    },
+    "B_haeufigste_box_von_20": 17,
+    "B_trainingsnummer_von_20": 1,
+    "B_entscheidung": "Box",
+    "fallback_or_error": 0
+  },
+  "German": {
+    "A0": "auswahlliste (8)",
+    "A_tausch": "auswahlliste (9)",
+    "C_zusammengelegt": "auswahlliste (7)",
+    "B_gewaehlte_box": {
+      "auswahlliste": 18,
+      "andere": 2
+    },
+    "B_haeufigste_box_von_20": 18,
+    "B_trainingsnummer_von_20": 2,
+    "B_entscheidung": "Box",
+    "fallback_or_error": 0
+  },
+  "中文（简体）": {
+    "A0": "auswahlliste (8)",
+    "A_tausch": "auswahlliste (9)",
+    "C_zusammengelegt": "auswahlliste (7)",
+    "B_gewaehlte_box": {
+      "auswahlliste": 18,
+      "andere": 2
+    },
+    "B_haeufigste_box_von_20": 18,
+    "B_trainingsnummer_von_20": 2,
+    "B_entscheidung": "Box",
+    "fallback_or_error": 0
+  },
+  "中文（繁體）": {
+    "A0": "auswahlliste (8)",
+    "A_tausch": "auswahlliste (9)",
+    "C_zusammengelegt": "auswahlliste (7)",
+    "B_gewaehlte_box": {
+      "auswahlliste": 15,
+      "andere": 5
+    },
+    "B_haeufigste_box_von_20": 15,
+    "B_trainingsnummer_von_20": 1,
+    "B_entscheidung": "Box",
+    "fallback_or_error": 0
+  }
+}

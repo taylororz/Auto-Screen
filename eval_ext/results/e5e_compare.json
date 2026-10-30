@@ -1,0 +1,289 @@
+{
+  "steps_paired": 598,
+  "base_correct": "567/598",
+  "lora_correct": "598/598",
+  "mcnemar": {
+    "lora_only_correct": 31,
+    "base_only_correct": 0,
+    "p_exact": 9.313225746154785e-10
+  },
+  "base_correct_by_app": {
+    "KatApp": "246/262",
+    "Bluesky": "321/336"
+  },
+  "base_errors_by_step": {
+    "KatApp|triage_dropdown": 10,
+    "Bluesky|go_to_Lists_page": 10,
+    "KatApp|triage_option": 5,
+    "Bluesky|go_to_Saved_page": 5,
+    "KatApp|home_tab": 1
+  },
+  "base_errors_by_language": {
+    "Bluesky|German": 10,
+    "KatApp|German": 6,
+    "KatApp|中文（简体）": 5,
+    "KatApp|中文（繁體）": 5,
+    "Bluesky|Chinese": 5
+  },
+  "base_fallback_or_error": 5,
+  "flows_without_error_base": {
+    "KatApp": "5/20",
+    "Bluesky": "5/15"
+  },
+  "first_error_step_base": {
+    "KatApp|triage_dropdown": 10,
+    "Bluesky|go_to_Lists_page": 10,
+    "KatApp|triage_option": 4,
+    "KatApp|home_tab": 1
+  },
+  "base_error_examples": [
+    {
+      "case": "2026-09-28T19:20:04.659729+00:00|home_tab",
+      "language": "German",
+      "step_name": "home_tab",
+      "instruction": "Click the Home icon (1st tab from left) in the bottom navigation bar",
+      "ground_truth_id": 10,
+      "target_replay": 15
+    },
+    {
+      "case": "2026-09-28T19:20:13.354628+00:00|triage_option",
+      "language": "German",
+      "step_name": "triage_option",
+      "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:22:10.840467+00:00|triage_dropdown",
+      "language": "中文（简体）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:23:11.792175+00:00|triage_dropdown",
+      "language": "中文（繁體）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:24:17.032760+00:00|triage_option",
+      "language": "German",
+      "step_name": "triage_option",
+      "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:26:16.768354+00:00|triage_dropdown",
+      "language": "中文（简体）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:27:20.593360+00:00|triage_dropdown",
+      "language": "中文（繁體）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:28:26.980733+00:00|triage_option",
+      "language": "German",
+      "step_name": "triage_option",
+      "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:30:25.830780+00:00|triage_dropdown",
+      "language": "中文（简体）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:31:27.487357+00:00|triage_dropdown",
+      "language": "中文（繁體）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:32:33.414929+00:00|triage_option",
+      "language": "German",
+      "step_name": "triage_option",
+      "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:34:34.165726+00:00|triage_dropdown",
+      "language": "中文（简体）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:35:35.287789+00:00|triage_dropdown",
+      "language": "中文（繁體）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:36:41.087796+00:00|triage_option",
+      "language": "German",
+      "step_name": "triage_option",
+      "instruction": "Select the Incident option labeled 'Schadensort' (1st option in the dropdown list)",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:38:42.287915+00:00|triage_dropdown",
+      "language": "中文（简体）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:39:43.731510+00:00|triage_dropdown",
+      "language": "中文（繁體）",
+      "step_name": "triage_dropdown",
+      "instruction": "Click the triage location dropdown menu in the upper-middle area",
+      "ground_truth_id": 8,
+      "target_replay": 6
+    },
+    {
+      "case": "2026-09-28T19:46:05.206096+00:00|go_to_Lists_page",
+      "language": "German",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 19,
+      "target_replay": 18
+    },
+    {
+      "case": "2026-09-28T19:46:19.269152+00:00|go_to_Saved_page",
+      "language": "German",
+      "step_name": "go_to_Saved_page",
+      "instruction": "go to Saved page.",
+      "ground_truth_id": 21,
+      "target_replay": 20
+    },
+    {
+      "case": "2026-09-28T19:48:18.769187+00:00|go_to_Lists_page",
+      "language": "Chinese",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 13,
+      "target_replay": 12
+    },
+    {
+      "case": "2026-09-28T19:52:21.549350+00:00|go_to_Lists_page",
+      "language": "German",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 19,
+      "target_replay": 18
+    },
+    {
+      "case": "2026-09-28T19:52:35.624019+00:00|go_to_Saved_page",
+      "language": "German",
+      "step_name": "go_to_Saved_page",
+      "instruction": "go to Saved page.",
+      "ground_truth_id": 21,
+      "target_replay": 20
+    },
+    {
+      "case": "2026-09-28T19:54:31.499240+00:00|go_to_Lists_page",
+      "language": "Chinese",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 13,
+      "target_replay": 12
+    },
+    {
+      "case": "2026-09-28T19:58:30.586648+00:00|go_to_Lists_page",
+      "language": "German",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 19,
+      "target_replay": 18
+    },
+    {
+      "case": "2026-09-28T19:58:45.316780+00:00|go_to_Saved_page",
+      "language": "German",
+      "step_name": "go_to_Saved_page",
+      "instruction": "go to Saved page.",
+      "ground_truth_id": 21,
+      "target_replay": 20
+    },
+    {
+      "case": "2026-09-28T20:00:44.532346+00:00|go_to_Lists_page",
+      "language": "Chinese",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 13,
+      "target_replay": 12
+    },
+    {
+      "case": "2026-09-28T20:04:49.579112+00:00|go_to_Lists_page",
+      "language": "German",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 19,
+      "target_replay": 18
+    },
+    {
+      "case": "2026-09-28T20:05:03.823995+00:00|go_to_Saved_page",
+      "language": "German",
+      "step_name": "go_to_Saved_page",
+      "instruction": "go to Saved page.",
+      "ground_truth_id": 21,
+      "target_replay": 20
+    },
+    {
+      "case": "2026-09-28T20:07:00.326721+00:00|go_to_Lists_page",
+      "language": "Chinese",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 13,
+      "target_replay": 12
+    },
+    {
+      "case": "2026-09-28T20:11:06.576034+00:00|go_to_Lists_page",
+      "language": "German",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 19,
+      "target_replay": 18
+    },
+    {
+      "case": "2026-09-28T20:11:21.444914+00:00|go_to_Saved_page",
+      "language": "German",
+      "step_name": "go_to_Saved_page",
+      "instruction": "go to Saved page.",
+      "ground_truth_id": 21,
+      "target_replay": 20
+    },
+    {
+      "case": "2026-09-28T20:13:22.818090+00:00|go_to_Lists_page",
+      "language": "Chinese",
+      "step_name": "go_to_Lists_page",
+      "instruction": "go to Lists page.",
+      "ground_truth_id": 13,
+      "target_replay": 12
+    }
+  ]
+}

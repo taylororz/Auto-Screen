@@ -1,0 +1,79 @@
+name: Approve visual baseline
+
+# Marks the screenshots of a CI run as the approved baseline for version comparison (BASELINE_MODE=approved).
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID of the 'Mobile Visual Regression CI' run whose screenshots are approved"
+        required: true
+      note:
+        description: "Reason for the approval (stored in baseline.json)"
+        required: false
+        default: ""
+
+jobs:
+  approve-baseline:
+    runs-on: self-hosted
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+
+    steps:
+      - name: 1. Find the screenshots artifact of the run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/$RUN_ID/artifacts" \
+            -o run_artifacts.json
+          python3 - <<'EOF'
+          import json, os, sys
+          artifacts = json.load(open("run_artifacts.json")).get("artifacts") or []
+          shots = [a for a in artifacts if a["name"].startswith("screenshots-") and not a.get("expired")]
+          if not shots:
+              print("::error::The run has no unexpired screenshots artifact. Only successful runs upload one.")
+              sys.exit(1)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"name={shots[0]['name']}\nidentity={shots[0]['name'][len('screenshots-'):]}\n")
+          print(f"📥 Approving {shots[0]['name']} from run {os.environ['RUN_ID']}")
+          EOF
+
+      - name: 2. Download the screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.source.outputs.name }}
+          path: approved_baseline
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: 3. Record the approval
+        env:
+          IDENTITY: ${{ steps.source.outputs.identity }}
+          RUN_ID: ${{ inputs.run_id }}
+          NOTE: ${{ inputs.note }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          from datetime import datetime, timezone
+          record = {
+              "label": os.environ["IDENTITY"],
+              "source_run": os.environ["RUN_ID"],
+              "approved_by": os.environ["ACTOR"],
+              "approved_at": datetime.now(timezone.utc).isoformat(),
+              "note": os.environ.get("NOTE", ""),
+          }
+          json.dump(record, open("approved_baseline/baseline.json", "w"), indent=2)
+          print(json.dumps(record, indent=2))
+          EOF
+
+      - name: 4. Upload the approved baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: approved-baseline-${{ github.ref_name }}
+          path: approved_baseline/
+          retention-days: 90

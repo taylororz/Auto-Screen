@@ -1,0 +1,39 @@
+{
+  "steps": 598,
+  "KatApp": {
+    "steps": 262,
+    "accepted": 262,
+    "median_shift_px": 2.2,
+    "accepted_within_40px": 262,
+    "accepted_over_40px": 0,
+    "over_40px_manual_hit": 0,
+    "over_40px_manual_miss": 0,
+    "over_40px_not_judged": 0,
+    "step_accuracy_with_refinement": "262/262",
+    "median_time_refine_ms": 3784
+  },
+  "Bluesky": {
+    "steps": 336,
+    "accepted": 328,
+    "median_shift_px": 4.5,
+    "accepted_within_40px": 301,
+    "accepted_over_40px": 27,
+    "over_40px_manual_hit": 27,
+    "over_40px_manual_miss": 0,
+    "over_40px_not_judged": 0,
+    "step_accuracy_with_refinement": "336/336",
+    "median_time_refine_ms": 3632
+  },
+  "gesamt": {
+    "steps": 598,
+    "accepted": 590,
+    "median_shift_px": 3.2,
+    "accepted_within_40px": 563,
+    "accepted_over_40px": 27,
+    "over_40px_manual_hit": 27,
+    "over_40px_manual_miss": 0,
+    "over_40px_not_judged": 0,
+    "step_accuracy_with_refinement": "598/598",
+    "median_time_refine_ms": 3684
+  }
+}
